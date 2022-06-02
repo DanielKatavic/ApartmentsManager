@@ -86,19 +86,22 @@ namespace RWAproject
         {
             DropDownList dropDownList = sender as DropDownList;
             string selectedItem = dropDownList.SelectedItem.ToString();
+            rptApartments.DataSource = GetSortedApartments(selectedItem);
+            rptApartments.DataBind();
+        }
+
+        private IOrderedEnumerable<Apartment> GetSortedApartments(string selectedItem)
+        {
             switch (selectedItem)
             {
                 case "Number of rooms":
-                    rptApartments.DataSource = _apartments.OrderByDescending(a => a.TotalRooms);
-                    break;
+                    return _apartments.OrderByDescending(a => a.TotalRooms);
                 case "Number of space":
-                    rptApartments.DataSource = _apartments.OrderByDescending(a => a.MaxChildren + a.MaxAdults);
-                    break;
+                    return _apartments.OrderByDescending(a => a.MaxChildren + a.MaxAdults);
                 case "Price":
-                    rptApartments.DataSource = _apartments.OrderByDescending(a => a.Price);
-                    break;
+                    return _apartments.OrderByDescending(a => a.Price);
             }
-            rptApartments.DataBind();
+            return null;
         }
     }
 }
