@@ -32,14 +32,14 @@ img {
     justify-content: space-between;
 }
 
-    #sorting-div label {
-        margin-left: 1em;
-        width: 7em;
-    }
+#sorting-div label {
+    margin-left: 1em;
+    width: 7em;
+}
 
-    #sorting-div select {
-        width: 100%;
-    }
+#sorting-div select {
+    width: 100%;
+}
 
 #popup {
     padding: 0;
