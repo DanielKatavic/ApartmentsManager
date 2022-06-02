@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminPage.master.cs" Inherits="RWAproject.AdminPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <!-- TITLE -->
+    <title></title>
+
+    <!-- HEAD -->
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <!-- BOOTSTRAP -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <link rel="stylesheet" href="css/CustomStyles.css"; />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-radius: 0">
+            <div class="container-fluid" runat="server" id="NavItems"> 
+                <div class="navbar-nav me-auto" id="navbar-items">
+                    <a class="navbar-brand" href="#" id="logo"></a>
+                    <a class="nav-link text-decoration-none" aria-current="page" href="Apartments.aspx">Apartments</a>
+                    <a class="nav-link text-decoration-none" href="Tags.aspx">Tags</a>
+                    <a class="nav-link text-decoration-none" href="RegisteredUsers.aspx">Registered users</a>
+                </div>
+                <div class="navbar-nav ms-auto" style="margin-right: 1em">
+                    <a class="nav-link text-decoration-none" href="LogInPage.aspx" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <main>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+        <footer class="py-3">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3" style="gap: 1em">
+                <li class="nav-item"><a href="https://github.com/DanielKatavic" id="github-icon" class="nav-link px-2 text-muted"></a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com/in/daniel-katavic-08771120b/" id="linkedin-icon" class="nav-link px-2 text-muted"></a></li>
+            </ul>
+            <p class="text-center text-muted">© 2022 Daniel Katavic</p>
+            <p class="text-center text-muted">Algebra University College</p>
+        </footer>
+    </form>
+
+    <!-- JQUERY -->
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

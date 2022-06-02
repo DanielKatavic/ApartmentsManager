@@ -1,0 +1,148 @@
+﻿:root {
+    --footer-height: 10em;
+}
+
+nav {
+    margin-bottom: 0 !important;
+    height: 4em;
+}
+
+#apartment-images {
+    overflow: hidden;
+    width: 100%;
+}
+
+main {
+    margin: 2em 0 2em 0;
+    min-height: calc(100vh - 18em);
+}
+
+body {
+    height: 100%;
+}
+
+img {
+    width: 30em;
+    border-radius: .5em .5em 0 0;
+}
+
+#sorting-div {
+    flex-direction: row !important;
+    margin-bottom: 2em;
+    justify-content: space-between;
+}
+
+    #sorting-div label {
+        margin-left: 1em;
+        width: 7em;
+    }
+
+    #sorting-div select {
+        width: 100%;
+    }
+
+#popup {
+    padding: 0;
+    border-radius: .7em;
+    background-color: white;
+    overflow: hidden;
+    width: 70vw;
+    position: absolute;
+    left: 15vw;
+    right: 15vw;
+    top: 10em;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#popup-header {
+    background-color: #e3f2fd;
+    padding: .5em 1em .5em 1em;
+}
+
+#table-div {
+    width: 100%;
+}
+
+#offcanvas {
+    gap: 2em;
+    overflow: hidden;
+    padding-top: 1.5em;
+}
+
+.row {
+    flex-direction: column !important;
+}
+
+.container {
+    flex-direction: column !important;
+    align-items: center;
+}
+
+html {
+    font-size: 100%;
+    overflow-x: hidden;
+}
+
+#logo {
+    text-align: center;
+    background: url(https://cdn-icons-png.flaticon.com/512/3523/3523148.png) center / contain no-repeat;
+}
+
+footer {
+    flex-shrink: 0;
+    width: 100vw !important;
+    background-color: #e3f2fd;
+    height: 10em;
+}
+
+li {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+}
+
+#github-icon {
+    width: 100%;
+    height: 100%;
+    background: url(https://cdn-icons-png.flaticon.com/512/733/733609.png) center / contain no-repeat;
+}
+
+#linkedin-icon {
+    width: 100%;
+    height: 100%;
+    background: url("/icons/linkedin.png") center / contain no-repeat;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+li:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#navbar-items {
+    gap: 1em;
+    margin-left: 1em;
+    align-items: center;
+}
+
+#div-alert {
+    gap: 1em;
+    background-color: white;
+    width: 25em;
+    position: absolute;
+    top: 10em;
+    right: 0;
+    padding: 1em;
+    border-radius: .7em 0 0 .7em;
+    align-items: center;
+    box-shadow: rgba(255, 0, 0, 0.7) 0px 5px 15px;
+    color: red;
+}
+
+#alert {
+    width: 3em;
+    height: 3em;
+}
