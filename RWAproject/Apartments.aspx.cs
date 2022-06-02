@@ -26,8 +26,22 @@ namespace RWAproject
         {
             rptApartments.DataSource = _apartments;
             rptApartments.DataBind();
-            city.DataSource = _apartments.Select(a => a.CityName).Distinct();
-            city.DataBind();
+            FillStatusDDL();
+            FillCityDDL();
+        }
+
+        private void FillCityDDL()
+        {
+            ddlCity.DataSource = _apartments.Select(a => a.CityName).Distinct();
+            ddlCity.DataBind();
+            ddlCity.Items.Add(new ListItem { Selected = true, Value = "Any" });
+        }
+
+        private void FillStatusDDL()
+        {
+            ddlStatus.DataSource = _apartments.Select(a => a.Status).Distinct();
+            ddlStatus.DataBind();
+            ddlStatus.Items.Add(new ListItem { Selected = true, Value = Status.Any.ToString() });
         }
 
         protected void LinkButton_Click(object sender, EventArgs e)
@@ -50,6 +64,41 @@ namespace RWAproject
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList dropDownList = sender as DropDownList;
+            Status selectedItem = (Status)Enum.Parse(typeof(Status), dropDownList.SelectedItem.ToString());
+            rptApartments.DataSource = selectedItem == Status.Any ? _apartments : _apartments.ToList().FindAll(a => a.Status == selectedItem);
+            rptApartments.DataBind();
+        }
+
+        protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList dropDownList = sender as DropDownList;
+            string selectedItem = dropDownList.SelectedItem.ToString();
+            rptApartments.DataSource = selectedItem == "Any" ? _apartments : _apartments.ToList().FindAll(a => a.CityName == selectedItem);
+            rptApartments.DataBind();
+        }
+
+        protected void ddlSortBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList dropDownList = sender as DropDownList;
+            string selectedItem = dropDownList.SelectedItem.ToString();
+            switch (selectedItem)
+            {
+                case "Number of rooms":
+                    rptApartments.DataSource = _apartments.OrderByDescending(a => a.TotalRooms);
+                    break;
+                case "Number of space":
+                    rptApartments.DataSource = _apartments.OrderByDescending(a => a.MaxChildren + a.MaxAdults);
+                    break;
+                case "Price":
+                    rptApartments.DataSource = _apartments.OrderByDescending(a => a.Price);
+                    break;
+            }
+            rptApartments.DataBind();
         }
     }
 }

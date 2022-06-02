@@ -8,26 +8,23 @@
             <div class="d-flex me-auto">
                 <div class="d-flex align-items-center" id="SortByStatus">
                     <label for="status">Status:</label>
-                    <select name="status" id="status" class="form-select" aria-label="Floating label select example">
-                        <option value="<%: DataLayer.Models.Status.Occupied %>" selected><%: DataLayer.Models.Status.Occupied %></option>
-                        <option value="<%: DataLayer.Models.Status.Vacant %>"><%: DataLayer.Models.Status.Vacant %></option>
-                        <option value="<%: DataLayer.Models.Status.Reserved %>"><%: DataLayer.Models.Status.Reserved %></option>
-                    </select>
+                    <asp:DropDownList class="form-select" runat="server" ID="ddlStatus" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True">
+                    </asp:DropDownList>
                 </div>
                 <div class="d-flex align-items-center" id="SortByCity">
                     <label for="city">City:</label>
-                    <select runat="server" name="city" id="city" class="form-select" aria-label="Floating label select example">
-                    </select>
+                    <asp:DropDownList class="form-select" runat="server" ID="ddlCity" OnSelectedIndexChanged="ddlCity_SelectedIndexChanged" AutoPostBack="True">
+                    </asp:DropDownList>
                 </div>
             </div>
             <div class="ms-auto">
                 <div class="d-flex align-items-center" id="SortBy">
                     <label for="sortBy">Sort by:</label>
-                    <select name="sortBy" id="sortBy" class="form-select" aria-label="Floating label select example">
-                        <option value="numberOfRooms" selected>Number of rooms</option>
-                        <option value="numberOfSpace">Number of space</option>
-                        <option value="price">Price</option>
-                    </select>
+                    <asp:DropDownList class="form-select" runat="server" ID="ddlSortBy" OnSelectedIndexChanged="ddlSortBy_SelectedIndexChanged" AutoPostBack="True">
+                        <asp:ListItem Selected="True" Value="numberOfRooms">Number of rooms</asp:ListItem>
+                        <asp:ListItem Value="numberOfSpace">Number of space</asp:ListItem>
+                        <asp:ListItem Value="price">Price</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
             </div>
         </div>

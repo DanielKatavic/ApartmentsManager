@@ -4,6 +4,7 @@ namespace DataLayer.Models
 {
     public enum Status
     {
+        Any,
         Occupied,
         Reserved,
         Vacant

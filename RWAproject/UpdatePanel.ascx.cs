@@ -14,11 +14,6 @@ namespace RWAproject
         protected void Page_Load(object sender, EventArgs e)
         {
             FillPanel();
-            if (IsPostBack)
-            {
-                BtnUpdate.Click += BtnUpdate_Click;
-                BtnDelete.Click += BtnDelete_Click;
-            }
         }
 
         private void UpdateApartment()
