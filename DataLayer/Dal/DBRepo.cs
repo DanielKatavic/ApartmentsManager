@@ -47,6 +47,7 @@ namespace DataLayer.Dal
                 tags.Add(
                     new Tag
                     {
+                        Guid= (Guid)row[nameof(Tag.Guid)],
                         Name = row[nameof(Tag.Name)].ToString(),
                         Count = (int)row[nameof(Tag.Count)]
                     }

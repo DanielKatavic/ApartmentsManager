@@ -22,12 +22,23 @@ namespace RWAproject
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            if (Session["user"] is null) Response.Redirect("LogInPage.aspx");
+            base.OnLoad(e);
+        }
+
         private void DataLoad()
+        {
+            FillRptApartments();
+            FillStatusDDL();
+            FillCityDDL();
+        }
+
+        private void FillRptApartments()
         {
             rptApartments.DataSource = _apartments;
             rptApartments.DataBind();
-            FillStatusDDL();
-            FillCityDDL();
         }
 
         private void FillCityDDL()
@@ -63,7 +74,7 @@ namespace RWAproject
         {
         }
 
-        protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList dropDownList = sender as DropDownList;
             Status selectedItem = (Status)Enum.Parse(typeof(Status), dropDownList.SelectedItem.ToString());
@@ -71,7 +82,7 @@ namespace RWAproject
             rptApartments.DataBind();
         }
 
-        protected void ddlCity_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlCity_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList dropDownList = sender as DropDownList;
             string selectedItem = dropDownList.SelectedItem.ToString();
@@ -79,7 +90,7 @@ namespace RWAproject
             rptApartments.DataBind();
         }
 
-        protected void ddlSortBy_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList dropDownList = sender as DropDownList;
             string selectedItem = dropDownList.SelectedItem.ToString();
@@ -105,7 +116,7 @@ namespace RWAproject
         {
             LinkButton linkButton = sender as LinkButton;
             ((IRepo)Application["database"]).DeleteApartment(Guid.Parse(linkButton.CommandArgument));
-            Response.Redirect("Apartments.aspx");
+            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
     }
 }

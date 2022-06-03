@@ -32,7 +32,8 @@
                     <a class="nav-link text-decoration-none" href="RegisteredUsers.aspx">Registered users</a>
                 </div>
                 <div class="navbar-nav ms-auto" style="margin-right: 1em">
-                    <a class="nav-link text-decoration-none" href="LogInPage.aspx" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+                    <%--<a href="LogInPage.aspx" onclick=>Logout</a>--%>
+                    <asp:LinkButton runat="server" class="nav-link text-decoration-none" OnClick="BtnLogout_Click" OnClientClick="return confirm('Are you sure you want to logout?')">Logout</asp:LinkButton>
                 </div>
             </div>
         </nav>

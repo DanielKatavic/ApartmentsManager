@@ -14,6 +14,22 @@ namespace RWAproject
         {
         }
 
+        protected void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            UpdateApartment();
+        }
+
+        protected void BtnDelete_Click(object sender, EventArgs e)
+        {
+            ((IRepo)Application["database"]).DeleteApartment(Apartment.Guid);
+            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
+        }
+
+        protected void BtnClose_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
+        }
+
         internal void FillPanel()
         {
             offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
@@ -32,23 +48,7 @@ namespace RWAproject
                 int.Parse(maxChildren.Value),
                 int.Parse(totalRooms.Value),
                 status);
-            Response.Redirect("Apartments.aspx");
-        }
-
-        protected void BtnUpdate_Click(object sender, EventArgs e)
-        {
-            UpdateApartment();
-        }
-
-        protected void BtnDelete_Click(object sender, EventArgs e)
-        {
-            ((IRepo)Application["database"]).DeleteApartment(Apartment.Guid);
-            Response.Redirect("Apartments.aspx");
-        }
-
-        protected void BtnClose_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Apartments.aspx");
+            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
     }
 }

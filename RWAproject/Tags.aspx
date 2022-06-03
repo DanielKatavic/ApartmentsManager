@@ -21,7 +21,7 @@
                             <td scope="row"><%# Eval(nameof(DataLayer.Models.Tag.Name)) %></td>
                             <td><%# Eval(nameof(DataLayer.Models.Tag.Count)) %></td>
                             <td>
-                                <asp:LinkButton visible="false" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Name)) %>" runat="server">Delete</asp:LinkButton>
+                                <asp:LinkButton Visible="false" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Guid)) %>" runat="server">Delete</asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>
