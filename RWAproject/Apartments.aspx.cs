@@ -50,27 +50,24 @@ namespace RWAproject
             apartmentGuid = Guid.Parse(linkButton.CommandArgument);
             selectedApartment = _apartments.ToList().FirstOrDefault(a => a.Guid == apartmentGuid);
             ApartmentsPanel.Visible = true;
-            FillPlaceholder();
+            FillUserControl();
         }
 
-        private void FillPlaceholder()
+        private void FillUserControl()
         {
-            UpdatePanel updatePanel = LoadControl("UpdatePanel.ascx") as UpdatePanel;
-            updatePanel.Apartment = selectedApartment;
-            updatePanel.ApartmentsPanel = ApartmentsPanel;
-            PanelPlaceholder.Controls.Add(updatePanel);
+            UpdatePanel.Apartment = selectedApartment;
+            updatePanel.FillPanel();
         }
 
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
-
         }
 
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList dropDownList = sender as DropDownList;
             Status selectedItem = (Status)Enum.Parse(typeof(Status), dropDownList.SelectedItem.ToString());
-            rptApartments.DataSource = selectedItem == Status.Any ? _apartments : _apartments.ToList().FindAll(a => a.Status == selectedItem);
+            rptApartments.DataSource = selectedItem == Status.Any ? _apartments : _apartments.ToList().Where(a => a.Status == selectedItem);
             rptApartments.DataBind();
         }
 
@@ -78,7 +75,7 @@ namespace RWAproject
         {
             DropDownList dropDownList = sender as DropDownList;
             string selectedItem = dropDownList.SelectedItem.ToString();
-            rptApartments.DataSource = selectedItem == "Any" ? _apartments : _apartments.ToList().FindAll(a => a.CityName == selectedItem);
+            rptApartments.DataSource = selectedItem == "Any" ? _apartments : _apartments.ToList().Where(a => a.CityName == selectedItem);
             rptApartments.DataBind();
         }
 
@@ -102,6 +99,13 @@ namespace RWAproject
                     return _apartments.OrderByDescending(a => a.Price);
             }
             return null;
+        }
+
+        protected void BtnDelete_Click(object sender, EventArgs e)
+        {
+            LinkButton linkButton = sender as LinkButton;
+            ((IRepo)Application["database"]).DeleteApartment(Guid.Parse(linkButton.CommandArgument));
+            Response.Redirect("Apartments.aspx");
         }
     }
 }

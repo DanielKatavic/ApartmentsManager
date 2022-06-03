@@ -10,6 +10,7 @@ namespace DataLayer.Models
         Vacant
     }
 
+    [Serializable]
     public class Apartment
     {
         public Guid Guid { get; set; }

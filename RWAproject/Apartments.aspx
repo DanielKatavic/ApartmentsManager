@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/AdminPage.Master" CodeBehind="Apartments.aspx.cs" Inherits="RWAproject.Apartments" %>
 
-<%@ Reference Control="UpdatePanel.ascx" %>
+<%@ Register TagName="UpdatePanel" TagPrefix="ascx" Src="~/UpdatePanel.ascx" %>
 
 <asp:Content ID="ApartmentsContent" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div class="container d-flex ">
@@ -59,6 +59,7 @@
                         <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.Status)) %></td>
                         <td>
                             <asp:LinkButton OnClick="LinkButton_Click" CommandArgument="<%# Eval(nameof(DataLayer.Models.Apartment.Guid)) %>" class="btn btn-primary" runat="server">Open</asp:LinkButton>
+                            <asp:LinkButton OnClick="BtnDelete_Click" OnClientClick="return confirm('Are you sure you want to delete?')" CommandArgument="<%# Eval(nameof(DataLayer.Models.Apartment.Guid)) %>" class="btn btn-danger" runat="server"><svg id="delete-icon"></svg></asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -67,13 +68,13 @@
                     </table>
                 </FooterTemplate>
             </asp:Repeater>
-            <div style="text-align: right">
+            <div style="text-align: right; margin-right: 2.5em">
                 <asp:Button OnClick="BtnAdd_Click" runat="server" type="button" class="btn btn-success" Text="Add apartment"></asp:Button>
             </div>
         </div>
         <asp:Panel runat="server" ID="ApartmentsPanel" Visible="false">
             <div class="container animate__animated animate__slideInDown" id="popup">
-                <asp:PlaceHolder runat="server" ID="PanelPlaceholder"></asp:PlaceHolder>
+                <ascx:UpdatePanel ID="updatePanel" runat="server" />
             </div>
         </asp:Panel>
     </div>

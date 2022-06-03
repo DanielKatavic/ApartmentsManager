@@ -7,6 +7,12 @@ nav {
     height: 4em;
 }
 
+#delete-icon {
+    background: url(https://cdn-icons-png.flaticon.com/512/1214/1214428.png) center / contain no-repeat;
+    height: 1.2em;
+    width: 1.2em;
+}
+
 #apartment-images {
     overflow: hidden;
     width: 100%;
@@ -32,14 +38,14 @@ img {
     justify-content: space-between;
 }
 
-#sorting-div label {
-    margin-left: 1em;
-    width: 7em;
-}
+    #sorting-div label {
+        margin-left: 1em;
+        width: 7em;
+    }
 
-#sorting-div select {
-    width: 100%;
-}
+    #sorting-div select {
+        width: 100%;
+    }
 
 #popup {
     padding: 0;

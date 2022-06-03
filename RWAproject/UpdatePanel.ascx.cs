@@ -8,12 +8,18 @@ namespace RWAproject
 {
     public partial class UpdatePanel : UserControl
     {
-        public Apartment Apartment { get; set; }
-        public Panel ApartmentsPanel { get; set; }
+        public static Apartment Apartment{ get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillPanel();
+        }
+
+        internal void FillPanel()
+        {
+            offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
+            maxAdults.Value = Apartment.MaxAdults.ToString();
+            maxChildren.Value = Apartment.MaxChildren.ToString();
+            totalRooms.Value = Apartment.TotalRooms.ToString();
         }
 
         private void UpdateApartment()
@@ -29,14 +35,6 @@ namespace RWAproject
             Response.Redirect("Apartments.aspx");
         }
 
-        private void FillPanel()
-        {
-            offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
-            maxAdults.Value = Apartment.MaxAdults.ToString();
-            maxChildren.Value = Apartment.MaxChildren.ToString();
-            totalRooms.Value = Apartment.TotalRooms.ToString();
-        }
-
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
             UpdateApartment();
@@ -50,7 +48,7 @@ namespace RWAproject
 
         protected void BtnClose_Click(object sender, EventArgs e)
         {
-            ApartmentsPanel.Visible = false;
+            Response.Redirect("Apartments.aspx");
         }
     }
 }
