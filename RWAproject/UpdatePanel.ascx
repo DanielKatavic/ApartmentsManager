@@ -15,15 +15,19 @@
             <label for="maxAdults">Max adults</label>
         </div>
         <div class="form-floating mb-3">
-            <select name="options" id="options" class="form-select" aria-label="Floating label select example">
-                <option value="<%: DataLayer.Models.Status.Occupied %>" selected><%: DataLayer.Models.Status.Occupied %></option>
-                <option value="<%: DataLayer.Models.Status.Vacant %>"><%: DataLayer.Models.Status.Vacant %></option>
-                <option value="<%: DataLayer.Models.Status.Reserved %>"><%: DataLayer.Models.Status.Reserved %></option>
-            </select>
+            <asp:DropDownList OnSelectedIndexChanged="DdlStatus_SelectedIndexChanged" runat="server" class="form-select" aria-label="Floating label select example" ID="DdlStatus">
+            </asp:DropDownList>
             <label for="options">Select availability options</label>
         </div>
         <div>
-            <asp:Button OnClick="BtnUpdate_Click" Style="width: 100%" id="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
+            <asp:Button OnClick="BtnUpdate_Click" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
+        </div>
+        <div>
+            <%--<asp:Panel class="form-select" runat="server" ID="TagsPanel"></asp:Panel>--%>
+            <div class="input-group">
+                <asp:CheckBox class="input-group-text align-items-baseline" runat="server"/>
+                <label class="form-control">Ime apartmana</label>
+            </div>
         </div>
     </div>
     <div class="row">

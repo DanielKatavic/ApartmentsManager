@@ -47,7 +47,7 @@ namespace DataLayer.Dal
                 tags.Add(
                     new Tag
                     {
-                        Guid= (Guid)row[nameof(Tag.Guid)],
+                        Guid = (Guid)row[nameof(Tag.Guid)],
                         Name = row[nameof(Tag.Name)].ToString(),
                         Count = (int)row[nameof(Tag.Count)]
                     }
@@ -63,10 +63,11 @@ namespace DataLayer.Dal
             var tblApartments = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name).Tables[0];
             foreach (DataRow row in tblApartments.Rows)
             {
+                Guid guid = (Guid)row[nameof(Apartment.Guid)];
                 apartments.Add(
                     new Apartment
                     {
-                        Guid = (Guid)row[nameof(Apartment.Guid)],
+                        Guid = guid,
                         Name = row[nameof(Apartment.Name)].ToString(),
                         MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
                         MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
@@ -74,11 +75,29 @@ namespace DataLayer.Dal
                         Price = (decimal)row[nameof(Apartment.Price)],
                         CityName = row[nameof(Apartment.CityName)].ToString(),
                         Status = (Status)Enum.Parse(typeof(Status), row[nameof(Apartment.Status)].ToString()),
-                        PicturesCount = (int)row[nameof(Apartment.PicturesCount)]
+                        PicturesCount = (int)row[nameof(Apartment.PicturesCount)],
+                        Tags = LoadTagsByApartmentGuid(guid)
                     }
                 );
             }
             return apartments;
+        }
+
+        private IList<Tag> LoadTagsByApartmentGuid(Guid guid)
+        {
+            IList<Tag> tags = new List<Tag>();
+
+            var tblTags = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid).Tables[0];
+            foreach (DataRow row in tblTags.Rows)
+            {
+                tags.Add(
+                    new Tag
+                    {
+                        Guid = (Guid)row["TagGuid"]
+                    }
+                );
+            }
+            return tags;
         }
 
         public void UpdateApartment(Guid guid, int maxAdults, int maxChildren, int totalRooms, string status)

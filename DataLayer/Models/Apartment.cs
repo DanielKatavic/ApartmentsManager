@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataLayer.Models
 {
@@ -22,5 +23,6 @@ namespace DataLayer.Models
         public string CityName { get; set; }
         public Status Status { get; set; }
         public int PicturesCount { get; set; }
+        public IList<Tag> Tags { get; set; }
     }
 }

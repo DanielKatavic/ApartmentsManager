@@ -8,7 +8,7 @@ namespace RWAproject
 {
     public partial class UpdatePanel : UserControl
     {
-        public static Apartment Apartment{ get; set; }
+        public static Apartment Apartment { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,15 +32,32 @@ namespace RWAproject
 
         internal void FillPanel()
         {
+            FillDdlStatus();
+            //FillTagsPanel();
             offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
             maxAdults.Value = Apartment.MaxAdults.ToString();
             maxChildren.Value = Apartment.MaxChildren.ToString();
             totalRooms.Value = Apartment.TotalRooms.ToString();
         }
 
+        private void FillTagsPanel()
+        {
+            //TagsPanel.Controls.Add(new LinkButton { Text="apartman"});
+            //TagsPanel.Controls.Add(new LinkButton { Text="drugi"});
+            //TagsPanel.Controls.Add(new LinkButton { Text="treci"});
+            //TagsPanel.Controls.Add(new LinkButton { Text="apartman"});
+        }
+
+        private void FillDdlStatus()
+        {
+            DdlStatus.Items.Add(new ListItem { Enabled = true, Value = Status.Vacant.ToString() });
+            DdlStatus.Items.Add(new ListItem { Value = Status.Reserved.ToString() });
+            DdlStatus.Items.Add(new ListItem { Value = Status.Occupied.ToString() });
+        }
+
         private void UpdateApartment()
         {
-            string status = Request.Form["options"];
+            string status = DdlStatus.SelectedItem.ToString();
 
             ((IRepo)Application["database"]).UpdateApartment(
                 Apartment.Guid,
@@ -49,6 +66,21 @@ namespace RWAproject
                 int.Parse(totalRooms.Value),
                 status);
             Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
+        }
+
+        protected void DdlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedStatus = DdlStatus.SelectedItem.ToString();
+            if (StatusIsReservedOrOccupied())
+            {
+                reservation.Attributes.Add("required", "required");
+            }
+        }
+
+        private bool StatusIsReservedOrOccupied()
+        {
+            string selectedStatus = DdlStatus.SelectedItem.ToString();
+            return selectedStatus == Status.Reserved.ToString() || selectedStatus == Status.Occupied.ToString();
         }
     }
 }

@@ -42,6 +42,15 @@ namespace RWAproject
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl maxAdults;
 
         /// <summary>
+        /// DdlStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdlStatus;
+
+        /// <summary>
         /// BtnUpdate control.
         /// </summary>
         /// <remarks>
