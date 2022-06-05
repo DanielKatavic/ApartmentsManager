@@ -9,16 +9,16 @@
 <h3>Admin site:</h3>
 
 LogIn page:
-![image](https://user-images.githubusercontent.com/79853787/172048959-345716f5-4866-427b-a7a9-b66057260cab.png)
+![Snimka ekrana 2022-06-05, 14 20 37](https://user-images.githubusercontent.com/79853787/172050102-f23eb682-b18d-4eed-8989-a4c0bc593b31.png)
 
 Apartments page:
-![image](https://user-images.githubusercontent.com/79853787/172048936-82bb7059-209c-4c5f-ab1c-8e4cfc623afd.png)
+![Snimka ekrana 2022-06-05, 14 19 51](https://user-images.githubusercontent.com/79853787/172050083-777afd77-2849-4ac5-b30f-2b504327e414.png)
 
 Tags page:
-![image](https://user-images.githubusercontent.com/79853787/172049048-c30386f8-517a-4a84-8884-898bc50c1caf.png)
+![Snimka ekrana 2022-06-05, 14 21 36](https://user-images.githubusercontent.com/79853787/172050147-fce3900f-3949-4a85-bf3b-772b9d96b0c0.png)
 
 Registered users page:
-![image](https://user-images.githubusercontent.com/79853787/172049010-7a7a5b29-93c8-4781-8698-9e6e1d875aeb.png)
+![Snimka ekrana 2022-06-05, 14 22 22](https://user-images.githubusercontent.com/79853787/172050181-28c16c53-d465-46df-8f9b-38b382170b26.png)
 
 <h3>Public site:</h3>
 <p>Work in progress</p>
