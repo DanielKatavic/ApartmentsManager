@@ -1,4 +1,5 @@
 ﻿using DataLayer.Dal;
+using DataLayer.Managers;
 using DataLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,6 @@ namespace RWAproject
     public partial class Apartments : System.Web.UI.Page
     {
         private IList<Apartment> _apartments;
-        private IList<Apartment> _sortedByCity = new List<Apartment>();
-        private IList<Apartment> _sortedByStatus = new List<Apartment>();
-        private IList<Apartment> _temp = new List<Apartment>();
         private static Guid apartmentGuid;
         private static Apartment selectedApartment;
 
@@ -82,35 +80,15 @@ namespace RWAproject
             string selectedCity = ddlCity.SelectedItem.ToString();
             string selectedStatus = ddlStatus.SelectedItem.ToString();
 
-            _sortedByCity = selectedCity == "Any" ? _apartments : _apartments.ToList().FindAll(a => a.CityName == selectedCity);
-
-            _sortedByStatus = selectedStatus == "Any" ? _apartments : _apartments.ToList().FindAll(a => a.Status.ToString() == selectedStatus);
-
-            _temp = _sortedByCity.Concat(_sortedByStatus).ToList();
-
-            rptApartments.DataSource = _temp.GroupBy(a => a).Where(g => g.Count() > 1).Select(a => a.Key).ToList(); ;
+            rptApartments.DataSource = ApartmentManager.GetFilteredApartments(selectedCity, selectedStatus, _apartments); 
             rptApartments.DataBind();
         }
 
         protected void DdlSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedItem = ddlSortBy.SelectedItem.ToString();
-            rptApartments.DataSource = GetSortedApartments(selectedItem);
+            rptApartments.DataSource = ApartmentManager.GetSortedApartments(selectedItem, _apartments);
             rptApartments.DataBind();
-        }
-
-        private IOrderedEnumerable<Apartment> GetSortedApartments(string selectedItem)
-        {
-            switch (selectedItem)
-            {
-                case "Number of rooms":
-                    return _apartments.OrderByDescending(a => a.TotalRooms);
-                case "Number of space":
-                    return _apartments.OrderByDescending(a => a.MaxChildren + a.MaxAdults);
-                case "Price":
-                    return _apartments.OrderByDescending(a => a.Price);
-            }
-            return null;
         }
 
         protected void BtnDelete_Click(object sender, EventArgs e)
