@@ -10,6 +10,9 @@ namespace RWAproject
     public partial class Apartments : System.Web.UI.Page
     {
         private IList<Apartment> _apartments;
+        private IList<Apartment> _sortedByCity = new List<Apartment>();
+        private IList<Apartment> _sortedByStatus = new List<Apartment>();
+        private IList<Apartment> _temp = new List<Apartment>();
         private static Guid apartmentGuid;
         private static Apartment selectedApartment;
 
@@ -74,26 +77,24 @@ namespace RWAproject
         {
         }
 
-        protected void DdlStatus_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DropDownList dropDownList = sender as DropDownList;
-            Status selectedItem = (Status)Enum.Parse(typeof(Status), dropDownList.SelectedItem.ToString());
-            rptApartments.DataSource = selectedItem == Status.Any ? _apartments : _apartments.ToList().Where(a => a.Status == selectedItem);
-            rptApartments.DataBind();
-        }
+            string selectedCity = ddlCity.SelectedItem.ToString();
+            string selectedStatus = ddlStatus.SelectedItem.ToString();
 
-        protected void DdlCity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList dropDownList = sender as DropDownList;
-            string selectedItem = dropDownList.SelectedItem.ToString();
-            rptApartments.DataSource = selectedItem == "Any" ? _apartments : _apartments.ToList().Where(a => a.CityName == selectedItem);
+            _sortedByCity = selectedCity == "Any" ? _apartments : _apartments.ToList().FindAll(a => a.CityName == selectedCity);
+
+            _sortedByStatus = selectedStatus == "Any" ? _apartments : _apartments.ToList().FindAll(a => a.Status.ToString() == selectedStatus);
+
+            _temp = _sortedByCity.Concat(_sortedByStatus).ToList();
+
+            rptApartments.DataSource = _temp.GroupBy(a => a).Where(g => g.Count() > 1).Select(a => a.Key).ToList(); ;
             rptApartments.DataBind();
         }
 
         protected void DdlSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DropDownList dropDownList = sender as DropDownList;
-            string selectedItem = dropDownList.SelectedItem.ToString();
+            string selectedItem = ddlSortBy.SelectedItem.ToString();
             rptApartments.DataSource = GetSortedApartments(selectedItem);
             rptApartments.DataBind();
         }

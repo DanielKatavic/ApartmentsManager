@@ -8,12 +8,12 @@
             <div class="d-flex me-auto">
                 <div class="d-flex align-items-center" id="SortByStatus">
                     <label for="status">Status:</label>
-                    <asp:DropDownList class="form-select" runat="server" ID="ddlStatus" OnSelectedIndexChanged="DdlStatus_SelectedIndexChanged" AutoPostBack="True">
+                    <asp:DropDownList class="form-select" runat="server" ID="ddlStatus" OnSelectedIndexChanged="DropDownList_SelectedIndexChanged" AutoPostBack="True">
                     </asp:DropDownList>
                 </div>
                 <div class="d-flex align-items-center" id="SortByCity">
                     <label for="city">City:</label>
-                    <asp:DropDownList class="form-select" runat="server" ID="ddlCity" OnSelectedIndexChanged="DdlCity_SelectedIndexChanged" AutoPostBack="True">
+                    <asp:DropDownList class="form-select" runat="server" ID="ddlCity" OnSelectedIndexChanged="DropDownList_SelectedIndexChanged" AutoPostBack="True">
                     </asp:DropDownList>
                 </div>
             </div>

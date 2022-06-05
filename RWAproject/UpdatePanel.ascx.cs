@@ -42,10 +42,7 @@ namespace RWAproject
 
         private void FillTagsPanel()
         {
-            //TagsPanel.Controls.Add(new LinkButton { Text="apartman"});
-            //TagsPanel.Controls.Add(new LinkButton { Text="drugi"});
-            //TagsPanel.Controls.Add(new LinkButton { Text="treci"});
-            //TagsPanel.Controls.Add(new LinkButton { Text="apartman"});
+            
         }
 
         private void FillDdlStatus()
@@ -70,10 +67,13 @@ namespace RWAproject
 
         protected void DdlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedStatus = DdlStatus.SelectedItem.ToString();
             if (StatusIsReservedOrOccupied())
             {
                 reservation.Attributes.Add("required", "required");
+            }
+            else
+            {
+                reservation.Attributes.Remove("required");
             }
         }
 
