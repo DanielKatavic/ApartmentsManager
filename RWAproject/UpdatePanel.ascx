@@ -15,12 +15,15 @@
             <label for="maxAdults">Max adults</label>
         </div>
         <div class="form-floating mb-3">
-            <asp:DropDownList OnSelectedIndexChanged="DdlStatus_SelectedIndexChanged" runat="server" class="form-select" ID="DdlStatus" AutoPostBack="True">
-            </asp:DropDownList>
-            <label for="options">Select availability options</label>
+            <select name="status" id="status" class="form-select" aria-label="Floating label select example">
+                <option value="<%: DataLayer.Models.Status.Occupied %>" selected><%: DataLayer.Models.Status.Occupied %></option>
+                <option value="<%: DataLayer.Models.Status.Vacant %>"><%: DataLayer.Models.Status.Vacant %></option>
+                <option value="<%: DataLayer.Models.Status.Reserved %>"><%: DataLayer.Models.Status.Reserved %></option>
+            </select>
+            <label for="status">Select availability options</label>
         </div>
         <div>
-            <asp:Button OnClick="BtnUpdate_Click" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
+            <asp:Button OnClick="BtnUpdate_Click" OnClientClick="CheckInput()" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
         </div>
         <div>
             <asp:Panel runat="server" ID="TagsPanel">
@@ -37,7 +40,7 @@
             <label for="distanceFromSea">Distance from sea in m</label>
         </div>
         <div class="form-floating mb-3">
-            <input runat="server" id="reservation" type="text" min="0" class="form-control" placeholder="2">
+            <input id="reservation" type="text" min="0" class="form-control" placeholder="2">
             <label for="reservation">Name of person</label>
         </div>
         <div>

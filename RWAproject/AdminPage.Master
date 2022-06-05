@@ -32,7 +32,6 @@
                     <a class="nav-link text-decoration-none" href="RegisteredUsers.aspx">Registered users</a>
                 </div>
                 <div class="navbar-nav ms-auto" style="margin-right: 1em">
-                    <%--<a href="LogInPage.aspx" onclick=>Logout</a>--%>
                     <asp:LinkButton runat="server" class="nav-link text-decoration-none" OnClick="BtnLogout_Click" OnClientClick="return confirm('Are you sure you want to logout?')">Logout</asp:LinkButton>
                 </div>
             </div>
@@ -50,6 +49,18 @@
             <p class="text-center text-muted">Algebra University College</p>
         </footer>
     </form>
+    <script>
+        function CheckInput() {
+            var selectedItem = $('#status').find(":selected").text();
+            if (selectedItem == "Reserved" || selectedItem == "Occupied") {
+                $("#reservation").focus();
+                $("#reservation").prop('required', true);
+            }
+            else {
+                $("#reservation").prop('required', false);
+            }
+        }
+    </script>
 
     <!-- JQUERY -->
     <script src="Scripts/jquery-3.6.0.min.js"></script>

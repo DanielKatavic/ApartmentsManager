@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <asp:Repeater ID="rptTags" runat="server">
                     <HeaderTemplate>
-                        <table id="myTable" class="table table-bordered">
+                        <table id="myTable" class="table">
                             <thead>
                                 <tr style="text-align: center">
                                     <th scope="col">Name</th>
@@ -21,7 +21,7 @@
                             <td scope="row"><%# Eval(nameof(DataLayer.Models.Tag.Name)) %></td>
                             <td><%# Eval(nameof(DataLayer.Models.Tag.Count)) %></td>
                             <td>
-                                <asp:LinkButton Visible="false" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Guid)) %>" runat="server">Delete</asp:LinkButton>
+                                <asp:LinkButton CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Guid)) %>" runat="server">Delete</asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>

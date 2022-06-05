@@ -32,7 +32,6 @@ namespace RWAproject
 
         internal void FillPanel()
         {
-            FillDdlStatus();
             //FillTagsPanel();
             offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
             maxAdults.Value = Apartment.MaxAdults.ToString();
@@ -42,19 +41,12 @@ namespace RWAproject
 
         private void FillTagsPanel()
         {
-            
-        }
 
-        private void FillDdlStatus()
-        {
-            DdlStatus.Items.Add(new ListItem { Enabled = true, Value = Status.Vacant.ToString() });
-            DdlStatus.Items.Add(new ListItem { Value = Status.Reserved.ToString() });
-            DdlStatus.Items.Add(new ListItem { Value = Status.Occupied.ToString() });
         }
 
         private void UpdateApartment()
         {
-            string status = DdlStatus.SelectedItem.ToString();
+            string status = Request.Form["status"];
 
             ((IRepo)Application["database"]).UpdateApartment(
                 Apartment.Guid,
@@ -63,24 +55,6 @@ namespace RWAproject
                 int.Parse(totalRooms.Value),
                 status);
             Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
-        }
-
-        protected void DdlStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (StatusIsReservedOrOccupied())
-            {
-                reservation.Attributes.Add("required", "required");
-            }
-            else
-            {
-                reservation.Attributes.Remove("required");
-            }
-        }
-
-        private bool StatusIsReservedOrOccupied()
-        {
-            string selectedStatus = DdlStatus.SelectedItem.ToString();
-            return selectedStatus == Status.Reserved.ToString() || selectedStatus == Status.Occupied.ToString();
         }
     }
 }
