@@ -14,6 +14,9 @@ LogIn page:
 Apartments page:
 ![Snimka ekrana 2022-06-05, 14 19 51](https://user-images.githubusercontent.com/79853787/172050083-777afd77-2849-4ac5-b30f-2b504327e414.png)
 
+Apartment edit panel:
+![Snimka ekrana 2022-06-05, 15 38 57](https://user-images.githubusercontent.com/79853787/172053493-20a6606a-1602-4c6a-b780-925990eb8660.png)
+
 Tags page:
 ![Snimka ekrana 2022-06-05, 14 21 36](https://user-images.githubusercontent.com/79853787/172050147-fce3900f-3949-4a85-bf3b-772b9d96b0c0.png)
 
