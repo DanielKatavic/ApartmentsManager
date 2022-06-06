@@ -2,7 +2,7 @@
 
 <div class="offcanvas-header" id="popup-header">
     <h4 runat="server" class="offcanvas-title" id="offcanvasTitle">Edit apartment</h4>
-    <asp:Button runat="server" OnClick="BtnClose_Click" type="button" class="btn-close" aria-label="Close"></asp:Button>
+    <asp:Button runat="server" OnClick="BtnClose_Click" OnClientClick="$('#reservation').prop('required', false);" type="button" class="btn-close" aria-label="Close"></asp:Button>
 </div>
 <div id="offcanvas" class="offcanvas-body small d-flex justify-content-center">
     <div class="row">

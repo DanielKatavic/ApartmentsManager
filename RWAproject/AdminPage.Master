@@ -51,13 +51,13 @@
     </form>
     <script>
         function CheckInput() {
-            var selectedItem = $('#status').find(":selected").text();
+            var selectedItem = $("#status").find(":selected").text();
             if (selectedItem == "Reserved" || selectedItem == "Occupied") {
                 $("#reservation").focus();
-                $("#reservation").prop('required', true);
+                $("#reservation").prop("required", true);
             }
             else {
-                $("#reservation").prop('required', false);
+                $("#reservation").prop("required", false);
             }
         }
     </script>

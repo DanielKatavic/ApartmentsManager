@@ -32,7 +32,7 @@ namespace RWAproject
 
         internal void FillPanel()
         {
-            //FillTagsPanel();
+            FillTagsPanel();
             offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
             maxAdults.Value = Apartment.MaxAdults.ToString();
             maxChildren.Value = Apartment.MaxChildren.ToString();
@@ -41,7 +41,6 @@ namespace RWAproject
 
         private void FillTagsPanel()
         {
-
         }
 
         private void UpdateApartment()

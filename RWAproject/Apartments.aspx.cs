@@ -38,7 +38,7 @@ namespace RWAproject
 
         private void FillRptApartments()
         {
-            rptApartments.DataSource = _apartments;
+            rptApartments.DataSource = _apartments.OrderByDescending(a => a.TotalRooms);
             rptApartments.DataBind();
         }
 
