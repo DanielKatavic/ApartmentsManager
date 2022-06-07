@@ -1,6 +1,7 @@
 ﻿using DataLayer.Dal;
 using System;
 using System.Web;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace RWAproject
@@ -18,7 +19,7 @@ namespace RWAproject
         {
             Application["database"] = _repo;
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
