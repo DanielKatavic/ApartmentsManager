@@ -9,9 +9,17 @@ namespace RWAproject
 {
     public partial class TagCard : System.Web.UI.UserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public string TagName { get; set; }
+        public bool IsChecked { get; set; }
+
+        public TagCard(string tagName, bool isChecked)
         {
 
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            LblTagName.InnerText = TagName;
         }
     }
 }

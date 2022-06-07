@@ -93,7 +93,8 @@ namespace DataLayer.Dal
                 tags.Add(
                     new Tag
                     {
-                        Guid = (Guid)row["TagGuid"]
+                        Guid = (Guid)row["TagGuid"],
+                        Name = (string)row["TagName"],
                     }
                 );
             }

@@ -26,7 +26,7 @@
             <asp:Button OnClick="BtnUpdate_Click" OnClientClick="CheckInput()" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
         </div>
         <div>
-            <asp:Panel runat="server" ID="TagsPanel">
+            <asp:Panel Style="max-height: 10em; margin: 2em 0 2em 0; padding: 1em 0 1em 0" ScrollBars="Horizontal" runat="server" ID="TagsPanel">
             </asp:Panel>
         </div>
     </div>
@@ -44,7 +44,7 @@
             <label for="reservation">Name of person</label>
         </div>
         <div>
-            <asp:Button OnClick="BtnDelete_Click" Style="width: 100%" id="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete?')" runat="server" type="button" class="btn btn-danger" Text="Delete"></asp:Button>
+            <asp:Button OnClick="BtnDelete_Click" Style="width: 100%" ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete?')" runat="server" type="button" class="btn btn-danger" Text="Delete"></asp:Button>
         </div>
     </div>
     <div class="row">
