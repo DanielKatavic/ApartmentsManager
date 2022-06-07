@@ -1,4 +1,5 @@
 ﻿using DataLayer.Dal;
+using DataLayer.Managers;
 using DataLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,8 @@ namespace RWAproject
         {
         }
 
-        protected void BtnUpdate_Click(object sender, EventArgs e)
-        {
-            UpdateApartment();
-        }
+        protected void BtnUpdate_Click(object sender, EventArgs e) 
+            => UpdateApartment();
 
         protected void BtnDelete_Click(object sender, EventArgs e)
         {
@@ -28,10 +27,8 @@ namespace RWAproject
             Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
 
-        protected void BtnClose_Click(object sender, EventArgs e)
-        {
-            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
-        }
+        protected void BtnClose_Click(object sender, EventArgs e) 
+            => Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
 
         internal void FillPanel()
         {
@@ -44,34 +41,16 @@ namespace RWAproject
 
         private void FillTagsPanel()
         {
-            IList<Tag> selectedTags = Apartment.Tags;
-            for (int i = 0; i < selectedTags.Count; i++)
-            {
-                TagsPanel.Controls.Add(new Literal
-                {
-                    Text = CreateTagCard(selectedTags[i].Name, i, true)
-                });
-            }
+            int tagId = 0;
             IList<Tag> allTags = ((IRepo)Application["database"]).LoadTags();
-            IList<Tag> notSelectedTags = selectedTags.Concat(allTags).GroupBy(t => t).Where(g => g.Count() == 1).Select(t => t.Key).ToList();
-            for (int i = 0; i < notSelectedTags.Count; i++)
+
+            foreach (Tag tag in allTags)
             {
                 TagsPanel.Controls.Add(new Literal
                 {
-                    Text = CreateTagCard(notSelectedTags[i].Name, i, false)
+                    Text = TagManager.CreateTagCard(tag.Name, tagId++, Apartment.Tags.Contains(tag))
                 });
             }
-        }
-
-        private string CreateTagCard(string tagName, int i, bool isChecked)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<div class=\"input-group\">");
-            sb.AppendLine($"<label class=\"form-control\" id=\"LblTagName{i}\" runat=\"server\">{tagName}</label>");
-            sb.AppendLine("<div class=\"input-group-text\">");
-            sb.AppendLine($"<input type=\"checkbox\" class=\"align-items-baseline\" runat=\"server\" ID=\"CheckBox{i}\" {(isChecked ? "checked" : "")}/>");
-            sb.AppendLine("</div></div>");
-            return sb.ToString();
         }
 
         private void UpdateApartment()
