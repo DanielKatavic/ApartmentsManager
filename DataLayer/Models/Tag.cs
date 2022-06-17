@@ -6,6 +6,7 @@ namespace DataLayer.Models
     {
         public Guid Guid { get; set; }
         public string Name { get; set; }
+        public string TypeName { get; set; }
         public DateTime CreatedAt { get; set; }
         public int Count { get; set; }
 

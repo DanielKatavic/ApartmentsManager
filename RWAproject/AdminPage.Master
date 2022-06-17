@@ -49,6 +49,10 @@
             <p class="text-center text-muted">Algebra University College</p>
         </footer>
     </form>
+
+    <asp:ContentPlaceHolder ID="ScriptsPlaceHolder" runat="server">
+    </asp:ContentPlaceHolder>
+
     <script>
         function CheckInput() {
             var selectedItem = $("#status").find(":selected").text();

@@ -49,7 +49,8 @@ namespace DataLayer.Dal
                     {
                         Guid = (Guid)row[nameof(Tag.Guid)],
                         Name = row[nameof(Tag.Name)].ToString(),
-                        Count = (int)row[nameof(Tag.Count)]
+                        Count = (int)row[nameof(Tag.Count)],
+                        TypeName = row[nameof(Tag.TypeName)].ToString()
                     }
                 );
             }
@@ -83,6 +84,9 @@ namespace DataLayer.Dal
             return apartments;
         }
 
+        public void AddTag(string name, string typeName) 
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, name, typeName);
+
         private IList<Tag> LoadTagsByApartmentGuid(Guid guid)
         {
             IList<Tag> tags = new List<Tag>();
@@ -105,6 +109,9 @@ namespace DataLayer.Dal
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid, maxAdults, maxChildren, totalRooms, status);
 
         public void DeleteApartment(Guid guid)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid);
+
+        public void DeleteTag(Guid guid)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid);
     }
 }

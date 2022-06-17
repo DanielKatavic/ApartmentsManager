@@ -40,7 +40,7 @@
             <label for="distanceFromSea">Distance from sea in m</label>
         </div>
         <div class="form-floating mb-3">
-            <input id="reservation" type="text" min="0" class="form-control" placeholder="2">
+            <input id="reservation" type="text" class="form-control" placeholder="2">
             <label for="reservation">Name of person</label>
         </div>
         <div>
