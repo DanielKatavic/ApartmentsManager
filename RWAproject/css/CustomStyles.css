@@ -2,13 +2,18 @@
     --footer-height: 10em;
 }
 
+td{
+    text-align: center !important; 
+    vertical-align: middle !important;
+}
+
 nav {
     margin-bottom: 0 !important;
     height: 4em;
 }
 
 #delete-icon {
-    background: url(https://cdn-icons-png.flaticon.com/512/1214/1214428.png) center / contain no-repeat;
+    background: url(../icons/delete-icon.png) center / contain no-repeat;
     height: 1.2em;
     width: 1.2em;
 }

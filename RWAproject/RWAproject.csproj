@@ -125,6 +125,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="AdminPage.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="icons\delete-icon.png" />
     <Content Include="icons\linkedin.png" />
     <Content Include="icons\users.png" />
     <Content Include="LogInPage.aspx" />
@@ -160,7 +161,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Tags.aspx" />
-    <Content Include="UpdatePanel.ascx" />
+    <Content Include="UpdateApartmentPanel.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -222,12 +223,12 @@
     <Compile Include="Tags.aspx.designer.cs">
       <DependentUpon>Tags.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UpdatePanel.ascx.cs">
-      <DependentUpon>UpdatePanel.ascx</DependentUpon>
+    <Compile Include="UpdateApartmentPanel.ascx.cs">
+      <DependentUpon>UpdateApartmentPanel.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UpdatePanel.ascx.designer.cs">
-      <DependentUpon>UpdatePanel.ascx</DependentUpon>
+    <Compile Include="UpdateApartmentPanel.ascx.designer.cs">
+      <DependentUpon>UpdateApartmentPanel.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

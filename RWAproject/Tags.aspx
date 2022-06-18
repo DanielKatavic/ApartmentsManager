@@ -21,7 +21,7 @@
                             <td scope="row"><%# Eval(nameof(DataLayer.Models.Tag.Name)) %></td>
                             <td><%# Eval(nameof(DataLayer.Models.Tag.Count)) %></td>
                             <td>
-                                <asp:LinkButton OnClientClick="return confirm('Are you sure you want to delete?')" OnClick="BtnDeleteTag_Click" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Guid)) %>" runat="server" ID="BtnDeleteTag" Visible="false">Delete</asp:LinkButton>
+                                <asp:Button class="btn btn-danger" OnClientClick="return confirm('Are you sure you want to delete?')" OnClick="BtnDeleteTag_Click" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Guid)) %>" runat="server" ID="BtnDeleteTag" Visible="false" Text="Delete"></asp:Button>
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -32,7 +32,7 @@
                 </asp:Repeater>
             </div>
             <div style="text-align: right">
-                <asp:Button class="btn btn-success" Style="text-align: center; margin-right: 1em" runat="server" Text="Add tag" OnClick="BtnShowPanel_Click"></asp:Button>
+                <asp:Button class="btn btn-success" runat="server" style="margin-right: 1em" Text="Add new tag" OnClick="BtnShowPanel_Click"></asp:Button>
             </div>
         </div>
     </div>

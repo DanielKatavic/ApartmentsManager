@@ -26,7 +26,7 @@ namespace RWAproject
         {
             for(int i = 0; i < rptTags.Items.Count; i++)
             {
-                LinkButton button = (LinkButton)rptTags.Items[i].FindControl("BtnDeleteTag");
+                Button button = (Button)rptTags.Items[i].FindControl("BtnDeleteTag");
                 if (_tags[i].Count == 0)
                 {
                     button.Visible = true;

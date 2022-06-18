@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UpdatePanel.ascx.cs" Inherits="RWAproject.UpdatePanel" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UpdateApartmentPanel.ascx.cs" Inherits="RWAproject.UpdatePanel" %>
 
 <div class="offcanvas-header" id="popup-header">
     <h4 runat="server" class="offcanvas-title" id="offcanvasTitle">Edit apartment</h4>

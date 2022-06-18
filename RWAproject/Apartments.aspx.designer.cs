@@ -51,13 +51,13 @@ namespace RWAproject
         protected global::System.Web.UI.WebControls.Repeater rptApartments;
 
         /// <summary>
-        /// ApartmentsPanel control.
+        /// UpdateApartmentPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ApartmentsPanel;
+        protected global::System.Web.UI.WebControls.Panel UpdateApartmentPanel;
 
         /// <summary>
         /// updatePanel control.
@@ -67,5 +67,14 @@ namespace RWAproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::RWAproject.UpdatePanel updatePanel;
+
+        /// <summary>
+        /// AddApartmentPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AddApartmentPanel;
     }
 }

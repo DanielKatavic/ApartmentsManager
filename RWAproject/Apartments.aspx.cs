@@ -61,7 +61,7 @@ namespace RWAproject
             LinkButton linkButton = sender as LinkButton;
             apartmentGuid = Guid.Parse(linkButton.CommandArgument);
             selectedApartment = _apartments.ToList().FirstOrDefault(a => a.Guid == apartmentGuid);
-            ApartmentsPanel.Visible = true;
+            UpdateApartmentPanel.Visible = true;
             FillUserControl();
         }
 
