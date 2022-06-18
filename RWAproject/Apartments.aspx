@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/AdminPage.Master" CodeBehind="Apartments.aspx.cs" Inherits="RWAproject.Apartments" %>
 
 <%@ Register TagName="UpdateApartmentPanel" TagPrefix="ascx" Src="~/UpdateApartmentPanel.ascx" %>
+<%@ Register TagName="AddApartmentUserControl" TagPrefix="ascx" Src="~/AddApartmentUserControl.ascx" %>
 
 <asp:Content ID="ApartmentsContent" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div class="container d-flex ">
@@ -78,7 +79,9 @@
             </div>
         </asp:Panel>
         <asp:Panel runat="server" ID="AddApartmentPanel" Visible="false">
-
+            <div class="container animate__animated animate__slideInDown" id="popup">
+                <ascx:AddApartmentUserControl ID="addPanel" runat="server" />
+            </div>
         </asp:Panel>
     </div>
 </asp:Content>

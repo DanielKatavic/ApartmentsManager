@@ -1,11 +1,15 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UpdateApartmentPanel.ascx.cs" Inherits="RWAproject.UpdatePanel" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddApartmentUserControl.ascx.cs" Inherits="RWAproject.AddApartmentUserControl" %>
 
 <div class="offcanvas-header" id="popup-header">
-    <h4 runat="server" class="offcanvas-title" id="offcanvasTitle">Edit apartment</h4>
+    <h4 runat="server" class="offcanvas-title" id="offcanvasTitle">Add apartment</h4>
     <asp:Button runat="server" OnClick="BtnClose_Click" OnClientClick="$('#reservation').prop('required', false);" type="button" class="btn-close" aria-label="Close"></asp:Button>
 </div>
 <div id="offcanvas" class="offcanvas-body small d-flex justify-content-center">
     <div>
+        <div class="form-floating mb-3">
+            <input runat="server" id="name" type="text" class="form-control" placeholder="2">
+            <label for="name">Apartment name</label>
+        </div>
         <div class="form-floating mb-3">
             <input runat="server" id="totalRooms" type="number" min="0" class="form-control" placeholder="2">
             <label for="totalRooms">Number of rooms</label>
@@ -23,10 +27,14 @@
             <label for="status">Select availability options</label>
         </div>
         <div>
-            <asp:Button OnClick="BtnUpdate_Click" OnClientClick="CheckInput()" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
+            <asp:Button OnClick="BtnAdd_Click" OnClientClick="CheckInput()" Style="width: 100%; margin-bottom: 1em" ID="BtnAdd" runat="server" type="button" class="btn btn-primary" Text="Add apartment"></asp:Button>
         </div>
     </div>
     <div>
+        <div class="form-floating mb-3">
+            <input runat="server" id="city" type="text" class="form-control" placeholder="2">
+            <label for="city">City name</label>
+        </div>
         <div class="form-floating mb-3">
             <input runat="server" id="maxChildren" type="number" min="0" class="form-control" placeholder="2">
             <label for="maxChildren">Max children</label>
@@ -39,8 +47,9 @@
             <input id="reservation" type="text" class="form-control" placeholder="2">
             <label for="reservation">Name of person</label>
         </div>
-        <div>
-            <asp:Button OnClick="BtnDelete_Click" Style="width: 100%" ID="BtnDelete" OnClientClick="return confirm('Are you sure you want to delete?')" runat="server" type="button" class="btn btn-danger" Text="Delete"></asp:Button>
+        <div class="form-floating mb-3">
+            <input id="price" type="number" class="form-control" placeholder="2">
+            <label for="price">Price in €</label>
         </div>
     </div>
     <div>
@@ -76,6 +85,9 @@
                             <h5>Apartment interior</h5>
                         </div>
                     </div>
+                    <asp:Literal runat="server" ID="ImagesLiteral">
+                        
+                    </asp:Literal>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -86,7 +98,10 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <div class="mt-3 d-flex">
+                <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%"/>
+                <asp:Button runat="server" class="btn btn-success" Style="margin-left: .5em" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click"/>
+            </div>
         </div>
     </div>
 </div>

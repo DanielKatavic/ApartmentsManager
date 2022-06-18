@@ -11,7 +11,7 @@ namespace RWAproject
 {
 
 
-    public partial class UpdatePanel
+    public partial class AddApartmentUserControl
     {
 
         /// <summary>
@@ -22,6 +22,15 @@ namespace RWAproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl offcanvasTitle;
+
+        /// <summary>
+        /// name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText name;
 
         /// <summary>
         /// totalRooms control.
@@ -42,13 +51,22 @@ namespace RWAproject
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl maxAdults;
 
         /// <summary>
-        /// BtnUpdate control.
+        /// BtnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnUpdate;
+        protected global::System.Web.UI.WebControls.Button BtnAdd;
+
+        /// <summary>
+        /// city control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText city;
 
         /// <summary>
         /// maxChildren control.
@@ -69,15 +87,6 @@ namespace RWAproject
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl distanceFromSea;
 
         /// <summary>
-        /// BtnDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnDelete;
-
-        /// <summary>
         /// TagsPanel control.
         /// </summary>
         /// <remarks>
@@ -85,5 +94,32 @@ namespace RWAproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel TagsPanel;
+
+        /// <summary>
+        /// ImagesLiteral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ImagesLiteral;
+
+        /// <summary>
+        /// FileUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
+
+        /// <summary>
+        /// BtnAddFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAddFile;
     }
 }

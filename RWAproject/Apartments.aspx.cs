@@ -73,6 +73,7 @@ namespace RWAproject
 
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
+            AddApartmentPanel.Visible = true;
         }
 
         protected void DropDownList_SelectedIndexChanged(object sender, EventArgs e)

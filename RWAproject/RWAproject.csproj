@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddApartmentUserControl.ascx" />
     <Content Include="Apartments.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -168,6 +169,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddApartmentUserControl.ascx.cs">
+      <DependentUpon>AddApartmentUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddApartmentUserControl.ascx.designer.cs">
+      <DependentUpon>AddApartmentUserControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPage.Master.cs">
       <DependentUpon>AdminPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
