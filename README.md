@@ -12,10 +12,13 @@ LogIn page:
 ![Snimka ekrana 2022-06-05, 14 20 37](https://user-images.githubusercontent.com/79853787/172050102-f23eb682-b18d-4eed-8989-a4c0bc593b31.png)
 
 Apartments page:
-![Snimka ekrana 2022-06-05, 14 19 51](https://user-images.githubusercontent.com/79853787/172050083-777afd77-2849-4ac5-b30f-2b504327e414.png)
+![Snimka ekrana 2022-06-18, 22 17 04](https://user-images.githubusercontent.com/79853787/174455888-3580d4ba-c7dd-4311-8dae-9cd79c2cd827.png)
 
 Apartment edit panel:
-![Snimka ekrana 2022-06-05, 15 38 57](https://user-images.githubusercontent.com/79853787/172053493-20a6606a-1602-4c6a-b780-925990eb8660.png)
+![Snimka ekrana 2022-06-18, 22 17 46](https://user-images.githubusercontent.com/79853787/174455891-c777bde3-31a6-40e5-898a-d0a1fcaa1897.png)
+
+Apartment add panel:
+![Snimka ekrana 2022-06-18, 22 18 01](https://user-images.githubusercontent.com/79853787/174455899-3a9dcde3-29f1-4634-99b0-12eadafe0d05.png)
 
 Tags page:
 ![localhost_61279_Tags](https://user-images.githubusercontent.com/79853787/174446913-f51795ba-1f90-4b69-bb1b-634eb4a0c2ba.png)
