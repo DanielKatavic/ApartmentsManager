@@ -2,8 +2,8 @@
     --footer-height: 10em;
 }
 
-td{
-    text-align: center !important; 
+td {
+    text-align: center !important;
     vertical-align: middle !important;
 }
 
@@ -35,6 +35,15 @@ body {
 img {
     width: 30em;
     border-radius: .5em .5em 0 0;
+}
+
+.image-desc {
+    background-color: transparent;
+    padding: .5em;
+    width: 80%;
+    font-weight: 600;
+    border: 0;
+    text-align: center;
 }
 
 #sorting-div {

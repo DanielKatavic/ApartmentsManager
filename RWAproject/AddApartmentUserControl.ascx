@@ -48,7 +48,7 @@
             <label for="reservation">Name of person</label>
         </div>
         <div class="form-floating mb-3">
-            <input id="price" type="number" class="form-control" placeholder="2">
+            <input id="price" type="number" min="0" class="form-control" placeholder="2">
             <label for="price">Price in €</label>
         </div>
     </div>
@@ -61,28 +61,23 @@
     <div>
         <div class="mb-3" id="apartment-images">
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="https://media.istockphoto.com/photos/europe-modern-complex-of-residential-buildings-picture-id1165384568?k=20&m=1165384568&s=612x612&w=0&h=CAnAr3uJtmkr0IQ2EPgm0IBoo8oCm-FEYEtyor8X_9I=" class="d-block w-100" style="height: 17em">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Apartment front side</h5>
+                            <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION" ></asp:TextBox>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="https://media.istockphoto.com/photos/exterior-view-of-modern-apartment-building-offering-luxury-rental-in-picture-id1322575582?b=1&k=20&m=1322575582&s=170667a&w=0&h=bGCtLpgCEorQuVdW2lbWguNZHcOGPePSwDibgbgyh0U=" class="d-block w-100" style="height: 17em">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Another side of apartment</h5>
+                            <asp:TextBox class="image-desc" runat="server" ID="TextBox1" placeholder="IMAGE DESCRIPTION" ></asp:TextBox>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="https://www.aveliving.com/AVE/media/Property_Images/Florham%20Park/hero/flor-apt-living-(2)-hero.jpg?ext=.jpg" class="d-block w-100" style="height: 17em">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Apartment interior</h5>
+                            <asp:TextBox class="image-desc" runat="server" ID="TextBox2" placeholder="IMAGE DESCRIPTION" ></asp:TextBox>
                         </div>
                     </div>
                     <asp:Literal runat="server" ID="ImagesLiteral">
@@ -99,8 +94,8 @@
                 </button>
             </div>
             <div class="mt-3 d-flex">
-                <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%"/>
-                <asp:Button runat="server" class="btn btn-success" Style="margin-left: .5em" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click"/>
+                <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%" />
+                <asp:Button runat="server" class="btn btn-success" Style="margin-left: .5em" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click" />
             </div>
         </div>
     </div>

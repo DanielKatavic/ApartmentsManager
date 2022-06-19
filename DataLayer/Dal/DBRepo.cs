@@ -84,6 +84,9 @@ namespace DataLayer.Dal
             return apartments;
         }
 
+        public void AddImage(Guid guid, string base64image, string imageName = "")
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid, base64image, imageName);
+
         public void AddTag(string name, string typeName) 
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, name, typeName);
 

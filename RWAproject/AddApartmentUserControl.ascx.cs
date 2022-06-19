@@ -12,7 +12,8 @@ namespace RWAproject
 {
     public partial class AddApartmentUserControl : System.Web.UI.UserControl
     {
-        private const string _imgPath = "~/img";
+        private const string _imgPath = "/img/";
+        private static int _id = 0;
 
         protected void Page_Load(object sender, EventArgs e)
             => FillTagsPanel();
@@ -22,7 +23,7 @@ namespace RWAproject
 
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
-
+            throw new Exception();
         }
 
         private void FillTagsPanel()
@@ -41,21 +42,33 @@ namespace RWAproject
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
         {
+            if (!FileUpload.HasFile)
+            {
+                FileUpload.Focus();
+                return;
+            }
+
             string fileName = FileUpload.PostedFile.FileName;
             string path = Server.MapPath(_imgPath);
             string combined = Path.Combine(path, fileName);
 
             Directory.CreateDirectory(path);
-            
+
             try
             {
                 FileUpload.PostedFile.SaveAs(combined);
-                AddImageToPanel(combined);
+                //SaveImageToDB(combined);
+                AddImageToPanel(Path.Combine(_imgPath, fileName));
             }
             catch
             {
                 Response.Write("<script>alert('Error while uploading file!')</script>");
             }
+        }
+
+        private void SaveImageToDB(string combined)
+        {
+            throw new NotImplementedException();
         }
 
         private void AddImageToPanel(string path)
@@ -64,9 +77,9 @@ namespace RWAproject
             sb.AppendLine("<div class=\"carousel-item\">");
             sb.AppendLine($"<img src=\"{path}\" class=\"d-block w-100\" style=\"height: 17em\">");
             sb.AppendLine("<div class=\"carousel-caption d-none d-md-block\">");
-            sb.AppendLine("<h5>Apartment interior</h5>");
+            sb.AppendLine($"<input type=\"text\" class=\"image-desc\" runat=\"server\" ID=\"ApartmentDesc{_id++}\" placeholder=\"IMAGE DESCRIPTION\"></asp:input>");
             sb.AppendLine("</div></div>");
-            ImagesLiteral.Text = sb.ToString();
+            ImagesLiteral.Text += sb.ToString();
         }
     }
 }

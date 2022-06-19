@@ -86,7 +86,10 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <div class="mt-3 d-flex">
+                <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%"/>
+                <asp:Button runat="server" class="btn btn-success" Style="margin-left: .5em" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click"/>
+            </div>
         </div>
     </div>
 </div>
