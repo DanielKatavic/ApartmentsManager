@@ -29,5 +29,8 @@ Tag add panel:
 Registered users page:
 ![Snimka ekrana 2022-06-05, 14 22 22](https://user-images.githubusercontent.com/79853787/172050181-28c16c53-d465-46df-8f9b-38b382170b26.png)
 
+Error page:
+![Snimka ekrana 2022-06-20, 18 24 54](https://user-images.githubusercontent.com/79853787/174644653-5052bed9-d264-4c6b-89cf-edc3c5a561f5.png)
+
 <h3>Public site:</h3>
 <p>Work in progress</p>
