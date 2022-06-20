@@ -18,6 +18,12 @@ namespace RWAproject
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            if (Session["user"] is null) Response.Redirect("LogInPage.aspx");
+            base.OnLoad(e);
+        }
+
         private void LoadData()
         {
             rptUsers.DataSource = _users;

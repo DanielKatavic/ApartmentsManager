@@ -22,6 +22,12 @@ namespace RWAproject
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            if (Session["user"] is null) Response.Redirect("LogInPage.aspx");
+            base.OnLoad(e);
+        }
+
         private void ShowDeleteButtons()
         {
             for(int i = 0; i < rptTags.Items.Count; i++)

@@ -10,6 +10,12 @@ namespace RWAproject
         {
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            if (Session["user"] != null) Response.Redirect("Apartments.aspx");
+            base.OnLoad(e);
+        }
+
         protected void BtnSignIn_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Value;
