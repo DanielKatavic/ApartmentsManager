@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RWAproject", "RWAproject\RWAproject.csproj", "{4C47199A-ED74-4F0F-8E13-EF7783FB22A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminSite", "RWAproject\AdminSite.csproj", "{4C47199A-ED74-4F0F-8E13-EF7783FB22A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{B8133D33-1236-4058-807D-4ABFE71E1705}"
 EndProject
