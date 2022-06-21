@@ -1,12 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/AdminPage.Master" CodeBehind="Tags.aspx.cs" Inherits="RWAproject.Tags" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <div class="container d-flex">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
+    <div class="container d-flex pt-4">
+        <div class="row justify-content-center" style="height: 60vh; width: 30em; overflow-y: scroll">
+            <div class="col-md-6" style="width: 100%; height:100%;">
                 <asp:Repeater ID="rptTags" runat="server">
                     <HeaderTemplate>
-                        <table id="myTable" class="table">
+                        <table class="table" style="height: 50%">
                             <thead>
                                 <tr style="text-align: center">
                                     <th scope="col">Name</th>
@@ -31,9 +31,9 @@
                     </FooterTemplate>
                 </asp:Repeater>
             </div>
-            <div style="text-align: right">
-                <asp:Button class="btn btn-success" runat="server" style="margin-right: 1em" Text="Add new tag" OnClick="BtnShowPanel_Click"></asp:Button>
-            </div>
+        </div>
+        <div style="text-align: right; width: 30em; margin-top: 2em">
+            <asp:Button class="btn btn-success" runat="server" Style="margin-right: 1em" Text="Add new tag" OnClick="BtnShowPanel_Click"></asp:Button>
         </div>
     </div>
     <asp:Panel runat="server" ID="TagAddPanel" Visible="false">
