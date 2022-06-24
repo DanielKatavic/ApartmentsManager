@@ -15,11 +15,8 @@
             <label for="maxAdults">Max adults</label>
         </div>
         <div class="form-floating mb-3">
-            <select name="status" id="status" class="form-select">
-                <option value="<%: DataLayer.Models.Status.Occupied %>" selected><%: DataLayer.Models.Status.Occupied %></option>
-                <option value="<%: DataLayer.Models.Status.Vacant %>"><%: DataLayer.Models.Status.Vacant %></option>
-                <option value="<%: DataLayer.Models.Status.Reserved %>"><%: DataLayer.Models.Status.Reserved %></option>
-            </select>
+            <asp:DropDownList runat="server" ID="StatusDDL" class="form-select" OnSelectedIndexChanged="StatusDDL_SelectedIndexChanged" AutoPostBack="true">
+                     </asp:DropDownList>
             <label for="status">Options:</label>
         </div>
         <div>
@@ -78,11 +75,6 @@
     <div style="margin-right: 1em; width: 15em">
         <div class="mb-3" id="apartment-images">
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="https://media.istockphoto.com/photos/europe-modern-complex-of-residential-buildings-picture-id1165384568?k=20&m=1165384568&s=612x612&w=0&h=CAnAr3uJtmkr0IQ2EPgm0IBoo8oCm-FEYEtyor8X_9I=" class="d-block w-100" style="height: 17em">

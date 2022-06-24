@@ -53,19 +53,6 @@
     <asp:ContentPlaceHolder ID="ScriptsPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
 
-    <script>
-        function CheckInput() {
-            var selectedItem = $("#status").find(":selected").text();
-            if (selectedItem == "Reserved" || selectedItem == "Occupied") {
-                $("#reservation").focus();
-                $("#reservation").prop("required", true);
-            }
-            else {
-                $("#reservation").prop("required", false);
-            }
-        }
-    </script>
-
     <!-- JQUERY -->
     <script src="Scripts/jquery-3.6.0.min.js"></script>
 

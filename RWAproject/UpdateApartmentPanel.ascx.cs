@@ -14,6 +14,7 @@ namespace RWAproject
     public partial class UpdatePanel : UserControl
     {
         private const string _imgPath = "/img/";
+        private static IList<User> _users;
 
         public static Apartment Apartment { get; set; }
 
@@ -41,6 +42,26 @@ namespace RWAproject
         {
             FillTagsPanel();
             FillElements();
+            FillStatusDdl();
+        }
+
+        private void FillStatusDdl()
+        {
+            StatusDDL.Items.Add(new ListItem
+            {
+                Value = Status.Reserved.ToString(),
+                Text = Status.Reserved.ToString()
+            });
+            StatusDDL.Items.Add(new ListItem
+            {
+                Value = Status.Vacant.ToString(),
+                Text = Status.Vacant.ToString()
+            });
+            StatusDDL.Items.Add(new ListItem
+            {
+                Value = Status.Occupied.ToString(),
+                Text = Status.Occupied.ToString()
+            });
         }
 
         private void FillElements()
@@ -123,39 +144,24 @@ namespace RWAproject
             if (ChbRegisteredUser.Checked)
             {
                 UsersDDL.Attributes.Remove("disabled");
-                UsersDDL.DataSource = ((IRepo)Application["database"]).LoadUsers();
+                _users = ((IRepo)Application["database"]).LoadUsers();
+                UsersDDL.DataSource = _users;
                 UsersDDL.DataBind();
-                DisableInputs();
+                AddTagToElement("disabled");
             }
             else
             {
                 UsersDDL.Attributes.Add("disabled", "");
                 UsersDDL.DataSource = Array.Empty<string>();
                 UsersDDL.DataBind();
-                EnableInputs();
+                RemoveTagFromElement("disabled");
             }
-        }
-
-        private void EnableInputs()
-        {
-            Username.Attributes.Remove("disabled");
-            Email.Attributes.Remove("disabled");
-            Address.Attributes.Remove("disabled");
-            PhoneNumber.Attributes.Remove("disabled");
-        }
-
-        private void DisableInputs()
-        {
-            Username.Attributes.Add("disabled", "");
-            Email.Attributes.Add("disabled", "");
-            Address.Attributes.Add("disabled", "");
-            PhoneNumber.Attributes.Add("disabled", "");
         }
 
         protected void UsersDDL_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedUser = ((DropDownList)sender).SelectedItem.ToString();
-            User user = ((IRepo)Application["database"]).LoadUsers().FirstOrDefault(u => u.UserName == selectedUser);
+            User user = _users.FirstOrDefault(u => u.UserName == selectedUser);
             FillInputs(user);
         }
 
@@ -165,6 +171,39 @@ namespace RWAproject
             Email.Value = user.Email;
             PhoneNumber.Value = user.PhoneNumber;
             Address.Value = user.Address;
+        }
+
+        protected void StatusDDL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(((DropDownList)sender).SelectedItem.ToString() == Status.Vacant.ToString())
+            {
+                ChbRegisteredUser.Enabled = false;
+                UsersDDL.Attributes.Add("disabled", "");
+                AddTagToElement("disabled");
+                RemoveTagFromElement("required");
+            }
+            else
+            {
+                ChbRegisteredUser.Enabled = true;
+                RemoveTagFromElement("disabled");
+                AddTagToElement("required");
+            }
+        }
+
+        private void AddTagToElement(string tag)
+        {
+            Username.Attributes.Add(tag, "");
+            Email.Attributes.Add(tag, "");
+            Address.Attributes.Add(tag, "");
+            PhoneNumber.Attributes.Add(tag, "");
+        }
+
+        private void RemoveTagFromElement(string tag)
+        {
+            Username.Attributes.Remove(tag);
+            Email.Attributes.Remove(tag);
+            Address.Attributes.Remove(tag);
+            PhoneNumber.Attributes.Remove(tag);
         }
     }
 }
