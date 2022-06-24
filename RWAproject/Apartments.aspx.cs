@@ -25,7 +25,7 @@ namespace RWAproject
 
         protected override void OnLoad(EventArgs e)
         {
-            if (Session["user"] is null) Response.Redirect("LogInPage.aspx");
+            //if (Session["user"] is null) Response.Redirect("LogInPage.aspx");
             base.OnLoad(e);
         }
 

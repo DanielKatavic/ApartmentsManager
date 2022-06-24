@@ -74,12 +74,12 @@
             </div>
         </div>
         <asp:Panel runat="server" ID="UpdateApartmentPanel" Visible="false">
-            <div class="container animate__animated animate__slideInDown" id="popup">
+            <div class="container" id="popup">
                 <ascx:UpdateApartmentPanel ID="updatePanel" runat="server" />
             </div>
         </asp:Panel>
         <asp:Panel runat="server" ID="AddApartmentPanel" Visible="false">
-            <div class="container animate__animated animate__slideInDown" id="popup">
+            <div class="container" id="popup">
                 <ascx:AddApartmentUserControl ID="addPanel" runat="server" />
             </div>
         </asp:Panel>

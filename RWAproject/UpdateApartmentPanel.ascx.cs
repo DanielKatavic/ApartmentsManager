@@ -4,6 +4,8 @@ using DataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,6 +19,10 @@ namespace RWAproject
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack && Apartment != null)
+            {
+                FillTagsPanel();
+            }
         }
 
         protected void BtnUpdate_Click(object sender, EventArgs e) 
@@ -110,6 +116,55 @@ namespace RWAproject
         private void LoadImage(string base64image)
         {
             File.WriteAllBytes(_imgPath, Convert.FromBase64String(base64image));
+        }
+
+        protected void ChbRegisteredUser_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChbRegisteredUser.Checked)
+            {
+                UsersDDL.Attributes.Remove("disabled");
+                UsersDDL.DataSource = ((IRepo)Application["database"]).LoadUsers();
+                UsersDDL.DataBind();
+                DisableInputs();
+            }
+            else
+            {
+                UsersDDL.Attributes.Add("disabled", "");
+                UsersDDL.DataSource = Array.Empty<string>();
+                UsersDDL.DataBind();
+                EnableInputs();
+            }
+        }
+
+        private void EnableInputs()
+        {
+            Username.Attributes.Remove("disabled");
+            Email.Attributes.Remove("disabled");
+            Address.Attributes.Remove("disabled");
+            PhoneNumber.Attributes.Remove("disabled");
+        }
+
+        private void DisableInputs()
+        {
+            Username.Attributes.Add("disabled", "");
+            Email.Attributes.Add("disabled", "");
+            Address.Attributes.Add("disabled", "");
+            PhoneNumber.Attributes.Add("disabled", "");
+        }
+
+        protected void UsersDDL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedUser = ((DropDownList)sender).SelectedItem.ToString();
+            User user = ((IRepo)Application["database"]).LoadUsers().FirstOrDefault(u => u.UserName == selectedUser);
+            FillInputs(user);
+        }
+
+        private void FillInputs(User user)
+        {
+            Username.Value = user.UserName;
+            Email.Value = user.Email;
+            PhoneNumber.Value = user.PhoneNumber;
+            Address.Value = user.Address;
         }
     }
 }
