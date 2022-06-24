@@ -15,16 +15,16 @@ Apartments page:
 ![Snimka ekrana 2022-06-18, 22 17 04](https://user-images.githubusercontent.com/79853787/174455888-3580d4ba-c7dd-4311-8dae-9cd79c2cd827.png)
 
 Apartment edit panel:
-![Snimka ekrana 2022-06-18, 22 17 46](https://user-images.githubusercontent.com/79853787/174455891-c777bde3-31a6-40e5-898a-d0a1fcaa1897.png)
+![Snimka ekrana 2022-06-24, 15 14 22](https://user-images.githubusercontent.com/79853787/175543605-d484e90d-d4b9-4578-9d0c-4ebb94a6d894.png)
 
 Apartment add panel:
 ![Snimka ekrana 2022-06-18, 22 18 01](https://user-images.githubusercontent.com/79853787/174455899-3a9dcde3-29f1-4634-99b0-12eadafe0d05.png)
 
 Tags page:
-![localhost_61279_Tags](https://user-images.githubusercontent.com/79853787/174446913-f51795ba-1f90-4b69-bb1b-634eb4a0c2ba.png)
+![Snimka ekrana 2022-06-24, 15 14 13](https://user-images.githubusercontent.com/79853787/175543642-a44e7bc4-9767-444c-90be-44f3cd9d5d37.png)
 
 Tag add panel:
-![localhost_61279_Tags (2)](https://user-images.githubusercontent.com/79853787/174446969-a2a1fc67-90ba-409a-b0ab-776f147588f0.png)
+![Snimka ekrana 2022-06-24, 15 16 03](https://user-images.githubusercontent.com/79853787/175543965-195e0772-8605-498a-a509-9c110c427a2c.png)
 
 Registered users page:
 ![Snimka ekrana 2022-06-05, 14 22 22](https://user-images.githubusercontent.com/79853787/172050181-28c16c53-d465-46df-8f9b-38b382170b26.png)
