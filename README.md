@@ -24,7 +24,7 @@ Tags page:
 ![Snimka ekrana 2022-06-24, 15 14 13](https://user-images.githubusercontent.com/79853787/175543642-a44e7bc4-9767-444c-90be-44f3cd9d5d37.png)
 
 Tag add panel:
-![Snimka ekrana 2022-06-24, 15 14 22](https://user-images.githubusercontent.com/79853787/175543788-6b669202-2ba8-40a9-907c-d4fcc49b8ea4.png)
+![Snimka ekrana 2022-06-24, 15 16 03](https://user-images.githubusercontent.com/79853787/175543965-195e0772-8605-498a-a509-9c110c427a2c.png)
 
 Registered users page:
 ![Snimka ekrana 2022-06-05, 14 22 22](https://user-images.githubusercontent.com/79853787/172050181-28c16c53-d465-46df-8f9b-38b382170b26.png)
