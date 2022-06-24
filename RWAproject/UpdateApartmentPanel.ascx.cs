@@ -15,6 +15,7 @@ namespace RWAproject
     {
         private const string _imgPath = "/img/";
         private static IList<User> _users;
+        private static User _user;
 
         public static Apartment Apartment { get; set; }
 
@@ -26,8 +27,39 @@ namespace RWAproject
             }
         }
 
-        protected void BtnUpdate_Click(object sender, EventArgs e) 
-            => UpdateApartment();
+        protected void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            string status = StatusDDL.SelectedItem.ToString();
+            UpdateApartment(status);
+            AddReservation(status);
+            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
+        }
+
+        private void AddReservation(string status)
+        {
+            if (status == Status.Reserved.ToString() || status == Status.Occupied.ToString())
+            {
+                if (_user is null)
+                {
+                    ((IRepo)Application["database"]).AddReservation(
+                    Apartment.Id,
+                    null,
+                    Username.Value,
+                    Email.Value,
+                    PhoneNumber.Value,
+                    Address.Value,
+                    Details.Value);
+                }
+                else
+                {
+                    ((IRepo)Application["database"]).AddReservation(
+                    Apartment.Id,
+                    _user.Id,
+                    Details.Value);
+                    _user = null;
+                }
+            }
+        }
 
         protected void BtnDelete_Click(object sender, EventArgs e)
         {
@@ -35,7 +67,7 @@ namespace RWAproject
             Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
 
-        protected void BtnClose_Click(object sender, EventArgs e) 
+        protected void BtnClose_Click(object sender, EventArgs e)
             => Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
 
         internal void FillPanel()
@@ -86,17 +118,14 @@ namespace RWAproject
             }
         }
 
-        private void UpdateApartment()
+        private void UpdateApartment(string status)
         {
-            string status = Request.Form["status"];
-
             ((IRepo)Application["database"]).UpdateApartment(
                 Apartment.Guid,
                 int.Parse(maxAdults.Value),
                 int.Parse(maxChildren.Value),
                 int.Parse(totalRooms.Value),
                 status);
-            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
@@ -151,6 +180,7 @@ namespace RWAproject
             }
             else
             {
+                _user = null;
                 UsersDDL.Attributes.Add("disabled", "");
                 UsersDDL.DataSource = Array.Empty<string>();
                 UsersDDL.DataBind();
@@ -161,21 +191,21 @@ namespace RWAproject
         protected void UsersDDL_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedUser = ((DropDownList)sender).SelectedItem.ToString();
-            User user = _users.FirstOrDefault(u => u.UserName == selectedUser);
-            FillInputs(user);
+            _user = _users.FirstOrDefault(u => u.UserName == selectedUser);
+            FillInputs();
         }
 
-        private void FillInputs(User user)
+        private void FillInputs()
         {
-            Username.Value = user.UserName;
-            Email.Value = user.Email;
-            PhoneNumber.Value = user.PhoneNumber;
-            Address.Value = user.Address;
+            Username.Value = _user.UserName;
+            Email.Value = _user.Email;
+            PhoneNumber.Value = _user.PhoneNumber;
+            Address.Value = _user.Address;
         }
 
         protected void StatusDDL_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(((DropDownList)sender).SelectedItem.ToString() == Status.Vacant.ToString())
+            if (((DropDownList)sender).SelectedItem.ToString() == Status.Vacant.ToString())
             {
                 ChbRegisteredUser.Enabled = false;
                 UsersDDL.Attributes.Add("disabled", "");

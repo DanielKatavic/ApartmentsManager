@@ -14,6 +14,7 @@ namespace DataLayer.Models
     [Serializable]
     public class Apartment
     {
+        public int Id { get; set; }
         public Guid Guid { get; set; }
         public string Name { get; set; }
         public int MaxAdults { get; set; }

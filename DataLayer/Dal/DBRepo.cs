@@ -27,6 +27,7 @@ namespace DataLayer.Dal
             {
                 users.Add(new User
                 {
+                    Id = (int)row[nameof(User.Id)],
                     Guid = (Guid)row[nameof(User.Guid)],
                     Email = row[nameof(User.Email)].ToString(),
                     PhoneNumber = row[nameof(User.PhoneNumber)].ToString(),
@@ -68,6 +69,7 @@ namespace DataLayer.Dal
                 apartments.Add(
                     new Apartment
                     {
+                        Id = (int)row[nameof(Apartment.Id)],
                         Guid = guid,
                         Name = row[nameof(Apartment.Name)].ToString(),
                         MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
@@ -107,6 +109,9 @@ namespace DataLayer.Dal
             }
             return tags;
         }
+
+        public void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null) 
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, id, username, email, phoneNumber, address, details);
 
         public void UpdateApartment(Guid guid, int maxAdults, int maxChildren, int totalRooms, string status)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid, maxAdults, maxChildren, totalRooms, status);

@@ -68,7 +68,7 @@
             </asp:Panel>
         </div>
         <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="Details" style="height: 8em; resize: none"></textarea>
+            <textarea runat="server" class="form-control" placeholder="Leave a comment here" id="Details" style="height: 8em; resize: none"></textarea>
             <label for="Details">Details</label>
         </div>
     </div>

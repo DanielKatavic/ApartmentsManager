@@ -14,8 +14,10 @@ namespace DataLayer.Dal
         User CkeckAdminUser(string email, string password);
         IList<User> LoadUsers();
         void AddTag(string name, string typeName);
+        void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null);
         void UpdateApartment(Guid guid, int maxAdults, int maxChildren, int totalRooms, string status);
         void DeleteApartment(Guid guid);
         void DeleteTag(Guid guid);
+
     }
 }
