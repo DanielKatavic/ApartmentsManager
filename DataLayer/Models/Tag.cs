@@ -4,6 +4,7 @@ namespace DataLayer.Models
 {
     public class Tag
     {
+        public int Id { get; set; }
         public Guid Guid { get; set; }
         public string Name { get; set; }
         public string TypeName { get; set; }
@@ -11,9 +12,9 @@ namespace DataLayer.Models
         public int Count { get; set; }
 
         public override bool Equals(object obj)
-            => obj is Tag other && this.Guid.Equals(other.Guid);
+            => obj is Tag other && this.Id.Equals(other.Id);
 
         public override int GetHashCode() 
-            => this.Guid.GetHashCode();
+            => this.Id.GetHashCode();
     }
 }

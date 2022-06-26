@@ -25,6 +25,7 @@ namespace DataLayer.Models
         public Status Status { get; set; }
         public int PicturesCount { get; set; }
         public IList<Tag> Tags { get; set; }
+        public IList<Image> Images { get; set; }
 
         public override bool Equals(object obj) 
             => obj is Apartment other && Guid.Equals(other.Guid);

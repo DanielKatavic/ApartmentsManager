@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web.Services;
+using System.Text;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace RWAproject
@@ -14,17 +15,19 @@ namespace RWAproject
     public partial class UpdatePanel : UserControl
     {
         private const string _imgPath = "/img/";
+        private static int _id = 0;
         private static IList<User> _users;
+        private static IList<Tag> _allTags;
+        private static IList<DataLayer.Models.Image> _images = new List<DataLayer.Models.Image>();
         private static User _user;
+        private IList<HtmlControl> _inputs;
 
         public static Apartment Apartment { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack && Apartment != null)
-            {
-                FillTagsPanel();
-            }
+            _inputs = new List<HtmlControl> { Username, Email, PhoneNumber, Address };
+            _allTags = ((IRepo)Application["database"]).LoadTags();
         }
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
@@ -75,6 +78,15 @@ namespace RWAproject
             FillTagsPanel();
             FillElements();
             FillStatusDdl();
+            FillImages();
+        }
+
+        private void FillImages()
+        {
+            if (Apartment.Images.Count != 0)
+            {
+                Apartment.Images.ToList().ForEach(i => AddImageToPanel(i.Path));
+            }
         }
 
         private void FillStatusDdl()
@@ -107,14 +119,10 @@ namespace RWAproject
         private void FillTagsPanel()
         {
             int tagId = 0;
-            IList<Tag> allTags = ((IRepo)Application["database"]).LoadTags();
-
-            foreach (Tag tag in allTags)
+            
+            foreach (Tag tag in _allTags)
             {
-                TagsPanel.Controls.Add(new Literal
-                {
-                    Text = TagManager.CreateTagCard(tag.Name, tagId++, Apartment.Tags.Contains(tag))
-                });
+                TagsLiteral.Text += TagManager.CreateTagCard(tag.Name, tagId++, Apartment.Tags.Contains(tag));
             }
         }
 
@@ -126,6 +134,8 @@ namespace RWAproject
                 int.Parse(maxChildren.Value),
                 int.Parse(totalRooms.Value),
                 status);
+            _images.ToList().ForEach(i => SaveImageToDB(i));
+            _images.Clear();
         }
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
@@ -145,9 +155,8 @@ namespace RWAproject
             try
             {
                 FileUpload.PostedFile.SaveAs(combined);
-                SaveImageToDB(combined);
-                //AddImageToPanel(combined);
-                Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
+                _images.Add(new DataLayer.Models.Image { Path = combined });
+                AddImageToPanel(Path.Combine(_imgPath, fileName));
             }
             catch
             {
@@ -155,18 +164,23 @@ namespace RWAproject
             }
         }
 
-        private void SaveImageToDB(string combined)
+        private void AddImageToPanel(string path)
         {
-            byte[] imageArray = File.ReadAllBytes(combined);
-            string base64image = Convert.ToBase64String(imageArray);
-
-            ((DBRepo)Application["database"]).AddImage(Apartment.Guid, base64image);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<div class=\"carousel-item\">");
+            sb.AppendLine($"<img src=\"{path}\" class=\"d-block w-100\" style=\"height: 17em\">");
+            sb.AppendLine("<div class=\"carousel-caption d-none d-md-block\">");
+            sb.AppendLine($"<input type=\"text\" class=\"image-desc\" runat=\"server\" ID=\"ApartmentDesc{_id++}\" placeholder=\"IMAGE DESCRIPTION\"></asp:input>");
+            sb.AppendLine("</div></div>");
+            ImagesLiteral.Text += sb.ToString();
         }
 
-        private void LoadImage(string base64image)
-        {
-            File.WriteAllBytes(_imgPath, Convert.FromBase64String(base64image));
-        }
+        private void SaveImageToDB(DataLayer.Models.Image image)
+            => ((DBRepo)Application["database"]).AddImage(
+                apartmentId: Apartment.Id,
+                path: image.Path,
+                imageName: string.Empty,
+                isRepresentative: image.IsRepresentative);
 
         protected void ChbRegisteredUser_CheckedChanged(object sender, EventArgs e)
         {
@@ -176,7 +190,7 @@ namespace RWAproject
                 _users = ((IRepo)Application["database"]).LoadUsers();
                 UsersDDL.DataSource = _users;
                 UsersDDL.DataBind();
-                AddTagToElement("disabled");
+                AddAttributeToInputs("disabled");
             }
             else
             {
@@ -184,7 +198,7 @@ namespace RWAproject
                 UsersDDL.Attributes.Add("disabled", "");
                 UsersDDL.DataSource = Array.Empty<string>();
                 UsersDDL.DataBind();
-                RemoveTagFromElement("disabled");
+                RemoveAttributeFromInputs("disabled");
             }
         }
 
@@ -209,31 +223,21 @@ namespace RWAproject
             {
                 ChbRegisteredUser.Enabled = false;
                 UsersDDL.Attributes.Add("disabled", "");
-                AddTagToElement("disabled");
-                RemoveTagFromElement("required");
+                AddAttributeToInputs("disabled");
+                RemoveAttributeFromInputs("required");
             }
             else
             {
                 ChbRegisteredUser.Enabled = true;
-                RemoveTagFromElement("disabled");
-                AddTagToElement("required");
+                RemoveAttributeFromInputs("disabled");
+                AddAttributeToInputs("required");
             }
         }
 
-        private void AddTagToElement(string tag)
-        {
-            Username.Attributes.Add(tag, "");
-            Email.Attributes.Add(tag, "");
-            Address.Attributes.Add(tag, "");
-            PhoneNumber.Attributes.Add(tag, "");
-        }
+        private void AddAttributeToInputs(string tag)
+            => _inputs.ToList().ForEach(i => i.Attributes.Add(tag, ""));
 
-        private void RemoveTagFromElement(string tag)
-        {
-            Username.Attributes.Remove(tag);
-            Email.Attributes.Remove(tag);
-            Address.Attributes.Remove(tag);
-            PhoneNumber.Attributes.Remove(tag);
-        }
+        private void RemoveAttributeFromInputs(string tag)
+            => _inputs.ToList().ForEach(i => i.Attributes.Remove(tag));
     }
 }

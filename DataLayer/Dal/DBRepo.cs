@@ -48,6 +48,7 @@ namespace DataLayer.Dal
                 tags.Add(
                     new Tag
                     {
+                        Id = (int)row[nameof(Tag.Id)],
                         Guid = (Guid)row[nameof(Tag.Guid)],
                         Name = row[nameof(Tag.Name)].ToString(),
                         Count = (int)row[nameof(Tag.Count)],
@@ -65,12 +66,12 @@ namespace DataLayer.Dal
             var tblApartments = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name).Tables[0];
             foreach (DataRow row in tblApartments.Rows)
             {
-                Guid guid = (Guid)row[nameof(Apartment.Guid)];
+                int id = (int)row[nameof(Apartment.Id)];
                 apartments.Add(
                     new Apartment
                     {
-                        Id = (int)row[nameof(Apartment.Id)],
-                        Guid = guid,
+                        Id = id,
+                        Guid = (Guid)row[nameof(Apartment.Guid)],
                         Name = row[nameof(Apartment.Name)].ToString(),
                         MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
                         MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
@@ -79,36 +80,58 @@ namespace DataLayer.Dal
                         CityName = row[nameof(Apartment.CityName)].ToString(),
                         Status = (Status)Enum.Parse(typeof(Status), row[nameof(Apartment.Status)].ToString()),
                         PicturesCount = (int)row[nameof(Apartment.PicturesCount)],
-                        Tags = LoadTagsByApartmentGuid(guid)
+                        Tags = LoadTagsByApartmentId(id),
+                        Images = LoadImagesByApartmentId(id)
                     }
                 );
             }
             return apartments;
         }
 
-        public void AddImage(Guid guid, string base64image, string imageName = "")
-            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid, base64image, imageName);
-
-        public void AddTag(string name, string typeName) 
-            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, name, typeName);
-
-        private IList<Tag> LoadTagsByApartmentGuid(Guid guid)
+        private IList<Tag> LoadTagsByApartmentId(int id)
         {
             IList<Tag> tags = new List<Tag>();
 
-            var tblTags = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid).Tables[0];
+            var tblTags = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, id).Tables[0];
             foreach (DataRow row in tblTags.Rows)
             {
                 tags.Add(
                     new Tag
                     {
-                        Guid = (Guid)row["TagGuid"],
+                        Id = (int)row[nameof(Tag.Id)],
                         Name = (string)row["TagName"],
                     }
                 );
             }
             return tags;
         }
+
+        public IList<Image> LoadImagesByApartmentId(int id)
+        {
+            IList<Image> images = new List<Image>();
+
+            var tblImages = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, id).Tables[0];
+
+            foreach (DataRow row in tblImages.Rows)
+            {
+                images.Add(new Image
+                {
+                    Id = (int)row[nameof(Image.Id)],
+                    Path = row[nameof(Image.Path)].ToString(),
+                    Base64Content = row[nameof(Image.Base64Content)].ToString(),
+                    Name = row[nameof(Image.Name)].ToString(),
+                    IsRepresentative = (bool)row[nameof(Image.IsRepresentative)]
+                });
+            }
+
+            return images;
+        }
+
+        public void AddImage(int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, path, base64image, imageName, isRepresentative);
+
+        public void AddTag(string name, string typeName) 
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, name, typeName);
 
         public void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null) 
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, id, username, email, phoneNumber, address, details);

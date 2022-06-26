@@ -129,7 +129,7 @@ namespace RWAproject
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Email;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Email;
 
         /// <summary>
         /// PhoneNumber control.
@@ -150,6 +150,15 @@ namespace RWAproject
         protected global::System.Web.UI.WebControls.Panel TagsPanel;
 
         /// <summary>
+        /// TagsLiteral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal TagsLiteral;
+
+        /// <summary>
         /// Details control.
         /// </summary>
         /// <remarks>
@@ -157,6 +166,24 @@ namespace RWAproject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea Details;
+
+        /// <summary>
+        /// ApartmentDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ApartmentDesc;
+
+        /// <summary>
+        /// ImagesLiteral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ImagesLiteral;
 
         /// <summary>
         /// FileUpload control.

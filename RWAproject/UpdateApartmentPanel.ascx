@@ -53,7 +53,7 @@
             <label for="Address">Address</label>
         </div>
         <div class="form-floating mb-3">
-            <input runat="server" id="Email" type="email" class="form-control" placeholder="2" required>
+            <input runat="server" id="Email" type="text" class="form-control" placeholder="2" required>
             <label for="Email">Email</label>
         </div>
         <div class="form-floating mb-3">
@@ -65,6 +65,7 @@
         <div>
             <label style="margin: 0">Select apartment tags:</label>
             <asp:Panel Style="max-height: 8em; overflow-y: scroll; overflow-x: hidden; margin-bottom: 1.2em" ScrollBars="Horizontal" runat="server" ID="TagsPanel">
+                <asp:Literal runat="server" ID="TagsLiteral"></asp:Literal>
             </asp:Panel>
         </div>
         <div class="form-floating">
@@ -79,21 +80,11 @@
                     <div class="carousel-item active">
                         <img src="https://media.istockphoto.com/photos/europe-modern-complex-of-residential-buildings-picture-id1165384568?k=20&m=1165384568&s=612x612&w=0&h=CAnAr3uJtmkr0IQ2EPgm0IBoo8oCm-FEYEtyor8X_9I=" class="d-block w-100" style="height: 17em">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Apartment front side</h5>
+                            <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION" ></asp:TextBox>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="https://media.istockphoto.com/photos/exterior-view-of-modern-apartment-building-offering-luxury-rental-in-picture-id1322575582?b=1&k=20&m=1322575582&s=170667a&w=0&h=bGCtLpgCEorQuVdW2lbWguNZHcOGPePSwDibgbgyh0U=" class="d-block w-100" style="height: 17em">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Another side of apartment</h5>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://www.aveliving.com/AVE/media/Property_Images/Florham%20Park/hero/flor-apt-living-(2)-hero.jpg?ext=.jpg" class="d-block w-100" style="height: 17em">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Apartment interior</h5>
-                        </div>
-                    </div>
+                    <asp:Literal runat="server" ID="ImagesLiteral">
+                    </asp:Literal>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
