@@ -14,7 +14,10 @@ namespace DataLayer.Models
         public override bool Equals(object obj)
             => obj is Tag other && this.Id.Equals(other.Id);
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => this.Id.GetHashCode();
+
+        public override string ToString()
+            => Name;
     }
 }

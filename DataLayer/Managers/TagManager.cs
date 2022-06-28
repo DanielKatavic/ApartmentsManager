@@ -4,14 +4,13 @@ namespace DataLayer.Managers
 {
     public static class TagManager
     {
-        public static string CreateTagCard(string tagName, int i, bool isChecked = false)
+        public static string CreateTagCard(string tagName, int i)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<div class=\"input-group\">");
             sb.AppendLine($"<label class=\"form-control\" id=\"LblTagName{i}\" runat=\"server\" for=\"CheckBox{i}\">{tagName}</label>");
-            sb.AppendLine("<div class=\"input-group-text\">");
-            sb.AppendLine($"<input type=\"checkbox\" class=\"align-items-baseline\" runat=\"server\" ID=\"CheckBox{i}\" {(isChecked ? "checked" : "")}/>");
-            sb.AppendLine("</div></div>");
+            sb.AppendLine($"<input type=\"submit\" runat=\"server\" ID=\"BtnDeleteTag{i}\" value=\"Del\" class=\"btn btn-danger\" />");
+            sb.AppendLine("</div>");
             return sb.ToString();
         }
     }

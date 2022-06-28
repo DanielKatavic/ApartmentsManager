@@ -15,10 +15,9 @@ namespace RWAproject
     public partial class UpdatePanel : UserControl
     {
         private const string _imgPath = "/img/";
-        private static int _id = 0;
+        private const string ErrorMessage = "<script>alert('Error while uploading file!')</script>";
         private static IList<User> _users;
         private static IList<Tag> _allTags;
-        private static IList<DataLayer.Models.Image> _images = new List<DataLayer.Models.Image>();
         private static User _user;
         private IList<HtmlControl> _inputs;
 
@@ -75,55 +74,46 @@ namespace RWAproject
 
         internal void FillPanel()
         {
-            FillTagsPanel();
-            FillElements();
+            FillTagsRpt();
+            FillApartmentInfo();
             FillStatusDdl();
+            FillTagsDdl();
             FillImages();
+        }
+
+        private void FillTagsDdl()
+        {
+            AllTagsDdl.DataSource = _allTags;
+            AllTagsDdl.DataBind();
         }
 
         private void FillImages()
         {
-            if (Apartment.Images.Count != 0)
-            {
-                Apartment.Images.ToList().ForEach(i => AddImageToPanel(i.Path));
-            }
+            ImagesRpt.DataSource = Apartment.Images;
+            ImagesRpt.DataBind();
         }
 
         private void FillStatusDdl()
         {
-            StatusDDL.Items.Add(new ListItem
-            {
-                Value = Status.Reserved.ToString(),
-                Text = Status.Reserved.ToString()
-            });
-            StatusDDL.Items.Add(new ListItem
-            {
-                Value = Status.Vacant.ToString(),
-                Text = Status.Vacant.ToString()
-            });
-            StatusDDL.Items.Add(new ListItem
-            {
-                Value = Status.Occupied.ToString(),
-                Text = Status.Occupied.ToString()
-            });
+            string[] statusList = Enum.GetNames(typeof(Status));
+            StatusDDL.DataSource = statusList.Where(s => s != Status.Any.ToString());
+            StatusDDL.DataBind();
         }
 
-        private void FillElements()
+        private void FillApartmentInfo()
         {
             offcanvasTitle.InnerHtml = $"Edit apartment {Apartment.Name}";
+            apartmentName.Value = Apartment.Name;
+            price.Value = Apartment.Price.ToString();
             maxAdults.Value = Apartment.MaxAdults.ToString();
             maxChildren.Value = Apartment.MaxChildren.ToString();
             totalRooms.Value = Apartment.TotalRooms.ToString();
         }
 
-        private void FillTagsPanel()
+        private void FillTagsRpt()
         {
-            int tagId = 0;
-            
-            foreach (Tag tag in _allTags)
-            {
-                TagsLiteral.Text += TagManager.CreateTagCard(tag.Name, tagId++, Apartment.Tags.Contains(tag));
-            }
+            TagsRepeater.DataSource = Apartment.Tags;
+            TagsRepeater.DataBind();
         }
 
         private void UpdateApartment(string status)
@@ -134,8 +124,8 @@ namespace RWAproject
                 int.Parse(maxChildren.Value),
                 int.Parse(totalRooms.Value),
                 status);
-            _images.ToList().ForEach(i => SaveImageToDB(i));
-            _images.Clear();
+            Apartment.Images.ToList().ForEach(i => SaveImageToDB(i));
+            Apartment.Images.Clear();
         }
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
@@ -155,24 +145,13 @@ namespace RWAproject
             try
             {
                 FileUpload.PostedFile.SaveAs(combined);
-                _images.Add(new DataLayer.Models.Image { Path = combined });
-                AddImageToPanel(Path.Combine(_imgPath, fileName));
+                Apartment.Images.Add(new DataLayer.Models.Image { Path = combined });
+                FillImages();
             }
             catch
             {
-                Response.Write("<script>alert('Error while uploading file!')</script>");
+                Response.Write(ErrorMessage);
             }
-        }
-
-        private void AddImageToPanel(string path)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<div class=\"carousel-item\">");
-            sb.AppendLine($"<img src=\"{path}\" class=\"d-block w-100\" style=\"height: 17em\">");
-            sb.AppendLine("<div class=\"carousel-caption d-none d-md-block\">");
-            sb.AppendLine($"<input type=\"text\" class=\"image-desc\" runat=\"server\" ID=\"ApartmentDesc{_id++}\" placeholder=\"IMAGE DESCRIPTION\"></asp:input>");
-            sb.AppendLine("</div></div>");
-            ImagesLiteral.Text += sb.ToString();
         }
 
         private void SaveImageToDB(DataLayer.Models.Image image)
@@ -206,10 +185,10 @@ namespace RWAproject
         {
             string selectedUser = ((DropDownList)sender).SelectedItem.ToString();
             _user = _users.FirstOrDefault(u => u.UserName == selectedUser);
-            FillInputs();
+            FillUserInfo();
         }
 
-        private void FillInputs()
+        private void FillUserInfo()
         {
             Username.Value = _user.UserName;
             Email.Value = _user.Email;
@@ -239,5 +218,21 @@ namespace RWAproject
 
         private void RemoveAttributeFromInputs(string tag)
             => _inputs.ToList().ForEach(i => i.Attributes.Remove(tag));
+
+        protected void BtnAddTag_Click(object sender, EventArgs e)
+        {
+            string selectedTag = AllTagsDdl.SelectedItem.ToString();
+            Tag tag = _allTags.FirstOrDefault(t => t.Name == selectedTag);
+            Apartment.Tags.Add(tag);
+            FillTagsRpt();
+        }
+
+        protected void BtnRemoveTag_Click(object sender, EventArgs e)
+        {
+            LinkButton linkButton = sender as LinkButton;
+            int tagId = int.Parse(linkButton.CommandArgument);
+            Apartment.Tags.Remove(Apartment.Tags.FirstOrDefault(t => t.Id == tagId));
+            FillTagsRpt();
+        }
     }
 }
