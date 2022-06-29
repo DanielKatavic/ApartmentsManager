@@ -1,11 +1,9 @@
 ﻿using DataLayer.Dal;
-using DataLayer.Managers;
 using DataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -161,6 +159,11 @@ namespace RWAproject
                 imageName: string.Empty,
                 isRepresentative: image.IsRepresentative);
 
+        private void SaveTagToDB(Tag tag)
+            => ((DBRepo)Application["database"]).AddTaggedApartment(
+                apartmentId: Apartment.Id,
+                tagId: tag.Id);
+
         protected void ChbRegisteredUser_CheckedChanged(object sender, EventArgs e)
         {
             if (ChbRegisteredUser.Checked)
@@ -223,6 +226,7 @@ namespace RWAproject
         {
             string selectedTag = AllTagsDdl.SelectedItem.ToString();
             Tag tag = _allTags.FirstOrDefault(t => t.Name == selectedTag);
+            tag.IsNew = true;
             Apartment.Tags.Add(tag);
             FillTagsRpt();
         }

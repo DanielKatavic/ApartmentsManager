@@ -13,20 +13,15 @@ namespace RWAproject
     {
         private const string _imgPath = "/img/";
         private const string ErrorMessage = "<script>alert('Error while uploading file!')</script>";
-        private static IList<Tag> _allTags;
         private static IList<City> _allCities;
         private static Apartment _apartment = new Apartment();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _allTags = ((IRepo)Application["database"]).LoadTags();
             _allCities = ((DBRepo)Application["database"]).LoadCities();
             if (!IsPostBack)
             {
-                _apartment.Tags = new List<Tag>();
                 _apartment.Images = new List<DataLayer.Models.Image>();
-                FillTagsDdl();
-                FillTagsRpt();
                 FillCityDdl();
             }
         }
@@ -35,12 +30,6 @@ namespace RWAproject
         {
             CityDDl.DataSource = _allCities;
             CityDDl.DataBind();
-        }
-
-        private void FillTagsDdl()
-        {
-            TagsDdl.DataSource = _allTags;
-            TagsDdl.DataBind();
         }
 
         protected void BtnClose_Click(object sender, EventArgs e)
@@ -59,21 +48,19 @@ namespace RWAproject
                 maxChildren: int.Parse(maxChildren.Value),
                 totalRooms: int.Parse(totalRooms.Value),
                 beachDistance: int.Parse(distanceFromSea.Value));
+
+            _apartment.Images.ToList().ForEach(i => SaveImageToDB(i));
+            _apartment.Images.Clear();
+
+            Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
 
-        private void FillTagsRpt()
-        {
-            TagsRepeater.DataSource = _apartment.Tags.Distinct();
-            TagsRepeater.DataBind();
-        }
-
-        protected void BtnAddTag_Click(object sender, EventArgs e)
-        {
-            string selectedTag = TagsDdl.SelectedItem.ToString();
-            Tag tag = _allTags.FirstOrDefault(t => t.Name == selectedTag);
-            _apartment.Tags.Add(tag);
-            FillTagsRpt();
-        }
+        private void SaveImageToDB(DataLayer.Models.Image image)
+            => ((DBRepo)Application["database"]).AddImage(
+                apartmentId: _apartment.Id,
+                path: image.Path,
+                imageName: string.Empty,
+                isRepresentative: image.IsRepresentative);
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
         {

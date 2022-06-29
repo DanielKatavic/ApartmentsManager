@@ -5,7 +5,7 @@
     <asp:Button runat="server" OnClick="BtnClose_Click" type="button" class="btn-close" aria-label="Close"></asp:Button>
 </div>
 <div id="offcanvas" class="offcanvas-body small d-flex">
-    <div style="margin-left: 1em; width: 15em">
+    <div style="margin-left: 1em;">
         <div class="form-floating mb-3">
             <input runat="server" id="apartmentName" type="text" class="form-control" placeholder="2" required>
             <label for="apartmentName">Apartment name</label>
@@ -22,7 +22,7 @@
             <asp:Button Style="width: 100%; margin-bottom: 1em" ID="BtnAddApartment" runat="server" type="button" class="btn btn-success" Text="Add" OnClick="BtnAdd_Click"></asp:Button>
         </div>
     </div>
-    <div style="width: 15em">
+    <div >
         <div class="form-floating mb-3">
             <input runat="server" id="price" type="number" class="form-control" placeholder="2" required>
             <label for="price">Price</label>
@@ -36,24 +36,7 @@
             <label for="distanceFromSea">Distance from sea in m</label>
         </div>
     </div>
-    <div style="width: 15em">
-        <div>
-            <label style="margin: 0">All apartment tags:</label>
-            <asp:Panel Style="max-height: 8em; overflow-y: scroll; overflow-x: hidden; margin-bottom: 1.2em; display: flex; flex-direction: column" ScrollBars="Horizontal" runat="server" ID="TagsPanel">
-                <asp:Repeater ID="TagsRepeater" runat="server">
-                    <ItemTemplate>
-                        <div class="input-group">
-                            <label class="form-control" style="display: flex; align-items: center" runat="server"><%# Eval(nameof(DataLayer.Models.Tag.Name)) %></label>
-                            <asp:LinkButton ID="BtnRemoveTag" Style="padding: 0 .5em 0 .5em" runat="server" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Id)) %>" Text="Del" class="btn btn-danger" />
-                        </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </asp:Panel>
-        </div>
-        <div class="input-group mb-3">
-            <asp:DropDownList runat="server" ID="TagsDdl" class="form-select" EnableViewState="true"/>
-            <asp:Button runat="server" ID="BtnAddTag" Text="Add" class="btn btn-success" OnClick="BtnAddTag_Click" />
-        </div>
+    <div >
         <div class="form-floating mb-3">
             <asp:DropDownList runat="server" ID="CityDDl" class="form-select" >
             </asp:DropDownList>
@@ -61,7 +44,7 @@
         </div>
     </div>
     <%--images--%>
-    <div style="margin-right: 1em; width: 15em">
+    <div style="margin-right: 1em;">
         <div class="mb-3" id="apartment-images">
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
                 <div class="carousel-inner">
