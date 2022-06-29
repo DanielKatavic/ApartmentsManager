@@ -24,13 +24,13 @@ namespace RWAproject
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl offcanvasTitle;
 
         /// <summary>
-        /// name control.
+        /// apartmentName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText name;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText apartmentName;
 
         /// <summary>
         /// totalRooms control.
@@ -51,22 +51,22 @@ namespace RWAproject
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl maxAdults;
 
         /// <summary>
-        /// BtnAdd control.
+        /// BtnAddApartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAdd;
+        protected global::System.Web.UI.WebControls.Button BtnAddApartment;
 
         /// <summary>
-        /// city control.
+        /// price control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText city;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl price;
 
         /// <summary>
         /// maxChildren control.
@@ -96,40 +96,40 @@ namespace RWAproject
         protected global::System.Web.UI.WebControls.Panel TagsPanel;
 
         /// <summary>
-        /// ApartmentDesc control.
+        /// TagsRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ApartmentDesc;
+        protected global::System.Web.UI.WebControls.Repeater TagsRepeater;
 
         /// <summary>
-        /// TextBox1 control.
+        /// TagsDdl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList TagsDdl;
 
         /// <summary>
-        /// TextBox2 control.
+        /// BtnAddTag control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.Button BtnAddTag;
 
         /// <summary>
-        /// ImagesLiteral control.
+        /// ImagesRpt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ImagesLiteral;
+        protected global::System.Web.UI.WebControls.Repeater ImagesRpt;
 
         /// <summary>
         /// FileUpload control.

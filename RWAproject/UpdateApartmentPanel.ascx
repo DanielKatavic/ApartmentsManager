@@ -2,7 +2,7 @@
 
 <div class="offcanvas-header" id="popup-header">
     <h4 runat="server" class="offcanvas-title" id="offcanvasTitle">Edit apartment</h4>
-    <asp:Button runat="server" OnClick="BtnClose_Click" OnClientClick="$('#reservation').prop('required', false);" type="button" class="btn-close" aria-label="Close"></asp:Button>
+    <asp:Button runat="server" OnClick="BtnClose_Click" type="button" class="btn-close" aria-label="Close"></asp:Button>
 </div>
 <div id="offcanvas" class="offcanvas-body small d-flex">
     <div style="margin-left: 1em; width: 15em">
@@ -24,7 +24,7 @@
             <label for="status">Options:</label>
         </div>
         <div>
-            <asp:Button OnClick="BtnUpdate_Click" OnClientClick="CheckInput()" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
+            <asp:Button OnClick="BtnUpdate_Click" Style="width: 100%" ID="BtnUpdate" runat="server" type="button" class="btn btn-primary" Text="Update"></asp:Button>
         </div>
     </div>
     <div style="width: 15em">
@@ -92,6 +92,7 @@
             <label for="Details">Details</label>
         </div>
     </div>
+    <%--images--%>
     <div style="margin-right: 1em; width: 15em">
         <div class="mb-3" id="apartment-images">
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
@@ -99,14 +100,14 @@
                     <asp:Repeater ID="ImagesRpt" runat="server">
                         <HeaderTemplate>
                             <div class="carousel-item active">
-                                <img src="https://media.istockphoto.com/photos/europe-modern-complex-of-residential-buildings-picture-id1165384568?k=20&m=1165384568&s=612x612&w=0&h=CAnAr3uJtmkr0IQ2EPgm0IBoo8oCm-FEYEtyor8X_9I=" class="d-block w-100" style="height: 17em">
+                                <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <asp:TextBox class="image-desc" runat="server" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
+                                    <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
                                 </div>
                             </div>
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <div class="carousel-item active">
+                            <div class="carousel-item">
                                 <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
                                     <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>

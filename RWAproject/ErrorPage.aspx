@@ -11,12 +11,12 @@
     <form id="form1" runat="server">
         <main>
             <div id="error-div">
-                <h1>404</h1>
+                <h1>Error</h1>
                 <h3>Page not found</h3>
                 <p>
                     An error occurred while loading this page.
                     <br />
-                    Please try again.
+                    Please try again later.
                 </p>
                 <div class="button">
                     <asp:Button class="btn-hover color-9" ID="BtnTryAgain" runat="server" Text="Try again" OnClick="BtnTryAgain_Click" />

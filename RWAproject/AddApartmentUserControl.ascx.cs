@@ -4,6 +4,7 @@ using DataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,10 +14,25 @@ namespace RWAproject
     public partial class AddApartmentUserControl : System.Web.UI.UserControl
     {
         private const string _imgPath = "/img/";
-        private static int _id = 0;
+        private const string ErrorMessage = "<script>alert('Error while uploading file!')</script>";
+        private static IList<Tag> _apartmentTags = new List<Tag>();
+        private static IList<Tag> _allTags;
 
         protected void Page_Load(object sender, EventArgs e)
-            => FillTagsPanel();
+        {
+            _allTags = ((IRepo)Application["database"]).LoadTags();
+            if (!IsPostBack)
+            {
+                FillTagsDdl();
+                FillTagsRpt();
+            }
+        }
+
+        private void FillTagsDdl()
+        {
+            TagsDdl.DataSource = _allTags;
+            TagsDdl.DataBind();
+        }
 
         protected void BtnClose_Click(object sender, EventArgs e)
             => Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
@@ -26,18 +42,18 @@ namespace RWAproject
             throw new Exception();
         }
 
-        private void FillTagsPanel()
+        private void FillTagsRpt()
         {
-            int tagId = 0;
-            IList<Tag> allTags = ((IRepo)Application["database"]).LoadTags();
+            TagsRepeater.DataSource = _apartmentTags.Distinct();
+            TagsRepeater.DataBind();
+        }
 
-            foreach (Tag tag in allTags)
-            {
-                TagsPanel.Controls.Add(new Literal
-                {
-                    Text = TagManager.CreateTagCard(tag.Name, tagId++)
-                });
-            }
+        protected void BtnAddTag_Click(object sender, EventArgs e)
+        {
+            string selectedTag = TagsDdl.SelectedItem.ToString();
+            Tag tag = _allTags.FirstOrDefault(t => t.Name == selectedTag);
+            _apartmentTags.Add(tag);
+            FillTagsRpt();
         }
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
@@ -58,28 +74,12 @@ namespace RWAproject
             {
                 FileUpload.PostedFile.SaveAs(combined);
                 //SaveImageToDB(combined);
-                AddImageToPanel(Path.Combine(_imgPath, fileName));
+                //AddImageToPanel(Path.Combine(_imgPath, fileName));
             }
             catch
             {
-                Response.Write("<script>alert('Error while uploading file!')</script>");
+                Response.Write(ErrorMessage);
             }
-        }
-
-        private void SaveImageToDB(string combined)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void AddImageToPanel(string path)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<div class=\"carousel-item\">");
-            sb.AppendLine($"<img src=\"{path}\" class=\"d-block w-100\" style=\"height: 17em\">");
-            sb.AppendLine("<div class=\"carousel-caption d-none d-md-block\">");
-            sb.AppendLine($"<input type=\"text\" class=\"image-desc\" runat=\"server\" ID=\"ApartmentDesc{_id++}\" placeholder=\"IMAGE DESCRIPTION\"></asp:input>");
-            sb.AppendLine("</div></div>");
-            ImagesLiteral.Text += sb.ToString();
         }
     }
 }

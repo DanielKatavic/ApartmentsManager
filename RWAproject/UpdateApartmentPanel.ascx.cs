@@ -112,7 +112,7 @@ namespace RWAproject
 
         private void FillTagsRpt()
         {
-            TagsRepeater.DataSource = Apartment.Tags;
+            TagsRepeater.DataSource = Apartment.Tags.Distinct();
             TagsRepeater.DataBind();
         }
 
