@@ -22,8 +22,9 @@ namespace DataLayer.Models
         public int TotalRooms { get; set; }
         public decimal Price { get; set; }
         public string CityName { get; set; }
+        public int BeachDistance { get; set; }
+        public int ImageCount { get; set; }
         public Status Status { get; set; }
-        public int PicturesCount { get; set; }
         public IList<Tag> Tags { get; set; }
         public IList<Image> Images { get; set; }
 

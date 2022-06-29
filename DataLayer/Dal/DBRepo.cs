@@ -38,6 +38,21 @@ namespace DataLayer.Dal
             return users;
         }
 
+        public IList<City> LoadCities()
+        {
+            IList<City> cities = new List<City>();
+            var tblCities = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name).Tables[0];
+            foreach (DataRow row in tblCities.Rows)
+            {
+                cities.Add(new City
+                {
+                    Id = (int)row[nameof(City.Id)],
+                    Name = row[nameof(City.Name)].ToString()
+                });
+            }
+            return cities;
+        }
+
         public IList<Tag> LoadTags()
         {
             IList<Tag> tags = new List<Tag>();
@@ -67,6 +82,7 @@ namespace DataLayer.Dal
             foreach (DataRow row in tblApartments.Rows)
             {
                 int id = (int)row[nameof(Apartment.Id)];
+                IList<Image> images = LoadImagesByApartmentId(id);
                 apartments.Add(
                     new Apartment
                     {
@@ -79,9 +95,10 @@ namespace DataLayer.Dal
                         Price = (decimal)row[nameof(Apartment.Price)],
                         CityName = row[nameof(Apartment.CityName)].ToString(),
                         Status = (Status)Enum.Parse(typeof(Status), row[nameof(Apartment.Status)].ToString()),
-                        PicturesCount = (int)row[nameof(Apartment.PicturesCount)],
+                        BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
                         Tags = LoadTagsByApartmentId(id),
-                        Images = LoadImagesByApartmentId(id)
+                        Images = images,
+                        ImageCount = images.Count
                     }
                 );
             }
@@ -126,6 +143,9 @@ namespace DataLayer.Dal
 
             return images;
         }
+
+        public void AddApartment(int cityId, string name, int price, int maxAdults, int maxChildren, int totalRooms, int beachDistance)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, cityId, name, name, price, maxAdults, maxChildren, totalRooms, beachDistance);
 
         public void AddImage(int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, path, base64image, imageName, isRepresentative);

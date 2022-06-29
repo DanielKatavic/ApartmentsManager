@@ -1,11 +1,9 @@
 ﻿using DataLayer.Dal;
-using DataLayer.Managers;
 using DataLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,17 +13,28 @@ namespace RWAproject
     {
         private const string _imgPath = "/img/";
         private const string ErrorMessage = "<script>alert('Error while uploading file!')</script>";
-        private static IList<Tag> _apartmentTags = new List<Tag>();
         private static IList<Tag> _allTags;
+        private static IList<City> _allCities;
+        private static Apartment _apartment = new Apartment();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _allTags = ((IRepo)Application["database"]).LoadTags();
+            _allCities = ((DBRepo)Application["database"]).LoadCities();
             if (!IsPostBack)
             {
+                _apartment.Tags = new List<Tag>();
+                _apartment.Images = new List<DataLayer.Models.Image>();
                 FillTagsDdl();
                 FillTagsRpt();
+                FillCityDdl();
             }
+        }
+
+        private void FillCityDdl()
+        {
+            CityDDl.DataSource = _allCities;
+            CityDDl.DataBind();
         }
 
         private void FillTagsDdl()
@@ -39,12 +48,22 @@ namespace RWAproject
 
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
-            throw new Exception();
+            string selectedCity = CityDDl.SelectedValue;
+            City city = _allCities.FirstOrDefault(c => c.Name == selectedCity);
+
+            ((DBRepo)Application["database"]).AddApartment(
+                cityId: city.Id,
+                name: apartmentName.Value,
+                price: int.Parse(price.Value),
+                maxAdults: int.Parse(maxAdults.Value),
+                maxChildren: int.Parse(maxChildren.Value),
+                totalRooms: int.Parse(totalRooms.Value),
+                beachDistance: int.Parse(distanceFromSea.Value));
         }
 
         private void FillTagsRpt()
         {
-            TagsRepeater.DataSource = _apartmentTags.Distinct();
+            TagsRepeater.DataSource = _apartment.Tags.Distinct();
             TagsRepeater.DataBind();
         }
 
@@ -52,7 +71,7 @@ namespace RWAproject
         {
             string selectedTag = TagsDdl.SelectedItem.ToString();
             Tag tag = _allTags.FirstOrDefault(t => t.Name == selectedTag);
-            _apartmentTags.Add(tag);
+            _apartment.Tags.Add(tag);
             FillTagsRpt();
         }
 
@@ -65,21 +84,23 @@ namespace RWAproject
             }
 
             string fileName = FileUpload.PostedFile.FileName;
-            string path = Server.MapPath(_imgPath);
-            string combined = Path.Combine(path, fileName);
-
-            Directory.CreateDirectory(path);
+            string combined = Path.Combine(_imgPath, fileName);
 
             try
             {
-                FileUpload.PostedFile.SaveAs(combined);
-                //SaveImageToDB(combined);
-                //AddImageToPanel(Path.Combine(_imgPath, fileName));
+                _apartment.Images.Add(new DataLayer.Models.Image { Path = combined });
+                FillImages();
             }
             catch
             {
                 Response.Write(ErrorMessage);
             }
+        }
+
+        private void FillImages()
+        {
+            ImagesRpt.DataSource = _apartment.Images;
+            ImagesRpt.DataBind();
         }
     }
 }

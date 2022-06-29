@@ -108,6 +108,7 @@ namespace RWAproject
             maxAdults.Value = Apartment.MaxAdults.ToString();
             maxChildren.Value = Apartment.MaxChildren.ToString();
             totalRooms.Value = Apartment.TotalRooms.ToString();
+            distanceFromSea.Value = Apartment.BeachDistance.ToString();
         }
 
         private void FillTagsRpt()
@@ -137,10 +138,9 @@ namespace RWAproject
             }
 
             string fileName = FileUpload.PostedFile.FileName;
-            string path = Server.MapPath(_imgPath);
-            string combined = Path.Combine(path, fileName);
+            string combined = Path.Combine(_imgPath, fileName);
 
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(combined);
 
             try
             {

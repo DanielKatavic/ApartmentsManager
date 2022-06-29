@@ -7,32 +7,32 @@
 <div id="offcanvas" class="offcanvas-body small d-flex">
     <div style="margin-left: 1em; width: 15em">
         <div class="form-floating mb-3">
-            <input runat="server" id="apartmentName" type="text" class="form-control" placeholder="2">
+            <input runat="server" id="apartmentName" type="text" class="form-control" placeholder="2" required>
             <label for="apartmentName">Apartment name</label>
         </div>
         <div class="form-floating mb-3">
-            <input runat="server" id="totalRooms" type="number" min="0" class="form-control" placeholder="2">
+            <input runat="server" id="totalRooms" type="number" min="0" class="form-control" placeholder="2" required>
             <label for="totalRooms">Number of rooms</label>
         </div>
         <div class="form-floating mb-3">
-            <input runat="server" id="maxAdults" type="number" min="0" class="form-control" placeholder="2">
+            <input runat="server" id="maxAdults" type="number" min="0" class="form-control" placeholder="2" required> 
             <label for="maxAdults">Max adults</label>
         </div>
         <div>
-            <asp:Button Style="width: 100%; margin-bottom: 1em" ID="BtnAddApartment" runat="server" type="button" class="btn btn-success" Text="Add"></asp:Button>
+            <asp:Button Style="width: 100%; margin-bottom: 1em" ID="BtnAddApartment" runat="server" type="button" class="btn btn-success" Text="Add" OnClick="BtnAdd_Click"></asp:Button>
         </div>
     </div>
     <div style="width: 15em">
         <div class="form-floating mb-3">
-            <input runat="server" id="price" type="number" class="form-control" placeholder="2">
+            <input runat="server" id="price" type="number" class="form-control" placeholder="2" required>
             <label for="price">Price</label>
         </div>
         <div class="form-floating mb-3">
-            <input runat="server" id="maxChildren" type="number" min="0" class="form-control" placeholder="2">
+            <input runat="server" id="maxChildren" type="number" min="0" class="form-control" placeholder="2" required>
             <label for="maxChildren">Max children</label>
         </div>
         <div class="form-floating mb-3">
-            <input runat="server" id="distanceFromSea" type="number" min="0" class="form-control" placeholder="2">
+            <input runat="server" id="distanceFromSea" type="number" min="0" class="form-control" placeholder="2" required>
             <label for="distanceFromSea">Distance from sea in m</label>
         </div>
     </div>
@@ -54,6 +54,11 @@
             <asp:DropDownList runat="server" ID="TagsDdl" class="form-select" EnableViewState="true"/>
             <asp:Button runat="server" ID="BtnAddTag" Text="Add" class="btn btn-success" OnClick="BtnAddTag_Click" />
         </div>
+        <div class="form-floating mb-3">
+            <asp:DropDownList runat="server" ID="CityDDl" class="form-select" >
+            </asp:DropDownList>
+            <label for="city">City:</label>
+        </div>
     </div>
     <%--images--%>
     <div style="margin-right: 1em; width: 15em">
@@ -61,16 +66,8 @@
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
                 <div class="carousel-inner">
                     <asp:Repeater ID="ImagesRpt" runat="server">
-                        <HeaderTemplate>
-                            <div class="carousel-item active">
-                                <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
-                                </div>
-                            </div>
-                        </HeaderTemplate>
                         <ItemTemplate>
-                            <div class="carousel-item">
+                            <div class="carousel-item active">
                                 <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
                                     <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
@@ -90,7 +87,7 @@
             </div>
             <div class="input-group mb-3">
                 <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%" />
-                <asp:Button runat="server" class="btn btn-success" ID="BtnAddFile" Text="Add file"  />
+                <asp:Button runat="server" class="btn btn-success" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click" />
             </div>
         </div>
     </div>

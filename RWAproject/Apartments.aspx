@@ -55,7 +55,7 @@
                         <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.MaxAdults)) %></td>
                         <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.MaxChildren)) %></td>
                         <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.TotalRooms)) %></td>
-                        <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.PicturesCount)) %></td>
+                        <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.ImageCount)) %></td>
                         <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.Price)) %> €</td>
                         <td scope="row"><%# Eval(nameof(DataLayer.Models.Apartment.Status)) %></td>
                         <td>

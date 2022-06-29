@@ -123,6 +123,15 @@ namespace RWAproject
         protected global::System.Web.UI.WebControls.Button BtnAddTag;
 
         /// <summary>
+        /// CityDDl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CityDDl;
+
+        /// <summary>
         /// ImagesRpt control.
         /// </summary>
         /// <remarks>
