@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace RWAproject
 {
-    public partial class AddApartmentUserControl : System.Web.UI.UserControl
+    public partial class AddApartmentUserControl : UserControl
     {
         private const string _imgPath = "/img/";
         private const string ErrorMessage = "<script>alert('Error while uploading file!')</script>";
@@ -60,7 +60,7 @@ namespace RWAproject
                 totalRooms: int.Parse(totalRooms.Value),
                 beachDistance: int.Parse(distanceFromSea.Value));
 
-            _apartment.Images.ToList().ForEach(i => SaveImageToDB(i));
+            _apartment.Images.ToList().ForEach(i => SaveImageToDB(i, insertedId));
             _apartment.Images.Clear();
 
             _apartment.Tags.ToList().ForEach(t => SaveTagToDB(t, insertedId));
@@ -69,9 +69,9 @@ namespace RWAproject
             Response.Redirect($"{Page.GetType().BaseType.Name}.aspx");
         }
 
-        private void SaveImageToDB(DataLayer.Models.Image image)
+        private void SaveImageToDB(DataLayer.Models.Image image, int insertedId)
             => ((DBRepo)Application["database"]).AddImage(
-                apartmentId: _apartment.Id,
+                apartmentId: insertedId,
                 path: image.Path,
                 imageName: string.Empty,
                 isRepresentative: image.IsRepresentative);
@@ -90,11 +90,16 @@ namespace RWAproject
             }
 
             string fileName = FileUpload.PostedFile.FileName;
-            string combined = Path.Combine(_imgPath, fileName);
+            string absolutePath = Server.MapPath(_imgPath);
+            string combinedAP = Path.Combine(absolutePath, fileName);
+            string combinedRP = Path.Combine(_imgPath, fileName);
+
+            Directory.CreateDirectory(absolutePath);
 
             try
             {
-                _apartment.Images.Add(new DataLayer.Models.Image { Path = combined });
+                FileUpload.PostedFile.SaveAs(combinedAP);
+                _apartment.Images.Add(new DataLayer.Models.Image { Path = combinedRP });
                 FillImages();
             }
             catch

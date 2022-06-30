@@ -79,7 +79,7 @@
             </div>
         </asp:Panel>
         <asp:Panel runat="server" ID="AddApartmentPanel" Visible="false">
-            <div class="container" id="popup">
+            <div class="container" id="popup" style="width: fit-content">
                 <ascx:AddApartmentUserControl ID="addPanel" runat="server" />
             </div>
         </asp:Panel>
