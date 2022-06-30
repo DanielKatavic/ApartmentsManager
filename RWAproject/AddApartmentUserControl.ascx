@@ -36,7 +36,24 @@
             <label for="distanceFromSea">Distance from sea in m</label>
         </div>
     </div>
-    <div >
+    <div>
+        <div>
+            <label style="margin: 0">All apartment tags:</label>
+            <asp:Panel Style="max-height: 8em; overflow-y: scroll; overflow-x: hidden; margin-bottom: 1.2em; display: flex; flex-direction: column" ScrollBars="Horizontal" runat="server" ID="TagsPanel">
+                <asp:Repeater ID="TagsRepeater" runat="server">
+                    <ItemTemplate>
+                        <div class="input-group">
+                            <label class="form-control" style="display: flex; align-items: center" runat="server"><%# Eval(nameof(DataLayer.Models.Tag.Name)) %></label>
+                            <asp:LinkButton ID="BtnRemoveTag" Style="padding: 0 .5em 0 .5em" runat="server" CommandArgument="<%# Eval(nameof(DataLayer.Models.Tag.Id)) %>" OnClick="BtnRemoveTag_Click" Text="Del" class="btn btn-danger" />
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </asp:Panel>
+        </div>
+        <div class="input-group mb-3">
+            <asp:DropDownList runat="server" ID="AllTagsDdl" class="form-select" />
+            <asp:Button runat="server" ID="BtnAddTag" Text="Add" class="btn btn-success" OnClick="BtnAddTag_Click" />
+        </div>
         <div class="form-floating mb-3">
             <asp:DropDownList runat="server" ID="CityDDl" class="form-select" >
             </asp:DropDownList>

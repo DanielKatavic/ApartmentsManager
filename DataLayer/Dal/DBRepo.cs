@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System;
+using System.Data.SqlClient;
 
 namespace DataLayer.Dal
 {
@@ -147,8 +148,11 @@ namespace DataLayer.Dal
         public void AddTaggedApartment(int apartmentId, int tagId)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, tagId);
 
-        public void AddApartment(int cityId, string name, int price, int maxAdults, int maxChildren, int totalRooms, int beachDistance)
-            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, cityId, name, name, price, maxAdults, maxChildren, totalRooms, beachDistance);
+        public int AddApartment(int cityId, string name, int price, int maxAdults, int maxChildren, int totalRooms, int beachDistance)
+        {
+            var dataSet = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, cityId, name, name, price, maxAdults, maxChildren, totalRooms, beachDistance).Tables[0];
+            return int.Parse(dataSet.Rows[0][0].ToString());
+        }
 
         public void AddImage(int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, path, base64image, imageName, isRepresentative);
