@@ -15,10 +15,10 @@ Apartments page:
 ![Snimka ekrana 2022-06-18, 22 17 04](https://user-images.githubusercontent.com/79853787/174455888-3580d4ba-c7dd-4311-8dae-9cd79c2cd827.png)
 
 Apartment edit panel:
-![Snimka ekrana 2022-06-24, 15 14 22](https://user-images.githubusercontent.com/79853787/175543605-d484e90d-d4b9-4578-9d0c-4ebb94a6d894.png)
+![Snimka ekrana 2022-06-30, 19 55 08](https://user-images.githubusercontent.com/79853787/176745209-1f4670ac-311d-418f-9b02-2081ca3bf569.png)
 
 Apartment add panel:
-![Snimka ekrana 2022-06-18, 22 18 01](https://user-images.githubusercontent.com/79853787/174455899-3a9dcde3-29f1-4634-99b0-12eadafe0d05.png)
+![Snimka ekrana 2022-06-30, 19 57 04](https://user-images.githubusercontent.com/79853787/176745545-15f63e60-1b14-4e55-aced-5fd99b1c6318.png)
 
 Tags page:
 ![Snimka ekrana 2022-06-24, 15 14 13](https://user-images.githubusercontent.com/79853787/175543642-a44e7bc4-9767-444c-90be-44f3cd9d5d37.png)
