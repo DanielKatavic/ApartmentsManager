@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,27 +10,30 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="#">Apartments</a>
+                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="#">About us</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+            <div class="navbar-nav">
+                <a class="nav-link disabled">Username</a>
+                <a class="nav-link" href="#">Log out</a>
             </div>
         </div>
-    </div>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    </nav>
+    <main>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+    </main>
+    <hr />
+    <footer>
+        <p style="text-align: center">&copy; @DateTime.Now.Year - Daniel Katavic</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
