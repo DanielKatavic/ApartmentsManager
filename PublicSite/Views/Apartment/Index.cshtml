@@ -13,6 +13,7 @@
 @section scripts{
     <script>
         $(document).ready(function () {
+            $("#spinner").show();
             loadAllApartments();
         });
 
@@ -22,6 +23,8 @@
                 success: function (partialView) {
                     $("#apartment-grid").html("");
                     $("#apartment-grid").append(partialView);
+                    $("#spinner").hide();
+                    $("#spinner-placeholder").css("z-index", -10);
                 }
             });
         }

@@ -6,11 +6,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <style>
+        body {
+            height: 100%;
+        }
+
+        main {
+            margin: 0;
+            min-height: calc(100vh - 11.5em);
+        }
+
+        footer
+        {
+            flex-shrink: 0;
+            width: 100vw !important;
+            background-color: #e3f2fd;
+            height: 8em;
+        }
+    </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+    <div id="spinner-placeholder" class="d-flex justify-content-center align-items-center" style="height: 100vh; width: 100vw; position: absolute;" hidden>
+        <div id="spinner" class="spinner-border" role="status" style="display:none">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-primary navbar-expand">
         <div class="container-fluid">
             <div class="navbar-nav">
                 <a class="nav-link active" href="#">Apartments</a>
@@ -23,14 +46,14 @@
             </div>
         </div>
     </nav>
-    <main>
+    <main style="background-color: #e3f2fd;">
         <div class="body-content" style="width: 100%; padding: 2em;">
             @RenderBody()
         </div>
     </main>
-    <hr />
-    <footer>
-        <p style="text-align: center">&copy; @DateTime.Now.Year - Daniel Katavic</p>
+    <footer class="py-3 bg-primary" style="color: white">
+        <p class="text-center">&copy; @DateTime.Now.Year - Daniel Katavic</p>
+        <p class="text-center">Algebra University College</p>
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
