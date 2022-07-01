@@ -1,0 +1,7 @@
+﻿@model IList<DataLayer.Models.Apartment>
+@{
+    foreach(var m in Model)
+    {
+        @Html.Partial("_ApartmentCardView", m);
+    }
+}

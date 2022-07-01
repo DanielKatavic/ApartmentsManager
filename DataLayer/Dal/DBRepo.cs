@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System;
-using System.Data.SqlClient;
 
 namespace DataLayer.Dal
 {
@@ -104,6 +103,29 @@ namespace DataLayer.Dal
                 );
             }
             return apartments;
+        }
+
+        public Apartment LoadApartmentDetails(int apartmentId)
+        {
+            DataTable tblApartmentDetails = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId).Tables[0];
+            int id = (int)tblApartmentDetails.Rows[0][nameof(Apartment.Id)];
+            IList<Image> images = LoadImagesByApartmentId(id);
+            var row = tblApartmentDetails.Rows[0];
+            return new Apartment
+            {
+                Id = id,
+                Name = row[nameof(Apartment.Name)].ToString(),
+                MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
+                MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
+                TotalRooms = (int)row[nameof(Apartment.TotalRooms)],
+                Price = (decimal)row[nameof(Apartment.Price)],
+                CityName = row[nameof(Apartment.CityName)].ToString(),
+                Status = (Status)Enum.Parse(typeof(Status), row[nameof(Apartment.Status)].ToString()),
+                BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
+                Tags = LoadTagsByApartmentId(id),
+                Images = images,
+                ImageCount = images.Count
+            };
         }
 
         private IList<Tag> LoadTagsByApartmentId(int id)

@@ -1,0 +1,40 @@
+﻿@model  DataLayer.Models.Apartment
+
+<style>
+    .hover {
+        color: #0000;
+        background: linear-gradient(90deg,#1095c1 50%,#000 0) var(--_p,100%)/200% no-repeat;
+        -webkit-background-clip: text;
+        background-clip: text;
+        transition: .4s;
+    }
+
+    .hover:hover {
+        --_p: 0%;
+    }
+
+    h3 {
+        font-family: system-ui, sans-serif;
+        font-size: 2rem;
+        margin: 0;
+        cursor: pointer;
+        padding: 0 .1em;
+    }
+</style>
+
+<div style="border: .1em solid; border-radius: .3em; display: flex;">
+    <div style="padding: 1em; width: 50%">
+        <img src="https://i.pinimg.com/originals/85/c9/36/85c936ef94a5db54d2a1b434e8148b5c.png" style="width: 100%; object-fit: cover; border-radius: .2em" />
+    </div>
+    <div style="padding: 1em; width: 50%">
+        <h3 class="hover" onclick="location.href='@Url.Action("Details", "Apartment", new { apartmentId = Model.Id })'">@Model.Name</h3>
+        <ul>
+            <li>@Model.CityName</li>
+            <li>@Model.BeachDistance m from beach</li>
+            <li>@Model.TotalRooms rooms</li>
+            <li>@Model.MaxAdults adults</li>
+            <li>@Model.MaxChildren children</li>
+        </ul>
+        <h4>@Model.Price.ToString("#,##") €</h4>
+    </div>
+</div>

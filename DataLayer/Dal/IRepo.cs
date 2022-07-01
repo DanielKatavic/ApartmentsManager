@@ -11,6 +11,7 @@ namespace DataLayer.Dal
     {
         IList<Tag> LoadTags();
         IList<Apartment> LoadApartments();
+        Apartment LoadApartmentDetails(int apartmentId);
         User CkeckAdminUser(string email, string password);
         IList<User> LoadUsers();
         void AddTag(string name, string typeName);
