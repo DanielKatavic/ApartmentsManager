@@ -6,10 +6,19 @@
 
 <h2>@Model.Name</h2>
 
-<div style="width: 40em">
-    @Html.Partial("_ApartmentImages", Model.Images)
+<div style="display: flex; align-items:center; width: 50vw">
+    <div style="width: 50%">
+        @Html.Partial("_ApartmentImages", Model.Images)
+    </div>
+    <div style="width: 50%">
+        <ul style="padding-top:.5em">
+            <li>@Model.CityName</li>
+            <li>@Model.BeachDistance m from beach</li>
+            <li>@Model.TotalRooms rooms</li>
+            <li>@Model.MaxAdults adults</li>
+            <li>@Model.MaxChildren children</li>
+        </ul>
+    </div>
 </div>
 
-<p>@Model.Id</p>
-<p>@Model.Name</p>
-<p>@Model.CityName</p>
+
