@@ -1,17 +1,56 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DataLayer.Dal.IRepo repo = DataLayer.Dal.RepoFactory.GetRepo();
+    SelectList citiesSelectList = new SelectList(
+        items: repo.LoadCities(),
+        dataTextField: "Name",
+        dataValueField: "Id"
+    );
+    SelectList sortingSelectList = new SelectList(new List<SelectListItem> 
+    {
+        new SelectListItem {Text = "Price: Low to High", Value = "LTH"},
+        new SelectListItem {Text = "Price: High to Low", Value = "HTL"}
+    }, "Value", "Text");
 }
 
-<h2>Index</h2>
-
-<div>
+<div style="height: 17em; background-image: url(https://s27363.pcdn.co/wp-content/uploads/2020/05/Things-to-do-in-Dubrovnik.jpg.optimal.jpg); object-fit:cover; width:100vw;">
+    <div class="d-flex justify-content-sm-between" style="position:relative; width: 50em; top:7em; margin: auto; gap:.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: .5em; padding: .5em">
+        <div class="form-floating">
+            @Html.DropDownList("CitiesDdl", optionLabel: "Any", selectList: citiesSelectList, htmlAttributes: new { @class = "form-select", id = "citiesSelect" })
+            <label for="citiesSelect">Select city</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="inputRooms" placeholder="2" min="0">
+            <label for="inputRooms">Rooms</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="inputAdults" placeholder="2" min="0">
+            <label for="inputAdults">Adults</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="inputChildren" placeholder="2" min="0">
+            <label for="inputChildren">Children</label>
+        </div>
+        <input type="button" class="btn btn-success" value="Search" id="searchBtn"/>
+    </div>
+</div>
+<div style="width: 100vw; height: 3em; padding: 2em" class="d-flex justify-content-end">
+    <div style="width: fit-content">
+        @Html.DropDownList("SortingDdl", optionLabel: "Featured", selectList: sortingSelectList, htmlAttributes: new { @class = "form-select", id = "sortingSelect"})
+    </div>
+</div>
+<div style="padding:2em">
     <div class="row row-cols-3" id="apartment-grid">
     </div>
 </div>
 
 @section scripts{
     <script>
+        $("#searchBtn").on("click", function () {
+            loadAllApartments();
+        });
+
         $(document).ready(function () {
             $("#spinner").show();
             $("#spinner-placeholder").css("z-index", 10);
@@ -19,8 +58,13 @@
         });
 
         function loadAllApartments() {
+            var city = $("#citiesSelect").find(":selected").text();
+            var rooms = $("#inputRooms").val();
+            var adults = $("#inputAdults").val();
+            var children = $("#inputChildren").val();
             $.ajax({
                 url: "@Url.Action("GetAllApartments", "Apartment")",
+                data: { city, rooms, adults, children },
                 success: function (partialView) {
                     $("#apartment-grid").html("");
                     $("#apartment-grid").append(partialView);

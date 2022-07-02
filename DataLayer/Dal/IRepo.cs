@@ -10,6 +10,7 @@ namespace DataLayer.Dal
     public interface IRepo
     {
         IList<Tag> LoadTags();
+        IList<City> LoadCities();
         IList<Apartment> LoadApartments();
         Apartment LoadApartmentDetails(int apartmentId);
         User CkeckAdminUser(string email, string password);

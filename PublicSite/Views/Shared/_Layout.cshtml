@@ -9,6 +9,7 @@
     <style>
         body {
             height: 100%;
+            overflow-x: hidden;
         }
         main {
             margin: 0;
@@ -20,6 +21,9 @@
             width: 100vw !important;
             background-color: #e3f2fd;
             height: 8em;
+        }
+        nav{
+            height: 4em;
         }
     </style>
     @Styles.Render("~/Content/css")
@@ -45,7 +49,7 @@
         </div>
     </nav>
     <main style="background-color: #e3f2fd;">
-        <div class="body-content" style="width: 100%; padding: 2em;">
+        <div class="body-content" style="width: 100%;">
             @RenderBody()
         </div>
     </main>

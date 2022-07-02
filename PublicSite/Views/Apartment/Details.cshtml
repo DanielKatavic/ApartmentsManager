@@ -6,19 +6,28 @@
 
 <h2>@Model.Name</h2>
 
-<div style="display: flex; align-items:center; width: 50vw">
-    <div style="width: 50%">
-        @Html.Partial("_ApartmentImages", Model.Images)
+<div class="container">
+    <div class="row">
+        <div class="col" style="width: 50%">
+            @Html.Partial("_ApartmentImages", Model.Images)
+        </div>
+        <div class="col" style="width: 50%">
+            <ul style="padding-top:.5em; font-size: 1.7em; list-style: none">
+                <li>@Model.CityName</li>
+                <li>@Model.BeachDistance m from beach</li>
+                <li>@Model.TotalRooms rooms</li>
+                <li>@Model.MaxAdults adults</li>
+                <li>@Model.MaxChildren children</li>
+            </ul>
+        </div>
     </div>
-    <div style="width: 50%">
-        <ul style="padding-top:.5em">
-            <li>@Model.CityName</li>
-            <li>@Model.BeachDistance m from beach</li>
-            <li>@Model.TotalRooms rooms</li>
-            <li>@Model.MaxAdults adults</li>
-            <li>@Model.MaxChildren children</li>
-        </ul>
+    <div class="row" style="text-align: center; margin-top: 2em">
+        <div class="col" style="overflow-y: scroll">
+            <h3>All tags:</h3>
+            @Html.Partial("_ApartmentTags", Model.Tags)
+        </div>
     </div>
 </div>
+
 
 

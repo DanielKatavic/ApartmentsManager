@@ -1,0 +1,8 @@
+﻿@model IList<DataLayer.Models.Tag>
+
+@{ 
+    foreach (var tag in Model)
+    {
+        <label style="border: .1em solid black; border-radius: .2em; padding: .3em; font-weight: 600" >@tag.Name</label>
+    }
+}

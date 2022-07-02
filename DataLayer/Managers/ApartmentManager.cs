@@ -16,6 +16,26 @@ namespace DataLayer.Managers
             return apartmentsList; //return duplicates
         }
 
+        public static void FilterApartments(string cityName, string rooms, string adults, string children, ref IList<Apartment> apartments)
+        {
+            if (cityName != "Any")
+            {
+                apartments = apartments.Where(a => a.CityName == cityName).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(rooms))
+            {
+                apartments = apartments.Where(a => a.TotalRooms == int.Parse(rooms)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(adults))
+            {
+                apartments = apartments.Where(a => a.MaxAdults == int.Parse(adults)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(children))
+            {
+                apartments = apartments.Where(a => a.MaxChildren == int.Parse(children)).ToList();
+            }
+        }
+
         public static IOrderedEnumerable<Apartment> GetSortedApartments(string selectedItem, IList<Apartment> apartments)
         {
             if (apartmentsList.Count == 0) apartmentsList = apartments;

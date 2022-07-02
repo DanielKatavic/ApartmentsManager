@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using DataLayer.Models;
+using System.Linq;
+using DataLayer.Managers;
 
 namespace PublicSite.Controllers
 {
@@ -15,10 +17,11 @@ namespace PublicSite.Controllers
             return View();
         }
 
-        public ActionResult GetAllApartments()
+        public ActionResult GetAllApartments(string city, string rooms, string adults, string children)
         {
-            IList<Apartment> model = repo.LoadApartments();
-            return PartialView("_Demo", model);
+            IList<Apartment> apartments = repo.LoadApartments();
+            ApartmentManager.FilterApartments(city, rooms, adults, children, ref apartments);
+            return PartialView("_Demo", apartments);
         }
 
         public ActionResult Details(int apartmentId)

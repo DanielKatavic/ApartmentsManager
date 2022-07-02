@@ -183,6 +183,7 @@
     <Content Include="Views\Shared\_Demo.cshtml" />
     <Content Include="Views\Apartment\Details.cshtml" />
     <Content Include="Views\Shared\_ApartmentImages.cshtml" />
+    <Content Include="Views\Shared\_ApartmentTags.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
