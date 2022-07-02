@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     <style>
         body {
             height: 100%;
@@ -35,6 +35,29 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Please log in</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating" style="margin: 1em">
+                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-floating" style="margin: 1em">
+                        <input type="password" class="form-control" id="password" placeholder="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div style="text-align: center; margin: 1em">
+                        <input type="submit" class="btn btn-info" id="btnLogIn" value="Log in"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navbar navbar-dark bg-primary navbar-expand">
         <div class="container-fluid">
             <div class="navbar-nav">
@@ -44,7 +67,10 @@
             </div>
             <div class="navbar-nav">
                 <a class="nav-link disabled">Username</a>
-                <a class="nav-link" href="#">Log out</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Log in
+                </button>
+                @*<a class="nav-link" href="#">Log in</a>*@
             </div>
         </div>
     </nav>

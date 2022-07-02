@@ -1,9 +1,9 @@
-﻿@{
+﻿@model DataLayer.Dal.IRepo
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    DataLayer.Dal.IRepo repo = DataLayer.Dal.RepoFactory.GetRepo();
     SelectList citiesSelectList = new SelectList(
-        items: repo.LoadCities(),
+        items: Model.LoadCities(),
         dataTextField: "Name",
         dataValueField: "Id"
     );

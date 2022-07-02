@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using DataLayer.Models;
-using System.Linq;
 using DataLayer.Managers;
 
 namespace PublicSite.Controllers
@@ -12,10 +11,7 @@ namespace PublicSite.Controllers
         private readonly IRepo repo = RepoFactory.GetRepo();
 
         // GET: Apartment
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View(repo);
 
         public ActionResult GetAllApartments(string city, string rooms, string adults, string children)
         {
