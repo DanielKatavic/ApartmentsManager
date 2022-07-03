@@ -117,6 +117,7 @@
     <Content Include="Content\images\children.png" />
     <Content Include="Content\images\euro.png" />
     <Content Include="Content\images\location-pin.png" />
+    <Content Include="Content\images\search-interface-symbol.png" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -186,7 +187,7 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Shared\_ApartmentCardView.cshtml" />
-    <Content Include="Views\Shared\_Demo.cshtml" />
+    <Content Include="Views\Shared\_ApartmentHelper.cshtml" />
     <Content Include="Views\Apartment\Details.cshtml" />
     <Content Include="Views\Shared\_ApartmentImages.cshtml" />
     <Content Include="Views\Shared\_ApartmentTags.cshtml" />

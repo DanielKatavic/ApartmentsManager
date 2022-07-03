@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,7 @@ namespace DataLayer.Managers
 {
     public static class ApartmentManager
     {
+        private const string PriceLowToHigh = "LTH";
         private static IList<Apartment> apartmentsList = new List<Apartment>();
 
         public static IList<Apartment> GetFilteredApartments(string selectedCity, string selectedStatus, IList<Apartment> apartments)
@@ -14,6 +16,14 @@ namespace DataLayer.Managers
             IList<Apartment> filteredByStatus = selectedStatus == "Any" ? apartments : apartments.ToList().FindAll(a => a.Status.ToString() == selectedStatus);
             apartmentsList = filteredByCity.Concat(filteredByStatus).GroupBy(a => a).Where(g => g.Count() > 1).Select(a => a.Key).ToList();
             return apartmentsList; //return duplicates
+        }
+
+        public static void OrderApartments(string order, ref IList<Apartment> apartments)
+        {
+            if (!string.IsNullOrEmpty(order))
+            {
+                apartments = order == PriceLowToHigh ? apartments.OrderBy(a => a.Price).ToList() : apartments.OrderByDescending(a => a.Price).ToList();
+            }
         }
 
         public static void FilterApartments(string cityName, string rooms, string adults, string children, ref IList<Apartment> apartments)

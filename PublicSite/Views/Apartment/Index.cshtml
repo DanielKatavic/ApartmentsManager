@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     SelectList citiesSelectList = new SelectList(
-        items: Model.LoadCities(),
+        items: Model.LoadCities().OrderBy(c => c.Name),
         dataTextField: "Name",
         dataValueField: "Id"
     );
@@ -32,7 +32,9 @@
             <input type="number" class="form-control" id="inputChildren" placeholder="2" min="0">
             <label for="inputChildren">Children</label>
         </div>
-        <button type="button" class="btn btn-success" id="searchBtn">Search</button>
+        <button type="button" class="btn btn-warning" id="searchBtn">
+            <img src="~/Content/images/search-interface-symbol.png" style="height: 1.3em; width: 1.3em"/>
+        </button>
     </div>
 </div>
 <div style="width: 100vw; height: 3em; padding: 2em" class="d-flex justify-content-end">
@@ -47,6 +49,10 @@
 
 @section scripts{
     <script>
+        $("#sortingSelect").on("change", function () {
+            loadAllApartments();
+        });
+
         $("#searchBtn").on("click", function () {
             loadAllApartments();
         });
@@ -62,9 +68,10 @@
             var rooms = $("#inputRooms").val();
             var adults = $("#inputAdults").val();
             var children = $("#inputChildren").val();
+            var order = $("#sortingSelect").val();
             $.ajax({
                 url: "@Url.Action("GetAllApartments", "Apartment")",
-                data: { city, rooms, adults, children },
+                data: { city, rooms, adults, children, order },
                 success: function (partialView) {
                     $("#apartment-grid").html("");
                     $("#apartment-grid").append(partialView);

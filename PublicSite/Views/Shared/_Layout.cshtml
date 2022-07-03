@@ -61,7 +61,7 @@
     <nav class="navbar navbar-dark bg-primary navbar-expand">
         <div class="container-fluid">
             <div class="navbar-nav">
-                <a class="nav-link active" href="#">Apartments</a>
+                @Html.ActionLink(linkText: "Apartments", actionName: "Index", controllerName: "Apartment", routeValues: null, htmlAttributes: new {@class = "nav-link active"})
                 <a class="nav-link" href="#">Contact</a>
                 <a class="nav-link" href="#">About us</a>
             </div>
