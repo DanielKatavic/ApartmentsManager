@@ -1,0 +1,22 @@
+﻿@model DataLayer.Models.Apartment
+
+<div class="d-flex align-items-center" style="border: .1em solid black; border-radius: .2em; padding: .3em">
+    <img src="~/Content/images/location-pin.png" style="width: 1.7em; height: 1.7em; margin-right: .2em" />
+    <label style="font-weight: 600">@Model.CityName</label>
+</div>
+<div class="d-flex align-items-center" style="border: .1em solid black; border-radius: .2em; padding: .3em">
+    <img src="~/Content/images/bed.png" style="width: 2em; height: 2em; margin-right: .2em" />
+    <label style="font-weight: 600">@Model.TotalRooms rooms</label>
+</div>
+<div class="d-flex align-items-center" style="border: .1em solid black; border-radius: .2em; padding: .3em">
+    <img src="~/Content/images/user.png" style="width: 1.7em; height: 1.7em; margin-right: .2em" />
+    <label style="font-weight: 600">@Model.MaxAdults adults</label>
+</div>
+<div class="d-flex align-items-center" style="border: .1em solid black; border-radius: .2em; padding: .3em">
+    <img src="~/Content/images/children.png" style="width: 2em; height: 2em; margin-right: .2em" />
+    <label style="font-weight: 600">@Model.MaxChildren children</label>
+</div>
+<div class="d-flex align-items-center" style="border: .1em solid black; border-radius: .2em; padding: .3em">
+    <img src="~/Content/images/euro.png" style="width: 2em; height: 2em; margin-right: .2em" />
+    <label style="font-weight: bold">@Model.Price.ToString("#,##") €</label>
+</div>

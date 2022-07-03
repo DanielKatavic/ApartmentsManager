@@ -4,26 +4,63 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
+<div>
+    <h1 style="text-align:center; padding: .3em 1em .3em 1em; margin: 0; font-weight: 700">@Model.Name</h1>
+    <div class="d-flex justify-content-center mb-5" style="gap: 1em">
+        @Html.Partial("_ApartmentSpecs", Model)
+    </div>
+</div>
+
 
 <div class="container">
     <div class="row">
         <div class="col" style="width: 50%">
-            @Html.Partial("_ApartmentImages", Model.Images)
+            <div class="row" style="width: 100%">
+                @Html.Partial("_ApartmentImages", Model.Images)
+            </div>
         </div>
-        <div class="col" style="width: 50%">
-            <ul style="padding-top:.5em; font-size: 1.7em; list-style: none">
-                <li>@Model.CityName</li>
-                <li>@Model.BeachDistance m from beach</li>
-                <li>@Model.TotalRooms rooms</li>
-                <li>@Model.MaxAdults adults</li>
-                <li>@Model.MaxChildren children</li>
-            </ul>
+        <div class="col" style="width: 50%; text-align: center">
+            <div class="row" style="width: 30em;">
+                <h2>Contact us</h2>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">First and last name</span>
+                    <input type="text" aria-label="First name" class="form-control" placeholder="First name">
+                    <input type="text" aria-label="Last name" class="form-control" placeholder="Last name">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="email">@@</span>
+                    <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="phone">Phone/mobile</span>
+                    <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="phone">
+                </div>
+                <div class="d-flex">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="adults">Adults</span>
+                        <input type="text" class="form-control" placeholder="Adults" aria-label="Adults" aria-describedby="adults">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="children">Children</span>
+                        <input type="text" class="form-control" placeholder="Children" aria-label="Children" aria-describedby="children">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="startDate">From</span>
+                    <input type="date" class="form-control" placeholder="StartDate" aria-label="StartDate" aria-describedby="startDate">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="endDate">To</span>
+                    <input type="date" class="form-control" placeholder="EndDate" aria-label="EndDate" aria-describedby="endDate">
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary w-100">Send request</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row" style="text-align: center; margin-top: 2em">
         <div class="col" style="overflow-y: scroll">
-            <h3>All tags:</h3>
             @Html.Partial("_ApartmentTags", Model.Tags)
         </div>
     </div>

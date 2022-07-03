@@ -43,16 +43,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-floating" style="margin: 1em">
+                    <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required>
                         <label for="email">Email</label>
                     </div>
-                    <div class="form-floating" style="margin: 1em">
+                    <div class="form-floating mb-3">
                         <input type="password" class="form-control" id="password" placeholder="password" required>
                         <label for="password">Password</label>
                     </div>
-                    <div style="text-align: center; margin: 1em">
-                        <input type="submit" class="btn btn-info" id="btnLogIn" value="Log in"/>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100" id="btnLogIn">Log in</button>
                     </div>
                 </div>
             </div>
@@ -67,10 +67,7 @@
             </div>
             <div class="navbar-nav">
                 <a class="nav-link disabled">Username</a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    Log in
-                </button>
-                @*<a class="nav-link" href="#">Log in</a>*@
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" >Log in</a>
             </div>
         </div>
     </nav>
