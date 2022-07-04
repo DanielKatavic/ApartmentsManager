@@ -12,6 +12,7 @@ namespace DataLayer.Dal
         IList<Tag> LoadTags();
         IList<City> LoadCities();
         IList<Apartment> LoadApartments();
+        IList<Review> LoadReviewsByApartmentId(int apartmentId);
         Apartment LoadApartmentDetails(int apartmentId);
         User CkeckAdminUser(string email, string password);
         IList<User> LoadUsers();

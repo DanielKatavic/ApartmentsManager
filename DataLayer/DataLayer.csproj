@@ -53,6 +53,7 @@
     <Compile Include="Models\Apartment.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

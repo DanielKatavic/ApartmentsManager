@@ -6,18 +6,19 @@
 
 <div>
     <h1 style="text-align:center; padding: .3em 1em .3em 1em; margin: 0; font-weight: 600">@Model.Name.ToUpper()</h1>
-    <div class="d-flex justify-content-center mb-5" style="gap: 1em">
+    <div class="d-flex justify-content-center mb-3" style="gap: 1em">
         @Html.Partial("_ApartmentSpecs", Model)
     </div>
 </div>
 <div class="container">
+    <hr />
     <div class="row">
-        <div class="col" style="width: 50%">
-            <div class="row" style="width: 100%">
+        <div class="col" style="width: 50%; display: flex; justify-content: right; align-items: center">
+            <div class="row" style="width: 35em;">
                 @Html.Partial("_ApartmentImages", Model.Images)
             </div>
         </div>
-        <div class="col" style="width: 50%; text-align: center">
+        <div class="col" style="width: 50%; text-align: center;">
             <form id="bookingForm" method="post">
                 <div class="row" style="width: 30em;">
                     <h2>Contact us</h2>
@@ -59,9 +60,26 @@
             </form>
         </div>
     </div>
-    <div class="row" style="text-align: center; margin-top: 2em">
+    <hr />
+    <div class="row mb-3" style="text-align: center; margin-top: 1em">
+        <h3>Facilities</h3>
         <div class="col" style="overflow-y: scroll">
             @Html.Partial("_ApartmentTags", Model.Tags)
+        </div>
+    </div>
+    <hr />
+    <div class="row w-50 m-auto">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mb-2">
+                <h3>Guest reviews</h3>
+            </div>
+            <div class="d-flex">
+                <label style="margin-right: .3em; font-weight: bold">@Model.Reviews.Average(a => a.Stars) / 5</label>
+                <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
+            </div>
+        </div>
+        <div class="mb-5" style="overflow-x: auto; height: 20em">
+            @Html.Partial("_ApartmentReview", Model.Reviews)
         </div>
     </div>
 </div>
@@ -69,7 +87,7 @@
 @section scripts{
     <script>
         $("#bookingForm").on("submit", function () {
-            $("#btnSendRequest").attr("disabled", true);
+            disableButton();
 
             $.ajax({
                 url: "",
@@ -77,6 +95,7 @@
                 async: false,
                 success: function (data) {
                     showSuccessNotification();
+                    $("#bookingForm")[0].reset();
                 }
             });
             return false;
@@ -85,6 +104,11 @@
         $(document).ready(function () {
             setDatePickerDate();
         });
+
+        function disableButton() {
+            $("#btnSendRequest").attr("disabled", true);
+            $("#btnSendRequest").blur();
+        }
 
         function showSuccessNotification() {
             $("#success-notification").fadeIn().delay(5000).fadeOut();

@@ -124,8 +124,29 @@ namespace DataLayer.Dal
                 BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
                 Tags = LoadTagsByApartmentId(id),
                 Images = images,
-                ImageCount = images.Count
+                ImageCount = images.Count,
+                Reviews = LoadReviewsByApartmentId(id)
             };
+        }
+
+        public IList<Review> LoadReviewsByApartmentId(int apartmentId)
+        {
+            IList<Review> reviews = new List<Review>();
+            var tblReviews = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId).Tables[0];
+            foreach (DataRow row in tblReviews.Rows)
+            {
+                reviews.Add(
+                    new Review
+                    {
+                        Id = (int)row[nameof(Review.Id)],
+                        ApartmentId = (int)row[nameof(Review.ApartmentId)],
+                        UserName = row[nameof(Review.UserName)].ToString(),
+                        CreatedAt = (DateTime)row[nameof(Review.CreatedAt)],
+                        Details = row[nameof(Review.Details)].ToString(),
+                        Stars = (int)row[nameof(Review.Stars)]
+                    });
+            }
+            return reviews;
         }
 
         private IList<Tag> LoadTagsByApartmentId(int id)
