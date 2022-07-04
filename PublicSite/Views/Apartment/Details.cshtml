@@ -18,43 +18,45 @@
             </div>
         </div>
         <div class="col" style="width: 50%; text-align: center">
-            <div class="row" style="width: 30em;">
-                <h2>Contact us</h2>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">First and last name</span>
-                    <input type="text" aria-label="First name" class="form-control" placeholder="First name" required>
-                    <input type="text" aria-label="Last name" class="form-control" placeholder="Last name" required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="email">@@</span>
-                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email" required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="phone">Phone/mobile</span>
-                    <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="phone" required>
-                </div>
-                <div class="d-flex">
+            <form id="bookingForm" method="post">
+                <div class="row" style="width: 30em;">
+                    <h2>Contact us</h2>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="adults">Adults</span>
-                        <input type="number" class="form-control" placeholder="Adults" aria-label="Adults" aria-describedby="adults" min="0" required>
+                        <span class="input-group-text">First and last name</span>
+                        <input type="text" aria-label="First name" class="form-control" placeholder="First name" required>
+                        <input type="text" aria-label="Last name" class="form-control" placeholder="Last name" required>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="children">Children</span>
-                        <input type="number" class="form-control" placeholder="Children" aria-label="Children" aria-describedby="children" min="0" required>
+                        <span class="input-group-text" id="email">@@</span>
+                        <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="phone">Phone/mobile</span>
+                        <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="phone" required>
+                    </div>
+                    <div class="d-flex">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="adults">Adults</span>
+                            <input type="number" class="form-control" placeholder="Adults" aria-label="Adults" aria-describedby="adults" min="0" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="children">Children</span>
+                            <input type="number" class="form-control" placeholder="Children" aria-label="Children" aria-describedby="children" min="0" required>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">From</span>
+                        <input type="date" class="form-control" placeholder="StartDate" aria-label="StartDate" aria-describedby="startDate" id="startDate" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">To</span>
+                        <input type="date" class="form-control" placeholder="EndDate" aria-label="EndDate" aria-describedby="endDate" id="endDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100" id="btnSendRequest">Send request</button>
                     </div>
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">From</span>
-                    <input type="date" class="form-control" placeholder="StartDate" aria-label="StartDate" aria-describedby="startDate" id="startDate" required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">To</span>
-                    <input type="date" class="form-control" placeholder="EndDate" aria-label="EndDate" aria-describedby="endDate" id="endDate" required>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary w-100" id="btnSendRequest">Send request</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="row" style="text-align: center; margin-top: 2em">
@@ -66,8 +68,18 @@
 
 @section scripts{
     <script>
-        $("#btnSendRequest").on("click", function () {
-            showSuccessNotification();
+        $("#bookingForm").on("submit", function () {
+            $("#btnSendRequest").attr("disabled", true);
+
+            $.ajax({
+                url: "",
+                type: "post",
+                async: false,
+                success: function (data) {
+                    showSuccessNotification();
+                }
+            });
+            return false;
         });
 
         $(document).ready(function () {
@@ -95,4 +107,3 @@
         }
     </script>
 }
-
