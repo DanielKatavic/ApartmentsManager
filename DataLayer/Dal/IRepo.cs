@@ -16,6 +16,7 @@ namespace DataLayer.Dal
         Apartment LoadApartmentDetails(int apartmentId);
         User CkeckAdminUser(string email, string password);
         IList<User> LoadUsers();
+        void AddReview(int apartmentId, int userId, string details, int stars);
         void AddTag(string name, string typeName);
         void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null);
         void UpdateApartment(Guid guid, int maxAdults, int maxChildren, int totalRooms, string status);

@@ -7,16 +7,15 @@
             <h5 class="m-0">Username</h5>
         </div>
         <div class="d-flex">
-            <input type="number" min="1" max="5" value="5" style="margin-right: .2em; width: 2.7em"/>
+            <input type="number" min="1" max="5" value="5" style="margin-right: .2em; width: 2.7em" id="inputStars" />
             <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
         </div>
     </div>
     <div class="card-body">
-        @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", disabled = "true" })
-        <button class="btn btn-primary" disabled>Post review</button>
+        @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", id = "reviewDetails" })
+        <button type="submit" class="btn btn-primary" id="btnPostReview">Post review</button>
     </div>
 </div>
-
 @{
     foreach (var review in Model)
     {

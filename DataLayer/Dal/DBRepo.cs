@@ -188,6 +188,9 @@ namespace DataLayer.Dal
             return images;
         }
 
+        public void AddReview(int apartmentId, int userId, string details, int stars) 
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, userId, details, stars);
+
         public void AddTaggedApartment(int apartmentId, int tagId)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, tagId);
 

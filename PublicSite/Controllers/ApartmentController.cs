@@ -26,5 +26,11 @@ namespace PublicSite.Controllers
             Apartment apartment = repo.LoadApartmentDetails(apartmentId);
             return View(apartment);
         }
+
+        public ActionResult AddReview(int userId, int apartmentId, int stars, string details)
+        {
+            repo.AddReview(apartmentId, userId, details, stars);
+            return new EmptyResult();
+        }
     }
 }

@@ -36,7 +36,7 @@
             <li>@Model.MaxChildren children</li>
         </ul>
         <div style="display:flex; justify-content: space-between;">
-            <h4>@Model.Price.ToString("#,##") €</h4>
+            <h4>@Model.Price.ToString("0.##") €</h4>
             <input style="font-weight: 600" type="submit" class="btn btn-info" value="View more.." onclick="location.href='@Url.Action("Details", "Apartment", new { apartmentId = Model.Id })'" />
         </div>
     </div>
