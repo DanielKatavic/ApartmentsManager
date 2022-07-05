@@ -22,7 +22,7 @@
             background-color: #e3f2fd;
             height: 8em;
         }
-        nav{
+        nav {
             height: 4em;
         }
         #success-notification {
@@ -34,6 +34,32 @@
             height: 2.5em;
             width: 100vw;
             opacity: .9;
+        }
+        footer li {
+            border-radius: 50%;
+            width: 2em;
+            height: 2em;
+        }
+
+        #github-icon {
+            width: 100%;
+            height: 100%;
+            background: url("/Content/images/git.png") center / contain no-repeat;
+        }
+
+        #linkedin-icon {
+            width: 100%;
+            height: 100%;
+            background: url("/Content/images/linkedin.png") center / contain no-repeat;
+        }
+
+        footer p {
+            color: white;
+            margin-bottom: 0;
+        }
+
+        footer li:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
     </style>
     @Styles.Render("~/Content/css")
@@ -48,7 +74,8 @@
     <div id="success-notification" class="align-items-center justify-content-center" style="display: none">
         <label style="font-weight: 600">You have successfully sent your booking request!</label>
     </div>
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @*Login modal*@
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,16 +98,21 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-dark bg-primary navbar-expand">
+    @*Navbar*@
+    <nav class="navbar navbar-dark bg-dark navbar-expand">
         <div class="container-fluid">
             <div class="navbar-nav">
-                @Html.ActionLink(linkText: "Apartments", actionName: "Index", controllerName: "Apartment", routeValues: null, htmlAttributes: new {@class = "nav-link active"})
+                <div class="d-flex align-items-center gap-1" style="margin-right: 1em">
+                    <img src="~/Content/images/villa.png" style="width: 2em; height: 2em" />
+                    <label style="font-weight: 700; color: white">RWA Apartments</label>
+                </div>
+                @Html.ActionLink(linkText: "Apartments", actionName: "Index", controllerName: "Apartment", routeValues: null, htmlAttributes: new { @class = "nav-link active" })
                 <a class="nav-link" href="#">Contact</a>
                 <a class="nav-link" href="#">About us</a>
             </div>
             <div class="navbar-nav">
                 <a class="nav-link disabled">Username</a>
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" >Log in</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a>
             </div>
         </div>
     </nav>
@@ -89,8 +121,12 @@
             @RenderBody()
         </div>
     </main>
-    <footer class="py-3 bg-primary" style="color: white">
-        <p class="text-center">&copy; @DateTime.Now.Year - Daniel Katavic</p>
+    <footer class="pt-3 bg-dark">
+        <ul class="nav justify-content-center pb-3" style="gap: 1em">
+            <li class="nav-item"><a href="https://github.com/DanielKatavic" id="github-icon" class="nav-link px-2 text-muted"></a></li>
+            <li class="nav-item"><a href="https://www.linkedin.com/in/daniel-katavic-08771120b/" id="linkedin-icon" class="nav-link px-2 text-muted"></a></li>
+        </ul>
+        <p class="text-center">&copy; @DateTime.Now.Year Daniel Katavic</p>
         <p class="text-center">Algebra University College</p>
     </footer>
     @Scripts.Render("~/bundles/jquery")

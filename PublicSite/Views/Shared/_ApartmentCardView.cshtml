@@ -24,7 +24,7 @@
 
 <div class="shadow-lg p-3 mb-5 bg-body rounded" style="display: flex; align-items:center">
     <div style="padding: .5em; width: 50%">
-        <img src="https://i.pinimg.com/originals/85/c9/36/85c936ef94a5db54d2a1b434e8148b5c.png" style="width: 100%; object-fit: cover; border-radius: .2em" />
+        <img src="@Model.Images.First(i => i.IsRepresentative).Path" style="width: 100%; object-fit: cover; border-radius: .2em" />
     </div>
     <div style="padding: .5em; width: 50%">
         <h3 class="hover" onclick="location.href='@Url.Action("Details", "Apartment", new { apartmentId = Model.Id })'">@Model.Name</h3>

@@ -119,6 +119,8 @@
     <Content Include="Content\images\bed.png" />
     <Content Include="Content\images\children.png" />
     <Content Include="Content\images\euro.png" />
+    <Content Include="Content\images\git.png" />
+    <Content Include="Content\images\linkedin.png" />
     <Content Include="Content\images\location-pin.png" />
     <Content Include="Content\images\search-interface-symbol.png" />
     <Content Include="Content\images\star.png" />
@@ -130,6 +132,7 @@
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\images\user-circle.png" />
     <Content Include="Content\images\user.png" />
+    <Content Include="Content\images\villa.png" />
     <Content Include="Content\images\wave.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.structure.css" />
