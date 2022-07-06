@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using DataLayer.Models;
 using DataLayer.Managers;
-using PublicSite.Models.Auth;
+using PublicSite.Models.ViewModels;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
-using System.Threading.Tasks;
-using PublicSite.Models.ViewModels;
+using PublicSite.Models.Auth;
 
 namespace PublicSite.Controllers
 {
@@ -15,7 +16,14 @@ namespace PublicSite.Controllers
     public class ApartmentController : Controller
     {
         private readonly IRepo repo = RepoFactory.GetRepo();
-        
+        private UserManager userManager;
+
+        public UserManager UserManager
+        {
+            get => userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
+            private set => userManager = value;
+        }
+
         // GET: Apartment
         [AllowAnonymous]
         public ActionResult Index() => View(repo);
@@ -33,7 +41,18 @@ namespace PublicSite.Controllers
         public ActionResult Details(int apartmentId)
         {
             Apartment apartment = repo.LoadApartmentDetails(apartmentId);
-            return View(apartment);
+            User user = UserManager.FindByName(User.Identity.Name);
+            ApartmentDetailsVM model = new ApartmentDetailsVM
+            {
+                Apartment = apartment
+            };
+            if (user != null)
+            {
+                model.FullName = user.Name;
+                model.Phone = user.PhoneNumber;
+                model.Email = user.Email;
+            }
+            return View(model);
         }
 
         public ActionResult AddReview(int userId, int apartmentId, int stars, string details)

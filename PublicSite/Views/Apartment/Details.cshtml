@@ -1,10 +1,10 @@
-﻿@model DataLayer.Models.Apartment
+﻿@using Recaptcha.Web.Mvc;
+@model PublicSite.Models.ViewModels.ApartmentDetailsVM
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool isLogedIn = !string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name);
 }
-@using Recaptcha.Web.Mvc;
 
 <style>
     .g-recaptcha {
@@ -14,9 +14,9 @@
 </style>
 
 <div>
-    <h1 style="text-align:center; padding: .3em 1em .3em 1em; margin: 0; font-weight: 600">@Model.Name.ToUpper()</h1>
+    <h1 style="text-align:center; padding: .3em 1em .3em 1em; margin: 0; font-weight: 600">@Model.Apartment.Name.ToUpper()</h1>
     <div class="d-flex justify-content-center mb-3" style="gap: 1em">
-        @Html.Partial("_ApartmentSpecs", Model)
+        @Html.Partial("_ApartmentSpecs", Model.Apartment)
     </div>
 </div>
 <div class="container">
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col" style="width: 50%; display: flex; justify-content: right; align-items: center">
             <div class="row" style="width: 35em;">
-                @Html.Partial("_ApartmentImages", Model.Images)
+                @Html.Partial("_ApartmentImages", Model.Apartment.Images)
             </div>
         </div>
         <div class="col" style="width: 50%; text-align: center;">
@@ -33,18 +33,18 @@
                     <h2>Contact us</h2>
                     <div class="input-group mb-3">
                         <span class="input-group-text">First and last name</span>
-                        <input type="text" aria-label="First name" class="form-control" placeholder="First name" required>
-                        <input type="text" aria-label="Last name" class="form-control" placeholder="Last name" required>
+                        <input type="text" aria-label="First name" class="form-control" placeholder="First name" required value="@Model.FirstName">
+                        <input type="text" aria-label="Last name" class="form-control" placeholder="Last name" required value="@Model.LastName">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="email">@@</span>
-                        <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email" required>
+                        <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email" required value="@Model.Email">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="phone">Phone/mobile</span>
-                        <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="phone" required>
+                        <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="phone" required value="@Model.Phone">
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex gap-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="adults">Adults</span>
                             <input type="number" class="form-control" placeholder="Adults" aria-label="Adults" aria-describedby="adults" min="0" required>
@@ -79,7 +79,7 @@
     <div class="row mb-3" style="text-align: center; margin-top: 1em">
         <h3>Facilities</h3>
         <div class="col" style="overflow-x: auto">
-            @Html.Partial("_ApartmentTags", Model.Tags)
+            @Html.Partial("_ApartmentTags", Model.Apartment.Tags)
         </div>
     </div>
     <hr />
@@ -90,27 +90,27 @@
             </div>
             <div class="d-flex">
                 @{
-                    if (Model.Reviews.Count == 0)
+                    if (Model.Apartment.Reviews.Count == 0)
                     {
                         <label style="margin-right: .3em; font-weight: 700">Apartment has no reviews yet</label>
                     }
                     else
                     {
-                        <label style="margin-right: .3em; font-weight: bold">@Model.Reviews.Average(a => a.Stars).ToString("0.##") / 5</label>
+                        <label style="margin-right: .3em; font-weight: bold">@Model.Apartment.Reviews.Average(a => a.Stars).ToString("0.##") / 5</label>
                         <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
                     }
                 }
             </div>
         </div>
         <div class="mb-5" style="overflow-x: auto; height: 20em">
-            <div class="card d-inline-block" style="width: 36em; height: 12em; border-radius: .5em; overflow: hidden;">
-                @{
-                    if (isLogedIn)
-                    {
+            @{
+                if (isLogedIn)
+                {
+                    <div class="card d-inline-block" style="width: 36em; height: 12em; border-radius: .5em; overflow: hidden;">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-1">
                                 <img src="~/Content/images/user-circle.png" style="height: 2em; width: 2em;" />
-                                <h5 class="m-0">@(HttpContext.Current.User.Identity.Name)</h5>
+                                <h5 class="m-0">@Model.FullName</h5>
                             </div>
                             <div class="d-flex">
                                 <input type="number" min="1" max="5" value="5" style="margin-right: .2em; width: 2.7em" id="inputStars" />
@@ -121,12 +121,12 @@
                             @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", id = "reviewDetails" })
                             <button type="submit" class="btn btn-primary" id="btnPostReview">Post review</button>
                         </div>
-                    }
+                    </div>
                 }
-            </div>
-            @if (Model.Reviews.Count > 0)
+            }
+            @if (Model.Apartment.Reviews.Count > 0)
             {
-                @Html.Partial("_ApartmentReview", Model.Reviews)
+                @Html.Partial("_ApartmentReview", Model.Apartment.Reviews)
             }
         </div>
     </div>
@@ -137,7 +137,7 @@
         $("#btnPostReview").on("click", function () {
             console.log("ss");
             var userId = 1;
-            var apartmentId = @Model.Id;
+            var apartmentId = @Model.Apartment.Id;
             var stars = $("#inputStars").val();
             var details = $("#reviewDetails").val();
             $.ajax({

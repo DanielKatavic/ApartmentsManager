@@ -143,6 +143,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\images\bed.png" />
     <Content Include="Content\images\children.png" />
+    <Content Include="Content\images\cover.jpg" />
     <Content Include="Content\images\cross.png" />
     <Content Include="Content\images\euro.png" />
     <Content Include="Content\images\git.png" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\Auth\UserManager.cs" />
     <Compile Include="Models\Auth\UserStoreService.cs" />
     <Compile Include="Models\CustomAttributes\IsAuthorized.cs" />
+    <Compile Include="Models\ViewModels\ApartmentDetailsVM.cs" />
     <Compile Include="Models\ViewModels\LogInViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

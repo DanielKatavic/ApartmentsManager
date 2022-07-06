@@ -14,7 +14,16 @@
     }, "Value", "Text");
 }
 
-<div style="height: 17em; background-image: url(https://s27363.pcdn.co/wp-content/uploads/2020/05/Things-to-do-in-Dubrovnik.jpg.optimal.jpg); object-fit:cover; width:100vw;">
+<style>
+    #img-placeholder {
+        height: 17em;
+        background: url("/Content/images/cover.jpg") center no-repeat;
+        object-fit: cover;
+        width: 100vw;
+    }
+</style>
+
+<div id="img-placeholder" style="">
     <div class="d-flex justify-content-sm-between" style="position:relative; width: 50em; top:7em; margin: auto; gap:.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: .5em; padding: .5em">
         <div class="form-floating">
             @Html.DropDownList("CitiesDdl", optionLabel: "Any", selectList: citiesSelectList, htmlAttributes: new { @class = "form-select", id = "citiesSelect" })
