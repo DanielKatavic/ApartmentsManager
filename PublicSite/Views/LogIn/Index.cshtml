@@ -44,7 +44,7 @@
                         {
                             <div class="d-flex shadow-lg bg-danger">
                                 <img id="alert-img" src="~/Content/images/cross.png" />
-                                <h5>@Html.ValidationSummary(true, "")</h5>
+                                <h5>@ViewData.ModelState["error"].Errors[0].ErrorMessage</h5>
                             </div>
                         }
                     }

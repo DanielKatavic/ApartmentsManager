@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PublicSite.Models.Auth;
 using PublicSite.Models.CustomAttributes;
 using PublicSite.Models.ViewModels;
@@ -53,5 +54,12 @@ namespace PublicSite.Controllers
             }
         }
 
+        [HttpGet]
+        [Authorize]
+        public ActionResult LogOut()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Apartment");
+        }
     }
 }

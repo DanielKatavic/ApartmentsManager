@@ -33,6 +33,7 @@ namespace DataLayer.Dal
                     Email = row[nameof(User.Email)].ToString(),
                     PhoneNumber = row[nameof(User.PhoneNumber)].ToString(),
                     UserName = row[nameof(User.Email)].ToString(),
+                    Name = row[nameof(User.Name)].ToString(),
                     Address = row[nameof(User.Address)].ToString(),
                     PasswordHash = paswHash,
                     Password = paswHash
