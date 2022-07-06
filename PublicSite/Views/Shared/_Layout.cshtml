@@ -74,30 +74,6 @@
     <div id="success-notification" class="align-items-center justify-content-center" style="display: none">
         <label style="font-weight: 600">You have successfully sent your booking request!</label>
     </div>
-    @*Login modal*@
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Please log in</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required>
-                        <label for="email">Email</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="password" placeholder="password" required>
-                        <label for="password">Password</label>
-                    </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary w-100" id="btnLogIn">Log in</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @*Navbar*@
     <nav class="navbar navbar-dark bg-dark navbar-expand">
         <div class="container-fluid">
@@ -112,7 +88,7 @@
             </div>
             <div class="navbar-nav">
                 <a class="nav-link disabled">Username</a>
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a>
+                @Html.ActionLink(linkText: "Log in", actionName: "Index", controllerName: "LogIn", routeValues: null, htmlAttributes: new { @class = "nav-link" })
             </div>
         </div>
     </nav>

@@ -25,14 +25,17 @@ namespace DataLayer.Dal
             var tblUsers = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name).Tables[0];
             foreach (DataRow row in tblUsers.Rows)
             {
+                string paswHash = row[nameof(User.PasswordHash)].ToString();
                 users.Add(new User
                 {
-                    Id = (int)row[nameof(User.Id)],
+                    Id = row[nameof(User.Id)].ToString(),
                     Guid = (Guid)row[nameof(User.Guid)],
                     Email = row[nameof(User.Email)].ToString(),
                     PhoneNumber = row[nameof(User.PhoneNumber)].ToString(),
-                    UserName = row[nameof(User.UserName)].ToString(),
-                    Address = row[nameof(User.Address)].ToString()
+                    UserName = row[nameof(User.Email)].ToString(),
+                    Address = row[nameof(User.Address)].ToString(),
+                    PasswordHash = paswHash,
+                    Password = paswHash
                 });
             }
             return users;
