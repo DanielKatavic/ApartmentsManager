@@ -2,7 +2,6 @@
 using Owin;
 using PublicSite.Models.Auth;
 using System;
-using System.Threading.Tasks;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -22,6 +21,7 @@ namespace PublicSite.App_Start
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions 
             {
+                CookieName = "AuthCookie",
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Apartment/Index"),
                 Provider = new CookieAuthenticationProvider

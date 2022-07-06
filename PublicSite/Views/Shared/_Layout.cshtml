@@ -82,13 +82,16 @@
                     <img src="~/Content/images/villa.png" style="width: 2em; height: 2em" />
                     <label style="font-weight: 700; color: white">RWA Apartments</label>
                 </div>
-                @Html.ActionLink(linkText: "Apartments", actionName: "Index", controllerName: "Apartment", routeValues: null, htmlAttributes: new { @class = "nav-link active" })
+                @Html.ActionLink(linkText: "Apartments", actionName: "Index", controllerName: "Apartment", routeValues: null, htmlAttributes: new { @class = "nav-link" })
                 <a class="nav-link" href="#">Contact</a>
                 <a class="nav-link" href="#">About us</a>
             </div>
             <div class="navbar-nav">
-                <a class="nav-link disabled">Username</a>
-                @Html.ActionLink(linkText: "Log in", actionName: "Index", controllerName: "LogIn", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                @{
+                    bool isLogedIn = !string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name);
+                    <a class="nav-link disabled">@(isLogedIn ? HttpContext.Current.User.Identity.Name : "Username")</a>
+                    @Html.ActionLink(linkText: (!isLogedIn ? "Log in" : "Log out"), actionName: (isLogedIn ? "LogOut" : "Index"), controllerName: "LogIn", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                }
             </div>
         </div>
     </nav>

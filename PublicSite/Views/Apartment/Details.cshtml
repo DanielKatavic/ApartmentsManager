@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isLogedIn = !string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name);
 }
 @using Recaptcha.Web.Mvc;
 
@@ -62,8 +63,13 @@
                         <input type="date" class="form-control" placeholder="EndDate" aria-label="EndDate" aria-describedby="endDate" id="endDate" required>
                     </div>
                     <div class="d-flex">
-                        @Html.RecaptchaWidget()
-                        <button type="submit" class="btn btn-primary w-100 h-50" id="btnSendRequest">Send request</button>
+                        @{
+                            if (!isLogedIn)
+                            {
+                                @Html.RecaptchaWidget()
+                            }
+                        }
+                        <button type="submit" class="btn btn-primary w-100" id="btnSendRequest">Send request</button>
                     </div>
                 </div>
             </form>
@@ -98,20 +104,25 @@
         </div>
         <div class="mb-5" style="overflow-x: auto; height: 20em">
             <div class="card d-inline-block" style="width: 36em; height: 12em; border-radius: .5em; overflow: hidden;">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center gap-1">
-                        <img src="~/Content/images/user-circle.png" style="height: 2em; width: 2em;" />
-                        <h5 class="m-0">Username</h5>
-                    </div>
-                    <div class="d-flex">
-                        <input type="number" min="1" max="5" value="5" style="margin-right: .2em; width: 2.7em" id="inputStars" />
-                        <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
-                    </div>
-                </div>
-                <div class="card-body">
-                    @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", id = "reviewDetails" })
-                    <button type="submit" class="btn btn-primary" id="btnPostReview">Post review</button>
-                </div>
+                @{
+                    if (isLogedIn)
+                    {
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-1">
+                                <img src="~/Content/images/user-circle.png" style="height: 2em; width: 2em;" />
+                                <h5 class="m-0">@(HttpContext.Current.User.Identity.Name)</h5>
+                            </div>
+                            <div class="d-flex">
+                                <input type="number" min="1" max="5" value="5" style="margin-right: .2em; width: 2.7em" id="inputStars" />
+                                <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", id = "reviewDetails" })
+                            <button type="submit" class="btn btn-primary" id="btnPostReview">Post review</button>
+                        </div>
+                    }
+                }
             </div>
             @if (Model.Reviews.Count > 0)
             {
