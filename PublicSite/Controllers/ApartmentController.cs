@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using PublicSite.Models.Auth;
+using System.Linq;
 
 namespace PublicSite.Controllers
 {
@@ -30,7 +31,7 @@ namespace PublicSite.Controllers
         [AllowAnonymous]
         public ActionResult GetAllApartments(string city, string rooms, string adults, string children, string order)
         {
-            IList<Apartment> apartments = repo.LoadApartments();
+            IList<Apartment> apartments = repo.LoadApartments().Where(a => a.Status == Status.Vacant).ToList();
             ApartmentManager.FilterApartments(city, rooms, adults, children, ref apartments);
             ApartmentManager.OrderApartments(order, ref apartments);
             return PartialView("_ApartmentHelper", apartments);

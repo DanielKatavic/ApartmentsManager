@@ -103,26 +103,27 @@
             </div>
         </div>
         <div class="mb-5" style="overflow-x: auto; height: 20em">
-            @{
-                if (isLogedIn)
-                {
-                    <div class="card d-inline-block" style="width: 36em; height: 12em; border-radius: .5em; overflow: hidden;">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center gap-1">
-                                <img src="~/Content/images/user-circle.png" style="height: 2em; width: 2em;" />
-                                <h5 class="m-0">@Model.FullName</h5>
-                            </div>
-                            <div class="d-flex">
-                                <input type="number" min="1" max="5" value="5" style="margin-right: .2em; width: 2.7em" id="inputStars" />
-                                <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
-                            </div>
+            @if (isLogedIn)
+            {
+                <div class="card d-inline-block" style="width: 36em; height: 12em; border-radius: .5em; overflow: hidden;">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-1">
+                            <img src="~/Content/images/user-circle.png" style="height: 2em; width: 2em;" />
+                            <h5 class="m-0">@Model.FullName</h5>
                         </div>
-                        <div class="card-body">
-                            @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", id = "reviewDetails" })
-                            <button type="submit" class="btn btn-primary" id="btnPostReview">Post review</button>
+                        <div class="d-flex" id="stars-wrapper">
+                            @Html.Hidden("starsSelected", value: 5)
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <img id="@i" src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em; cursor: pointer;" />
+                            }
                         </div>
                     </div>
-                }
+                    <div class="card-body">
+                        @Html.TextArea("txtDetails", new { @class = "card-text mb-3", style = "width: 100%; resize: none;", id = "reviewDetails" })
+                        <button type="submit" class="btn btn-primary" id="btnPostReview">Post review</button>
+                    </div>
+                </div>
             }
             @if (Model.Apartment.Reviews.Count > 0)
             {
@@ -134,7 +135,18 @@
 
 @section scripts{
     <script>
-        $("#btn-fullscreen").on("click", function (e) {
+        $("#stars-wrapper img").on("click", function () {
+            var selectedId = $(this).attr("id");
+            for (var i = 5; i > selectedId; i--) {
+                $("#" + i).attr("src", "/Content/images/star-blank.png");
+            }
+            for (var i = 1; i <= selectedId; i++) {
+                $("#" + i).attr("src", "/Content/images/star.png");
+            }
+            $("#starsSelected").val(selectedId);
+        });
+
+        $("#btn-fullscreen").on("click", function () {
             if ($("#img-placeholder").attr("class") == "row") {
                 $("#btn-fullscreen").attr("src", "/Content/images/close.png");
                 $("#img-placeholder").attr("class", "row fullscreen");
@@ -143,7 +155,6 @@
                 $("#img-placeholder").css("top", "10vh");
                 $("#img-placeholder").css("left", "15vw");
                 $("#img-placeholder").css("z-index", "10");
-                count++;
             }
             else {
                 $("#btn-fullscreen").attr("src", "/Content/images/full-screen.png");
@@ -151,16 +162,13 @@
                 $("#img-placeholder").css("width", "35em");
                 $("#img-placeholder").css("position", "static");
                 $("#img-placeholder").css("z-index", "0");
-                count = 0;
             }
-            e.preventDefault();
         });
 
         $("#btnPostReview").on("click", function () {
-            console.log("ss");
             var userId = @Model.UserId;
             var apartmentId = @Model.Apartment.Id;
-            var stars = $("#inputStars").val();
+            var stars = $("#starsSelected").val();
             var details = $("#reviewDetails").val();
             $.ajax({
                 url: "@Url.Action("AddReview", "Apartment")",
