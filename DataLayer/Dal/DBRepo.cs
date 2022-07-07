@@ -192,6 +192,9 @@ namespace DataLayer.Dal
             return images;
         }
 
+        public static void AddUser(string email, string password, string username, string phone, string address)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, email, password, username, phone, address);
+
         public void AddReview(int apartmentId, int userId, string details, int stars) 
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, userId, details, stars);
 

@@ -1,12 +1,9 @@
-﻿@model PublicSite.Models.ViewModels.LogInViewModel
+﻿@model PublicSite.Models.ViewModels.RegisterViewModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -33,7 +30,7 @@
 </head>
 <body>
     <main class="text-center pt-5 w-100">
-        @using (Html.BeginForm("Index", "LogIn", null, FormMethod.Post, new { role = "form" }))
+        @using (Html.BeginForm("Register", "LogIn", null, FormMethod.Post, new { role = "form" }))
         {
             @Html.AntiForgeryToken()
             <div class="w-25 m-auto p-3 shadow-lg" style="background-color: #e3f2fd; border-radius: 1em;">
@@ -52,7 +49,11 @@
                     <img src="~/Content/images/villa.png" style="width: 5em; height: 5em" />
                     <label style="font-weight: 700; font-size: 2em">RWA Apartments</label>
                 </div>
-                <h1 class="h3 mb-3 font-weight-bold">Sign in</h1>
+                <h1 class="h3 mb-3 font-weight-bold">Sign up</h1>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m => m.Username, htmlAttributes: new { @class = "form-control", placeholder = "example", required = true, id = "username" })
+                    <label for="username">Username</label>
+                </div>
                 <div class="form-floating mb-3">
                     @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", placeholder = "name@example.com", required = true, id = "email" })
                     <label for="email">Email address</label>
@@ -61,11 +62,19 @@
                     @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", placeholder = "password", required = true, id = "password" })
                     <label for="password">Password</label>
                 </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m => m.Phone, htmlAttributes: new { @class = "form-control", placeholder = "example", required = true, id = "phone" })
+                    <label for="phone">Phone</label>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m => m.Address, htmlAttributes: new { @class = "form-control", placeholder = "example", required = true, id = "address" })
+                    <label for="address">Address</label>
+                </div>
                 <div>
-                    <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign in</button>
+                    <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign up</button>
                     <label>
-                        Don't have an account?
-                        @Html.ActionLink(linkText: "Sign up", actionName: "Register", routeValues: null, new { @class = "fw-bold" })
+                        Already have an account?
+                        @Html.ActionLink(linkText: "Sign in", actionName: "Index", routeValues: null, new { @class = "fw-bold" })
                     </label>
                 </div>
             </div>
@@ -73,5 +82,3 @@
     </main>
 </body>
 </html>
-
-

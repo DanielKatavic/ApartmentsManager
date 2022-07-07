@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using DataLayer.Models;
 using DataLayer.Managers;
 using PublicSite.Models.ViewModels;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
@@ -48,6 +47,7 @@ namespace PublicSite.Controllers
             };
             if (user != null)
             {
+                model.UserId = user.Id;
                 model.FullName = user.Name;
                 model.Phone = user.PhoneNumber;
                 model.Email = user.Email;
@@ -55,9 +55,9 @@ namespace PublicSite.Controllers
             return View(model);
         }
 
-        public ActionResult AddReview(int userId, int apartmentId, int stars, string details)
+        public ActionResult AddReview(string userId, int apartmentId, int stars, string details)
         {
-            repo.AddReview(apartmentId, userId, details, stars);
+            repo.AddReview(apartmentId: apartmentId, userId: int.Parse(userId), details: details, stars: stars);
             return new EmptyResult();
         }
     }

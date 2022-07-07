@@ -6,6 +6,8 @@ using PublicSite.Models.ViewModels;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DataLayer.Models;
+using DataLayer.Dal;
 
 namespace PublicSite.Controllers
 {
@@ -25,7 +27,6 @@ namespace PublicSite.Controllers
             private set => _authManager = value;
         }
 
-        // GET: LogIn
         [HttpGet]
         [AllowAnonymous]
         [IsAuthorized]
@@ -50,6 +51,40 @@ namespace PublicSite.Controllers
             else
             {
                 ModelState.AddModelError(key: "error", errorMessage: "Incorrect username or password");
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [IsAuthorized]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            User user = AuthManager.FindByName(model.Email);
+            if (user is null)
+            {
+                Models.Auth.PasswordHasher ph = new Models.Auth.PasswordHasher();
+                string hashedPassword = ph.HashPassword(model.Password);
+                DBRepo.AddUser(
+                    email: model.Email, 
+                    password: hashedPassword, 
+                    username: model.Username, 
+                    phone: model.Phone, 
+                    address: model.Address);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError(key: "error", errorMessage: "User already exists!");
                 return View(model);
             }
         }

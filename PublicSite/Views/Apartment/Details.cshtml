@@ -136,7 +136,7 @@
     <script>
         $("#btnPostReview").on("click", function () {
             console.log("ss");
-            var userId = 1;
+            var userId = @Model.UserId;
             var apartmentId = @Model.Apartment.Id;
             var stars = $("#inputStars").val();
             var details = $("#reviewDetails").val();

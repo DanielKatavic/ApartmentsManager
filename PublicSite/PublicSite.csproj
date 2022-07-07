@@ -199,6 +199,7 @@
     <Compile Include="Models\CustomAttributes\IsAuthorized.cs" />
     <Compile Include="Models\ViewModels\ApartmentDetailsVM.cs" />
     <Compile Include="Models\ViewModels\LogInViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +240,7 @@
     <Content Include="Views\Shared\_ApartmentSpecs.cshtml" />
     <Content Include="Views\Shared\_ApartmentReview.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
+    <Content Include="Views\LogIn\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
