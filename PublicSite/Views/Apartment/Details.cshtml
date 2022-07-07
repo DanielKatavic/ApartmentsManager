@@ -23,7 +23,7 @@
     <hr />
     <div class="row">
         <div class="col" style="width: 50%; display: flex; justify-content: right; align-items: center">
-            <div class="row" style="width: 35em;">
+            <div id="img-placeholder" class="row" style="width: 35em;">
                 @Html.Partial("_ApartmentImages", Model.Apartment.Images)
             </div>
         </div>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <hr />
-    <div class="row mb-3" style="text-align: center; margin-top: 1em">
+    <div class="row mb-3" style="text-align: center; margin-top: 1em;">
         <h3>Facilities</h3>
         <div class="col" style="overflow-x: auto">
             @Html.Partial("_ApartmentTags", Model.Apartment.Tags)
@@ -134,6 +134,28 @@
 
 @section scripts{
     <script>
+        $("#btn-fullscreen").on("click", function (e) {
+            if ($("#img-placeholder").attr("class") == "row") {
+                $("#btn-fullscreen").attr("src", "/Content/images/close.png");
+                $("#img-placeholder").attr("class", "row fullscreen");
+                $("#img-placeholder").css("width", "70vw");
+                $("#img-placeholder").css("position", "absolute");
+                $("#img-placeholder").css("top", "10vh");
+                $("#img-placeholder").css("left", "15vw");
+                $("#img-placeholder").css("z-index", "10");
+                count++;
+            }
+            else {
+                $("#btn-fullscreen").attr("src", "/Content/images/full-screen.png");
+                $("#img-placeholder").attr("class", "row");
+                $("#img-placeholder").css("width", "35em");
+                $("#img-placeholder").css("position", "static");
+                $("#img-placeholder").css("z-index", "0");
+                count = 0;
+            }
+            e.preventDefault();
+        });
+
         $("#btnPostReview").on("click", function () {
             console.log("ss");
             var userId = @Model.UserId;

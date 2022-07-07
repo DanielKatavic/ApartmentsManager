@@ -1,6 +1,7 @@
 ﻿@model IList<DataLayer.Models.Image>
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
     <div class="carousel-inner">
+        <img id="btn-fullscreen" src="~/Content/images/full-screen.png" style="position: absolute; right: 1em; top: 1em; z-index: 10; width: 1.7em; height: 1.7em; cursor: pointer;" />
         @{
             <div class="carousel-item active">
                 <img src="@Model[0].Path" class="d-block w-100" style="border-radius: .5em">

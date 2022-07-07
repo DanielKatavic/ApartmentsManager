@@ -143,9 +143,11 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\images\bed.png" />
     <Content Include="Content\images\children.png" />
+    <Content Include="Content\images\close.png" />
     <Content Include="Content\images\cover.jpg" />
     <Content Include="Content\images\cross.png" />
     <Content Include="Content\images\euro.png" />
+    <Content Include="Content\images\full-screen.png" />
     <Content Include="Content\images\git.png" />
     <Content Include="Content\images\linkedin.png" />
     <Content Include="Content\images\location-pin.png" />
