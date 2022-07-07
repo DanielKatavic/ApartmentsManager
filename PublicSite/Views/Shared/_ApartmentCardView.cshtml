@@ -9,9 +9,9 @@
         transition: .4s;
     }
 
-    .hover:hover {
-        --_p: 0%;
-    }
+        .hover:hover {
+            --_p: 0%;
+        }
 
     h3 {
         font-family: system-ui, sans-serif;
@@ -27,7 +27,16 @@
         <img src="@Model.Images.First(i => i.IsRepresentative).Path" style="width: 100%; object-fit: cover; border-radius: .2em" />
     </div>
     <div style="padding: .5em; width: 50%">
-        <h3 class="hover" onclick="location.href='@Url.Action("Details", "Apartment", new { apartmentId = Model.Id })'">@Model.Name</h3>
+        <div class="d-flex justify-content-between align-items-baseline">
+            <h3 class="hover" onclick="location.href='@Url.Action("Details", "Apartment", new { apartmentId = Model.Id })'">@Model.Name</h3>
+            @{
+                string averageRating = Model.Reviews.Count > 0 ? Model.Reviews.Average(a => a.Stars).ToString("0.##") : "0";
+                <div class="d-flex">
+                    <label style="margin-right: .3em; font-weight: bold">@(Model.Reviews.Count > 0 ? $"{averageRating}/5" : "N/A")</label>
+                    <img src="~/Content/images/star.png" style="height: 1.7em; width: 1.7em" />
+                </div>
+            }
+        </div>
         <ul style="padding-top:.5em">
             <li>@Model.CityName</li>
             <li>@Model.BeachDistance m from beach</li>

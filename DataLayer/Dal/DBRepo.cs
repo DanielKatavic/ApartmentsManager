@@ -102,7 +102,8 @@ namespace DataLayer.Dal
                         BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
                         Tags = LoadTagsByApartmentId(id),
                         Images = images,
-                        ImageCount = images.Count
+                        ImageCount = images.Count,
+                        Reviews = LoadReviewsByApartmentId(id)
                     }
                 );
             }

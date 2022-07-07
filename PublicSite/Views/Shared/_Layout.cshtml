@@ -95,7 +95,7 @@
             </div>
             <div class="navbar-nav">
                 @{
-                    <a class="nav-link disabled">@(isLogedIn ? HttpContext.Current.User.Identity.Name : "Username")</a>
+                    <a class="nav-link disabled">@(isLogedIn ? HttpContext.Current.User.Identity.Name : "")</a>
                     @Html.ActionLink(linkText: (!isLogedIn ? "Sign in" : "Sign out"), actionName: (isLogedIn ? "LogOut" : "Index"), controllerName: "LogIn", routeValues: null, htmlAttributes: new { @class = "nav-link", id = (isLogedIn ? "btn-signout" : "") })
                 }
             </div>

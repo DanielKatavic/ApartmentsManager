@@ -4,74 +4,62 @@
     ViewBag.Title = "Log in";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    #alert div {
+        gap: 1em;
+        background-color: white;
+        width: 25em;
+        position: absolute;
+        top: 10em;
+        right: 0;
+        padding: 1em;
+        border-radius: .7em 0 0 .7em;
+        align-items: center;
+        color: white;
+    }
 
-<!DOCTYPE html>
+    #alert-img {
+        width: 3em;
+        height: 3em;
+    }
+</style>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <style>
-        #alert div {
-            gap: 1em;
-            background-color: white;
-            width: 25em;
-            position: absolute;
-            top: 10em;
-            right: 0;
-            padding: 1em;
-            border-radius: .7em 0 0 .7em;
-            align-items: center;
-            color: white;
-        }
-
-        #alert-img {
-            width: 3em;
-            height: 3em;
-        }
-    </style>
-</head>
-<body>
-    <main class="text-center pt-5 w-100">
-        @using (Html.BeginForm("Index", "LogIn", null, FormMethod.Post, new { role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-            <div class="w-25 m-auto p-3 shadow-lg" style="background-color: #e3f2fd; border-radius: 1em;">
-                <div id="alert">
-                    @{
-                        if (!ViewData.ModelState.IsValid)
-                        {
-                            <div class="d-flex shadow-lg bg-danger">
-                                <img id="alert-img" src="~/Content/images/cross.png" />
-                                <h5>@ViewData.ModelState["error"].Errors[0].ErrorMessage</h5>
-                            </div>
-                        }
+<main class="text-center pt-5 w-100">
+    @using (Html.BeginForm("Index", "LogIn", null, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="w-25 m-auto p-3 shadow-lg" style="background-color: #e3f2fd; border-radius: 1em;">
+            <div id="alert">
+                @{
+                    if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="d-flex shadow-lg bg-danger">
+                            <img id="alert-img" src="~/Content/images/cross.png" />
+                            <h5>@ViewData.ModelState["error"].Errors[0].ErrorMessage</h5>
+                        </div>
                     }
-                </div>
-                <div class="d-flex align-items-center justify-content-center gap-1" style="margin-right: 1em">
-                    <img src="~/Content/images/villa.png" style="width: 5em; height: 5em" />
-                    <label style="font-weight: 700; font-size: 2em">RWA Apartments</label>
-                </div>
-                <h1 class="h3 mb-3 font-weight-bold">Sign in</h1>
-                <div class="form-floating mb-3">
-                    @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", placeholder = "name@example.com", required = true, id = "email" })
-                    <label for="email">Email address</label>
-                </div>
-                <div class="form-floating mb-3">
-                    @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", placeholder = "password", required = true, id = "password" })
-                    <label for="password">Password</label>
-                </div>
-                <div>
-                    <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign in</button>
-                    <label>
-                        Don't have an account?
-                        @Html.ActionLink(linkText: "Sign up", actionName: "Register", routeValues: null, new { @class = "fw-bold" })
-                    </label>
-                </div>
+                }
             </div>
-        }
-    </main>
-</body>
-</html>
-
-
+            <div class="d-flex align-items-center justify-content-center gap-1" style="margin-right: 1em">
+                <img src="~/Content/images/villa.png" style="width: 5em; height: 5em" />
+                <label style="font-weight: 700; font-size: 2em">RWA Apartments</label>
+            </div>
+            <h1 class="h3 mb-3 font-weight-bold">Sign in</h1>
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @class = "form-control", placeholder = "name@example.com", required = true, id = "email" })
+                <label for="email">Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+                @Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "form-control", placeholder = "password", required = true, id = "password" })
+                <label for="password">Password</label>
+            </div>
+            <div>
+                <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign in</button>
+                <label>
+                    Don't have an account?
+                    @Html.ActionLink(linkText: "Sign up", actionName: "Register", routeValues: null, new { @class = "fw-bold" })
+                </label>
+            </div>
+        </div>
+    }
+</main>
