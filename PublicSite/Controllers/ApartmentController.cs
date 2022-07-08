@@ -9,6 +9,7 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using PublicSite.Models.Auth;
 using System.Linq;
+using System.IO;
 
 namespace PublicSite.Controllers
 {
@@ -55,6 +56,17 @@ namespace PublicSite.Controllers
             }
             return View(model);
         }
+
+        [AllowAnonymous]
+        public ActionResult ImageSrc(string path = "img/apartment.jpg")
+        { 
+            var publicRoot = Server.MapPath("~");
+            var adminRoot = Path.Combine(publicRoot, "../AdminSite/");
+            var picturePath = Path.Combine(adminRoot, path);
+            string mimeType = MimeMapping.GetMimeMapping(picturePath);
+            return new FilePathResult(picturePath, mimeType);
+        }
+
 
         public ActionResult AddReview(string userId, int apartmentId, int stars, string details)
         {
