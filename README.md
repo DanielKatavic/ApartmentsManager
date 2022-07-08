@@ -33,4 +33,17 @@ Error page:
 ![Snimka ekrana 2022-06-20, 18 24 54](https://user-images.githubusercontent.com/79853787/174644653-5052bed9-d264-4c6b-89cf-edc3c5a561f5.png)
 
 <h3>Public site:</h3>
-<p>Work in progress</p>
+
+LogIn page:
+![Snimka ekrana 2022-07-08, 23 33 12](https://user-images.githubusercontent.com/79853787/178073418-acd4e29c-6118-42ba-a422-3f0af1287ada.png)
+
+Apartments page:
+![Snimka ekrana 2022-07-08, 23 32 44](https://user-images.githubusercontent.com/79853787/178073461-5e5ea632-f923-4320-b7c5-c9dcc3bbf0e7.png)
+
+Apartment details page (if user is logged in):
+![Snimka ekrana 2022-07-08, 23 32 55](https://user-images.githubusercontent.com/79853787/178073623-aefdfcae-c9d4-42c1-a65c-b2d8e3c6ab49.png)
+
+Apartment details page (if user is not logged in):
+![Snimka ekrana 2022-07-08, 23 33 50](https://user-images.githubusercontent.com/79853787/178073689-d3794f8e-0b05-42b1-8ea4-ebfdb3c3bcbd.png)
+
+
