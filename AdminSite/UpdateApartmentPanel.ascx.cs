@@ -54,7 +54,7 @@ namespace RWAproject
                 {
                     ((IRepo)Application["database"]).AddReservation(
                     Apartment.Id,
-                    _user.Id,
+                    int.Parse(_user.Id),
                     Details.Value);
                     _user = null;
                 }
@@ -87,7 +87,8 @@ namespace RWAproject
 
         private void FillImages()
         {
-            ImagesRpt.DataSource = Apartment.Images;
+            FirstImage.Src = Apartment.Images[0].Path;
+            ImagesRpt.DataSource = Apartment.Images.Skip(1);
             ImagesRpt.DataBind();
         }
 

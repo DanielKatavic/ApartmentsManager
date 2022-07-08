@@ -85,3 +85,23 @@
         </asp:Panel>
     </div>
 </asp:Content>
+
+<asp:Content ContentPlaceHolderID="ScriptsPlaceHolder" runat="server">
+    <script>
+        function removeRequiredTag() {
+            $("#ContentPlaceHolder_updatePanel_Username").removeAttr("required");
+            $("#ContentPlaceHolder_updatePanel_Address").removeAttr("required");
+            $("#ContentPlaceHolder_updatePanel_Email").removeAttr("required");
+            $("#ContentPlaceHolder_updatePanel_PhoneNumber").removeAttr("required");
+        }
+
+        function removeRequiredTagAddPanel() {
+            $("#ContentPlaceHolder_addPanel_apartmentName").removeAttr("required");
+            $("#ContentPlaceHolder_addPanel_price").removeAttr("required");
+            $("#ContentPlaceHolder_addPanel_totalRooms").removeAttr("required");
+            $("#ContentPlaceHolder_addPanel_maxAdults").removeAttr("required");
+            $("#ContentPlaceHolder_addPanel_maxChildren").removeAttr("required");
+            $("#ContentPlaceHolder_addPanel_distanceFromSea").removeAttr("required");
+        }
+    </script>
+</asp:Content>

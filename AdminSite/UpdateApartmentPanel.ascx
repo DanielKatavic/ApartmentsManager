@@ -2,7 +2,7 @@
 
 <div class="offcanvas-header" id="popup-header">
     <h4 runat="server" class="offcanvas-title" id="offcanvasTitle">Edit apartment</h4>
-    <asp:Button runat="server" OnClick="BtnClose_Click" type="button" class="btn-close" aria-label="Close"></asp:Button>
+    <asp:Button runat="server" OnClick="BtnClose_Click" OnClientClick="removeRequiredTag()" type="button" class="btn-close" aria-label="Close"></asp:Button>
 </div>
 <div id="offcanvas" class="offcanvas-body small d-flex">
     <div style="margin-left: 1em; width: 15em">
@@ -97,12 +97,20 @@
         <div class="mb-3" id="apartment-images">
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
                 <div class="carousel-inner">
+                    <itemtemplate>
+                        <div class="carousel-item active">
+                            <img src="..." runat="server" id="FirstImage" class="d-block w-100" style="height: 17em">
+                            <div class="carousel-caption d-none d-md-block">
+                                <asp:TextBox class="image-desc" runat="server" ID="FirstImageDesc"></asp:TextBox>
+                            </div>
+                        </div>
+                    </itemtemplate>
                     <asp:Repeater ID="ImagesRpt" runat="server">
                         <ItemTemplate>
-                            <div class="carousel-item active">
+                            <div class="carousel-item">
                                 <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
+                                    <asp:TextBox class="image-desc" runat="server" ID="ImageDesc" Text="<%# Eval(nameof(DataLayer.Models.Image.Name)) %>"></asp:TextBox>
                                 </div>
                             </div>
                         </ItemTemplate>

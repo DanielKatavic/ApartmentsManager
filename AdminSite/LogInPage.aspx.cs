@@ -21,7 +21,9 @@ namespace RWAproject
             string email = txtEmail.Value;
             string password = txtPassword.Value;
 
-            User adminUser = ((DBRepo)Application["database"]).CkeckAdminUser(email, password);
+            User adminUser = ((DBRepo)Application["database"]).CkeckAdminUser(
+                email: email,
+                password: HashPassword(password));
 
             if (adminUser is null)
             {
@@ -31,6 +33,19 @@ namespace RWAproject
 
             Session["user"] = adminUser;
             Response.Redirect("Apartments.aspx");
+        }
+
+        private string HashPassword(string password)
+        {
+            var bytes = System.Text.Encoding.UTF8.GetBytes(password);
+            using (var hash = System.Security.Cryptography.SHA512.Create())
+            {
+                var hashedInputBytes = hash.ComputeHash(bytes);
+                var hashedInputStringBuilder = new System.Text.StringBuilder(128);
+                foreach (var b in hashedInputBytes)
+                    hashedInputStringBuilder.Append(b.ToString("X2"));
+                return hashedInputStringBuilder.ToString();
+            }
         }
     }
 }

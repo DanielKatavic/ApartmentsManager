@@ -96,7 +96,7 @@ namespace DataLayer.Dal
                         MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
                         MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
                         TotalRooms = (int)row[nameof(Apartment.TotalRooms)],
-                        Price = (decimal)row[nameof(Apartment.Price)],
+                        Price = Math.Round((decimal)row[nameof(Apartment.Price)], 2),
                         CityName = row[nameof(Apartment.CityName)].ToString(),
                         Status = (Status)Enum.Parse(typeof(Status), row[nameof(Apartment.Status)].ToString()),
                         BeachDistance = (int)row[nameof(Apartment.BeachDistance)],

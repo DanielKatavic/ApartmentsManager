@@ -63,6 +63,9 @@ namespace PublicSite.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
