@@ -16,6 +16,7 @@ namespace PublicSite.Controllers
     [Authorize]
     public class ApartmentController : Controller
     {
+        private const string AdminSiteDir = "../AdminSite/";
         private readonly IRepo repo = RepoFactory.GetRepo();
         private UserManager userManager;
 
@@ -58,15 +59,14 @@ namespace PublicSite.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ImageSrc(string path = "img/apartment.jpg")
+        public ActionResult ImageSrc(string path)
         { 
-            var publicRoot = Server.MapPath("~");
-            var adminRoot = Path.Combine(publicRoot, "../AdminSite/");
-            var picturePath = Path.Combine(adminRoot, path);
+            string publicRoot = Server.MapPath("~");
+            string adminRoot = Path.Combine(publicRoot, AdminSiteDir);
+            string picturePath = Path.Combine(adminRoot, path);
             string mimeType = MimeMapping.GetMimeMapping(picturePath);
             return new FilePathResult(picturePath, mimeType);
         }
-
 
         public ActionResult AddReview(string userId, int apartmentId, int stars, string details)
         {
