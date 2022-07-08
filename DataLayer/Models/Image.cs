@@ -7,5 +7,6 @@
         public string Path { get; set; }
         public string Base64Content { get; set; }
         public bool IsRepresentative { get; set; }
+        public bool IsNew { get; set; }
     }
 }

@@ -54,6 +54,7 @@ namespace RWAproject
             ddlStatus.DataSource = _apartments.Select(a => a.Status).Distinct();
             ddlStatus.DataBind();
             ddlStatus.Items.Add(new ListItem { Selected = true, Value = Status.Any.ToString() });
+            
         }
 
         protected void LinkButton_Click(object sender, EventArgs e)

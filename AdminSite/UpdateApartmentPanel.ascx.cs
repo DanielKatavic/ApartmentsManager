@@ -124,8 +124,8 @@ namespace RWAproject
                 int.Parse(maxChildren.Value),
                 int.Parse(totalRooms.Value),
                 status);
-            Apartment.Images.ToList().ForEach(i => SaveImageToDB(i));
-            Apartment.Images.Clear();
+            Apartment.Images.Where(i => i.IsNew).ToList().ForEach(i => SaveImageToDB(i));
+            Apartment.Tags.Where(t => t.IsNew).ToList().ForEach(t => SaveTagToDB(t));
         }
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
@@ -144,7 +144,7 @@ namespace RWAproject
             try
             {
                 FileUpload.PostedFile.SaveAs(combined);
-                Apartment.Images.Add(new DataLayer.Models.Image { Path = combined });
+                Apartment.Images.Add(new DataLayer.Models.Image { Path = combined, IsNew = true });
                 FillImages();
             }
             catch

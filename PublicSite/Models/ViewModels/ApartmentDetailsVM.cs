@@ -10,7 +10,7 @@ namespace PublicSite.Models.ViewModels
     {
         public Apartment Apartment { get; set; }
 
-        public string UserId { get; set; } = "";
+        public string UserId { get; set; } = "0";
         public string FullName { get; set; } = "";
         public string FirstName{ get => FullName.Split(' ').Count() > 0 ? FullName.Split(' ')[0] : ""; }
         public string LastName { get => FullName.Split(' ').Count() > 1 ? FullName.Split(' ')[1] : ""; }
