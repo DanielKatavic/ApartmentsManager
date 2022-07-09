@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataLayer.Models;
 
 namespace DataLayer.Dal
@@ -19,7 +16,7 @@ namespace DataLayer.Dal
         void AddReview(int apartmentId, int userId, string details, int stars);
         void AddTag(string name, string typeName);
         void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null);
-        void UpdateApartment(Guid guid, int maxAdults, int maxChildren, int totalRooms, string status);
+        void UpdateApartment(Guid guid, string name, int maxAdults, int maxChildren, int totalRooms, string status, int beachDistance, decimal price);
         void DeleteApartment(Guid guid);
         void DeleteTag(Guid guid);
 

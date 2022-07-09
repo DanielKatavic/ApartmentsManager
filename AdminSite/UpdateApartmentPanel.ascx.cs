@@ -112,7 +112,7 @@ namespace RWAproject
 
         private void FillTagsRpt()
         {
-            TagsRepeater.DataSource = Apartment.Tags.Distinct();
+            TagsRepeater.DataSource = Apartment.Tags.Where(t => !t.IsDeleted).Distinct();
             TagsRepeater.DataBind();
         }
 
@@ -120,12 +120,17 @@ namespace RWAproject
         {
             ((IRepo)Application["database"]).UpdateApartment(
                 Apartment.Guid,
+                apartmentName.Value,
                 int.Parse(maxAdults.Value),
                 int.Parse(maxChildren.Value),
                 int.Parse(totalRooms.Value),
-                status);
+                status,
+                int.Parse(distanceFromSea.Value),
+                decimal.Parse(price.Value));
+
             Apartment.Images.Where(i => i.IsNew).ToList().ForEach(i => SaveImageToDB(i));
             Apartment.Tags.Where(t => t.IsNew).ToList().ForEach(t => SaveTagToDB(t));
+            Apartment.Tags.Where(t => t.IsDeleted).ToList().ForEach(t => DeleteTagFromDB(t));
         }
 
         protected void BtnAddFile_Click(object sender, EventArgs e)
@@ -137,14 +142,16 @@ namespace RWAproject
             }
 
             string fileName = FileUpload.PostedFile.FileName;
-            string combined = Path.Combine(_imgPath, fileName);
+            string absolutePath = Server.MapPath(_imgPath);
+            string combinedAP = Path.Combine(absolutePath, fileName);
+            string combinedRP = Path.Combine(_imgPath, fileName);
 
-            Directory.CreateDirectory(combined);
+            Directory.CreateDirectory(absolutePath);
 
             try
             {
-                FileUpload.PostedFile.SaveAs(combined);
-                Apartment.Images.Add(new DataLayer.Models.Image { Path = combined, IsNew = true });
+                FileUpload.PostedFile.SaveAs(combinedAP);
+                Apartment.Images.Add(new DataLayer.Models.Image { Path = combinedRP, IsNew = true });
                 FillImages();
             }
             catch
@@ -162,6 +169,11 @@ namespace RWAproject
 
         private void SaveTagToDB(Tag tag)
             => ((DBRepo)Application["database"]).AddTaggedApartment(
+                apartmentId: Apartment.Id,
+                tagId: tag.Id);
+
+        private void DeleteTagFromDB(Tag tag)
+            => ((DBRepo)Application["database"]).DeleteTaggedApartment(
                 apartmentId: Apartment.Id,
                 tagId: tag.Id);
 
@@ -228,6 +240,7 @@ namespace RWAproject
             string selectedTag = AllTagsDdl.SelectedItem.ToString();
             Tag tag = _allTags.FirstOrDefault(t => t.Name == selectedTag);
             tag.IsNew = true;
+            tag.IsDeleted = false;
             Apartment.Tags.Add(tag);
             FillTagsRpt();
         }
@@ -236,7 +249,9 @@ namespace RWAproject
         {
             LinkButton linkButton = sender as LinkButton;
             int tagId = int.Parse(linkButton.CommandArgument);
-            Apartment.Tags.Remove(Apartment.Tags.FirstOrDefault(t => t.Id == tagId));
+            Tag tag = Apartment.Tags.FirstOrDefault(t => t.Id == tagId);
+            tag.IsNew = false;
+            tag.IsDeleted = true;
             FillTagsRpt();
         }
     }

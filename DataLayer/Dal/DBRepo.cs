@@ -217,8 +217,11 @@ namespace DataLayer.Dal
         public void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null) 
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, id, username, email, phoneNumber, address, details);
 
-        public void UpdateApartment(Guid guid, int maxAdults, int maxChildren, int totalRooms, string status)
-            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid, maxAdults, maxChildren, totalRooms, status);
+        public void UpdateApartment(Guid guid, string name, int maxAdults, int maxChildren, int totalRooms, string status, int beachDistance, decimal price)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid, name, maxAdults, maxChildren, totalRooms, status, beachDistance, price);
+
+        public void DeleteTaggedApartment(int apartmentId, int tagId)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, tagId);
 
         public void DeleteApartment(Guid guid)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, guid);
