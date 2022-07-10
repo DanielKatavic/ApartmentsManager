@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+    <link href="~/Content/css/ErrorPage.css" rel="stylesheet" />
+</head>
+<body style="background-color: #e3f2fd">
+    <main>
+        <div id="error-div">
+            <h1>Error</h1>
+            <h3>Page not found</h3>
+            <p>
+                An error occurred while loading this page.
+                <br />
+                Please try again later.
+            </p>
+            <div class="button">
+                <input class="btn-hover color-9" onclick="location.href='@Url.Action("Index", "Apartment")'" type="button" id="btnTryAgain" value="Try again" />
+            </div>
+        </div>
+    </main>
+</body>
+</html>

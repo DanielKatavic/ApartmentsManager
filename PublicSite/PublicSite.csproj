@@ -141,6 +141,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\CustomStyles.css" />
+    <Content Include="Content\css\ErrorPage.css" />
     <Content Include="Content\images\bed.png" />
     <Content Include="Content\images\children.png" />
     <Content Include="Content\images\close.png" />
@@ -190,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\ApartmentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -244,6 +247,7 @@
     <Content Include="Views\Shared\_ApartmentReview.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\LogIn\Register.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
