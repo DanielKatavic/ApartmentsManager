@@ -99,6 +99,7 @@
                 <div class="carousel-inner">
                     <itemtemplate>
                         <div class="carousel-item active">
+                            <asp:CheckBox runat="server" ID="FirstChbRepresentative" style="position: absolute; right: 1em; top: 1em; z-index: 1000;"/>
                             <img src="..." runat="server" id="FirstImage" class="d-block w-100" style="height: 17em">
                             <div class="carousel-caption d-none d-md-block">
                                 <asp:TextBox class="image-desc" runat="server" ID="FirstImageDesc"></asp:TextBox>
@@ -108,6 +109,7 @@
                     <asp:Repeater ID="ImagesRpt" runat="server">
                         <ItemTemplate>
                             <div class="carousel-item">
+                                <asp:CheckBox runat="server" ID="ChbRepresentative" style="position: absolute; right: 1em; top: 1em; z-index: 1000"/>
                                 <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
                                     <asp:TextBox class="image-desc" runat="server" ID="ImageDesc" Text="<%# Eval(nameof(DataLayer.Models.Image.Name)) %>"></asp:TextBox>

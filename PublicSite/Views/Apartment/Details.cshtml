@@ -67,9 +67,13 @@
                             if (!isLogedIn)
                             {
                                 @Html.RecaptchaWidget()
+                                <button type="submit" class="btn btn-primary w-100 h-50" id="btnSendRequest">Send request</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary w-100" id="btnSendRequest">Send request</button>
                             }
                         }
-                        <button type="submit" class="btn btn-primary w-100" id="btnSendRequest">Send request</button>
                     </div>
                 </div>
             </form>
@@ -135,6 +139,17 @@
 
 @section scripts{
     <script>
+        function isCaptchaChecked() {
+            return grecaptcha && grecaptcha.getResponse().length !== 0;
+        }
+
+        $("#btnSendRequest").on("click", function () {
+            if (!isCaptchaChecked()) {
+                alert("You must check recaptcha!");
+                return;
+            }
+        });
+
         $("#stars-wrapper img").on("click", function () {
             var selectedId = $(this).attr("id");
             for (var i = 5; i > selectedId; i--) {
