@@ -64,10 +64,11 @@
     <div style="margin-right: 1em;">
         <div class="mb-3" id="apartment-images">
             <div id="carouselExampleCaptions" class="carousel slide overflow-hidden" data-bs-ride="false">
-                <div class="carousel-inner">
+                <div class="carousel-inner" id="image-wrapper">
                     <asp:Repeater ID="ImagesRpt" runat="server">
                         <ItemTemplate>
                             <div class="carousel-item active">
+                                <asp:CheckBox runat="server" ID="ChbRepresentative" style="position: absolute; right: 1em; top: 1em; z-index: 1000" />
                                 <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
                                     <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>

@@ -77,6 +77,16 @@ namespace RWAproject
             FillStatusDdl();
             FillTagsDdl();
             FillImages();
+            ShowRepresentativeImages();
+        }
+
+        private void ShowRepresentativeImages()
+        {
+            for (int i = 0; i < ImagesRpt.Items.Count; i++)
+            {
+                CheckBox checkBox = (CheckBox)ImagesRpt.Items[i].FindControl("ChbRepresentative");
+                checkBox.Checked = Apartment.Images[i + 1].IsRepresentative;
+            }
         }
 
         private void FillTagsDdl()
@@ -88,6 +98,7 @@ namespace RWAproject
         private void FillImages()
         {
             FirstImage.Src = Apartment.Images[0].Path;
+            FirstChbRepresentative.Checked = Apartment.Images[0].IsRepresentative;
             ImagesRpt.DataSource = Apartment.Images.Skip(1);
             ImagesRpt.DataBind();
         }
@@ -161,19 +172,19 @@ namespace RWAproject
         }
 
         private void SaveImageToDB(DataLayer.Models.Image image)
-            => ((DBRepo)Application["database"]).AddImage(
+            => ((IRepo)Application["database"]).AddImage(
                 apartmentId: Apartment.Id,
                 path: image.Path,
                 imageName: string.Empty,
                 isRepresentative: image.IsRepresentative);
 
         private void SaveTagToDB(Tag tag)
-            => ((DBRepo)Application["database"]).AddTaggedApartment(
+            => ((IRepo)Application["database"]).AddTaggedApartment(
                 apartmentId: Apartment.Id,
                 tagId: tag.Id);
 
         private void DeleteTagFromDB(Tag tag)
-            => ((DBRepo)Application["database"]).DeleteTaggedApartment(
+            => ((IRepo)Application["database"]).DeleteTaggedApartment(
                 apartmentId: Apartment.Id,
                 tagId: tag.Id);
 

@@ -103,5 +103,11 @@
             $("#ContentPlaceHolder_addPanel_maxChildren").removeAttr("required");
             $("#ContentPlaceHolder_addPanel_distanceFromSea").removeAttr("required");
         }
+
+        $(document).ready(function () {
+            $("#image-wrapper input:checkbox").on('change', function () {
+                $("#image-wrapper input:checkbox").not(this).prop('checked', false);
+            });
+        });
     </script>
 </asp:Content>

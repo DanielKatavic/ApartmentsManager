@@ -3,7 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div class="container d-flex pt-4">
         <div class="row justify-content-center" style="height: 60vh; width: 30em; overflow-y: scroll">
-            <div class="col-md-6" style="width: 100%; height:100%;">
+            <div class="col-md-6" style="width: 100%; height: 100%;">
                 <asp:Repeater ID="rptTags" runat="server">
                     <HeaderTemplate>
                         <table class="table" style="height: 50%">

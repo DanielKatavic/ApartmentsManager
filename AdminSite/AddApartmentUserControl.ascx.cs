@@ -19,8 +19,8 @@ namespace RWAproject
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _allCities = ((DBRepo)Application["database"]).LoadCities();
-            _allTags = ((DBRepo)Application["database"]).LoadTags();
+            _allCities = ((IRepo)Application["database"]).LoadCities();
+            _allTags = ((IRepo)Application["database"]).LoadTags();
             if (!IsPostBack)
             {
                 _apartment.Images = new List<DataLayer.Models.Image>();
@@ -70,14 +70,14 @@ namespace RWAproject
         }
 
         private void SaveImageToDB(DataLayer.Models.Image image, int insertedId)
-            => ((DBRepo)Application["database"]).AddImage(
+            => ((IRepo)Application["database"]).AddImage(
                 apartmentId: insertedId,
                 path: image.Path,
                 imageName: string.Empty,
                 isRepresentative: image.IsRepresentative);
 
         private void SaveTagToDB(Tag tag, int insertedId)
-            => ((DBRepo)Application["database"]).AddTaggedApartment(
+            => ((IRepo)Application["database"]).AddTaggedApartment(
                 apartmentId: insertedId,
                 tagId: tag.Id);
 
