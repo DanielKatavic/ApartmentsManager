@@ -13,7 +13,7 @@ namespace DataLayer.Dal
         Apartment LoadApartmentDetails(int apartmentId);
         User CkeckAdminUser(string email, string password);
         IList<User> LoadUsers();
-        void AddImage(int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false);
+        void AddImage(int imageId, int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false);
         void AddReview(int apartmentId, int userId, string details, int stars);
         void AddTag(string name, string typeName);
         void AddTaggedApartment(int apartmentId, int tagId);

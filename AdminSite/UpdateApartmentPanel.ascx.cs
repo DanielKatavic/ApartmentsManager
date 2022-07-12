@@ -99,6 +99,7 @@ namespace RWAproject
         {
             FirstImage.Src = Apartment.Images[0].Path;
             FirstChbRepresentative.Checked = Apartment.Images[0].IsRepresentative;
+            FirstImageDesc.Text = Apartment.Images[0].Name;
             ImagesRpt.DataSource = Apartment.Images.Skip(1);
             ImagesRpt.DataBind();
         }
@@ -129,22 +130,38 @@ namespace RWAproject
 
         private void UpdateApartment(string status)
         {
-            ((IRepo)Application["database"]).UpdateApartment(
-                Apartment.Guid,
-                apartmentName.Value,
-                int.Parse(maxAdults.Value),
-                int.Parse(maxChildren.Value),
-                int.Parse(totalRooms.Value),
-                status,
-                int.Parse(distanceFromSea.Value),
-                decimal.Parse(price.Value));
+            //((IRepo)Application["database"]).UpdateApartment(
+            //    Apartment.Guid,
+            //    apartmentName.Value,
+            //    int.Parse(maxAdults.Value),
+            //    int.Parse(maxChildren.Value),
+            //    int.Parse(totalRooms.Value),
+            //    status,
+            //    int.Parse(distanceFromSea.Value),
+            //    decimal.Parse(price.Value));
 
-            Apartment.Images.Where(i => i.IsNew).ToList().ForEach(i => SaveImageToDB(i));
+            for (int i = 0; i < Apartment.Images.Count; i++)
+            {
+                //TODO: add image path, isRepresentative and desc to DB
+
+                if (i == 0)
+                {
+                    Apartment.Images[i].Name = FirstImageDesc.Text;
+                    Apartment.Images[i].IsRepresentative = FirstChbRepresentative.Checked;
+                }
+                else
+                {
+                    Apartment.Images[i].Name = ((TextBox)ImagesRpt.Items[i - 1].FindControl("ImageDesc")).Text;
+                    Apartment.Images[i].IsRepresentative = ((CheckBox)ImagesRpt.Items[i - 1].FindControl("ChbRepresentative")).Checked;
+                }
+                SaveImageToDB(Apartment.Images[i]);
+            }
+
             Apartment.Tags.Where(t => t.IsNew).ToList().ForEach(t => SaveTagToDB(t));
             Apartment.Tags.Where(t => t.IsDeleted).ToList().ForEach(t => DeleteTagFromDB(t));
         }
 
-        protected void BtnAddFile_Click(object sender, EventArgs e)
+        protected void BtnAddImage_Click(object sender, EventArgs e)
         {
             if (!FileUpload.HasFile)
             {
@@ -173,9 +190,10 @@ namespace RWAproject
 
         private void SaveImageToDB(DataLayer.Models.Image image)
             => ((IRepo)Application["database"]).AddImage(
+                imageId: image.IsNew ? 0 : image.Id,
                 apartmentId: Apartment.Id,
                 path: image.Path,
-                imageName: string.Empty,
+                imageName: image.Name,
                 isRepresentative: image.IsRepresentative);
 
         private void SaveTagToDB(Tag tag)

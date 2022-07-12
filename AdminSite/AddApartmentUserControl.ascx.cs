@@ -71,6 +71,7 @@ namespace RWAproject
 
         private void SaveImageToDB(DataLayer.Models.Image image, int insertedId)
             => ((IRepo)Application["database"]).AddImage(
+                imageId: 0,
                 apartmentId: insertedId,
                 path: image.Path,
                 imageName: string.Empty,

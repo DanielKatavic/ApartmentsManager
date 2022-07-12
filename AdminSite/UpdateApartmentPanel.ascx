@@ -129,7 +129,7 @@
             </div>
             <div class="input-group mb-3">
                 <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%" />
-                <asp:Button runat="server" class="btn btn-success" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click" />
+                <asp:Button runat="server" class="btn btn-success" ID="BtnAddImage" Text="Add file" OnClick="BtnAddImage_Click" />
             </div>
         </div>
     </div>

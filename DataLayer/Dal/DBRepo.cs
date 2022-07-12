@@ -208,8 +208,8 @@ namespace DataLayer.Dal
             return int.Parse(dataSet.Rows[0][0].ToString());
         }
 
-        public void AddImage(int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false)
-            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, path, base64image, imageName, isRepresentative);
+        public void AddImage(int imageId, int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false)
+            => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, imageId, apartmentId, path, base64image, imageName, isRepresentative);
 
         public void AddTag(string name, string typeName) 
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, name, typeName);
