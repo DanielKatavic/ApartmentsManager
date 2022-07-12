@@ -5,14 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     bool isLogedIn = !string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name);
 }
-
-<style>
-    .g-recaptcha {
-        transform: scale(0.77);
-        transform-origin: 0 0;
-    }
-</style>
-
 <div>
     <h1 style="text-align:center; padding: .3em 1em .3em 1em; margin: 0; font-weight: 600">@Model.Apartment.Name.ToUpper()</h1>
     <div class="d-flex justify-content-center mb-3" style="gap: 1em">

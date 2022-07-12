@@ -13,17 +13,7 @@
         new SelectListItem {Text = "Price: High to Low", Value = "HTL"}
     }, "Value", "Text");
 }
-
-<style>
-    #img-placeholder {
-        height: 17em;
-        background: url("/Content/images/cover.jpg") center no-repeat;
-        object-fit: cover;
-        width: 100vw;
-    }
-</style>
-
-<div id="img-placeholder" style="">
+<div id="cover-placeholder">
     <div class="d-flex justify-content-sm-between" style="position:relative; width: 50em; top:7em; margin: auto; gap:.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: .5em; padding: .5em">
         <div class="form-floating">
             @Html.DropDownList("CitiesDdl", optionLabel: "Any", selectList: citiesSelectList, htmlAttributes: new { @class = "form-select", id = "citiesSelect" })

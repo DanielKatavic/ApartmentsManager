@@ -4,26 +4,6 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    #alert div {
-        gap: 1em;
-        background-color: white;
-        width: 25em;
-        position: absolute;
-        top: 10em;
-        right: 0;
-        padding: 1em;
-        border-radius: .7em 0 0 .7em;
-        align-items: center;
-        color: white;
-    }
-
-    #alert-img {
-        width: 3em;
-        height: 3em;
-    }
-</style>
-
 <main class="text-center pt-5 w-100">
     @using (Html.BeginForm("Register", "LogIn", null, FormMethod.Post, new { role = "form" }))
     {
