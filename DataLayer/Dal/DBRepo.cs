@@ -134,6 +134,20 @@ namespace DataLayer.Dal
             };
         }
 
+        public User LoadReservationByApartmentId(int apartmentId)
+        {
+            var tblReservations = SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId).Tables[0];
+            var row = tblReservations.Rows[0];
+            return new User
+            {
+                Name = row[nameof(User.UserName)].ToString(),
+                Address = row[nameof(User.Address)].ToString(),
+                Email = row[nameof(User.Email)].ToString(),
+                PhoneNumber = row[nameof(User.PhoneNumber)].ToString(),
+                Details = row[nameof(User.Details)].ToString()
+            };
+        }
+
         public IList<Review> LoadReviewsByApartmentId(int apartmentId)
         {
             IList<Review> reviews = new List<Review>();
@@ -196,7 +210,7 @@ namespace DataLayer.Dal
         public static void AddUser(string email, string password, string username, string phone, string address)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, email, password, username, phone, address);
 
-        public void AddReview(int apartmentId, int userId, string details, int stars) 
+        public void AddReview(int apartmentId, int userId, string details, int stars)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, userId, details, stars);
 
         public void AddTaggedApartment(int apartmentId, int tagId)
@@ -211,10 +225,10 @@ namespace DataLayer.Dal
         public void AddImage(int imageId, int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, imageId, apartmentId, path, base64image, imageName, isRepresentative);
 
-        public void AddTag(string name, string typeName) 
+        public void AddTag(string name, string typeName)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, name, typeName);
 
-        public void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null) 
+        public void AddReservation(int apartmentId, int? id, string username = null, string email = null, string phoneNumber = null, string address = null, string details = null)
             => SqlHelper.ExecuteDataset(APARTMENTS_CS, MethodBase.GetCurrentMethod().Name, apartmentId, id, username, email, phoneNumber, address, details);
 
         public void UpdateApartment(Guid guid, string name, int maxAdults, int maxChildren, int totalRooms, string status, int beachDistance, decimal price)

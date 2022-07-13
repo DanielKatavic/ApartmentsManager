@@ -75,9 +75,26 @@ namespace RWAproject
             FillTagsRpt();
             FillApartmentInfo();
             FillStatusDdl();
+            FIllReservationInfo();
             FillTagsDdl();
             FillImages();
             ShowRepresentativeImages();
+        }
+
+        private void FIllReservationInfo()
+        {
+            if (Apartment.Status == Status.Reserved || Apartment.Status == Status.Occupied)
+            {
+                User userDetails = ((DBRepo)Application["database"]).LoadReservationByApartmentId(apartmentId: Apartment.Id);
+                ChbRegisteredUser.Checked = true;
+                FillUsersDdl();
+                UsersDDL.SelectedValue = userDetails.Name;
+                Username.Value = userDetails.Name;
+                Email.Value = userDetails.Email;
+                Address.Value = userDetails.Address;
+                PhoneNumber.Value = userDetails.PhoneNumber;
+                Details.Value = userDetails.Details;
+            }
         }
 
         private void ShowRepresentativeImages()
@@ -109,6 +126,7 @@ namespace RWAproject
             string[] statusList = Enum.GetNames(typeof(Status));
             StatusDDL.DataSource = statusList.Where(s => s != Status.Any.ToString());
             StatusDDL.DataBind();
+            StatusDDL.SelectedValue = Apartment.Status.ToString();
         }
 
         private void FillApartmentInfo()
@@ -211,9 +229,7 @@ namespace RWAproject
             if (ChbRegisteredUser.Checked)
             {
                 UsersDDL.Attributes.Remove("disabled");
-                _users = ((IRepo)Application["database"]).LoadUsers();
-                UsersDDL.DataSource = _users;
-                UsersDDL.DataBind();
+                FillUsersDdl();
                 AddAttributeToInputs("disabled");
             }
             else
@@ -224,6 +240,13 @@ namespace RWAproject
                 UsersDDL.DataBind();
                 RemoveAttributeFromInputs("disabled");
             }
+        }
+
+        private void FillUsersDdl()
+        {
+            _users = ((IRepo)Application["database"]).LoadUsers();
+            UsersDDL.DataSource = _users.Select(u => u.Name);
+            UsersDDL.DataBind();
         }
 
         protected void UsersDDL_SelectedIndexChanged(object sender, EventArgs e)

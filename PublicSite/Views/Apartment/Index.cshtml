@@ -14,7 +14,7 @@
     }, "Value", "Text");
 }
 <div id="cover-placeholder">
-    <div class="d-flex justify-content-sm-between" style="position:relative; width: 50em; top:7em; margin: auto; gap:.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: .5em; padding: .5em">
+    <div class="d-flex justify-content-sm-between shadow-lg" style="position:relative; width: 50em; top:7em; margin: auto; gap:.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: .5em; padding: .5em">
         <div class="form-floating">
             @Html.DropDownList("CitiesDdl", optionLabel: "Any", selectList: citiesSelectList, htmlAttributes: new { @class = "form-select", id = "citiesSelect" })
             <label for="citiesSelect">Select city</label>

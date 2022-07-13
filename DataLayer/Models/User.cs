@@ -21,6 +21,7 @@ namespace DataLayer.Models
         public string UserName { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public string Details { get; set; }
 
         public List<string> Roles { get; set; }
         public virtual string Password { get; set; }
