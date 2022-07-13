@@ -85,15 +85,11 @@ namespace RWAproject
         {
             if (Apartment.Status == Status.Reserved || Apartment.Status == Status.Occupied)
             {
-                User userDetails = ((DBRepo)Application["database"]).LoadReservationByApartmentId(apartmentId: Apartment.Id);
+                User userDetails = ((IRepo)Application["database"]).LoadReservationByApartmentId(apartmentId: Apartment.Id);
                 ChbRegisteredUser.Checked = true;
                 FillUsersDdl();
                 UsersDDL.SelectedValue = userDetails.Name;
-                Username.Value = userDetails.Name;
-                Email.Value = userDetails.Email;
-                Address.Value = userDetails.Address;
-                PhoneNumber.Value = userDetails.PhoneNumber;
-                Details.Value = userDetails.Details;
+                FillUserInfo(userDetails);
             }
         }
 
@@ -148,20 +144,18 @@ namespace RWAproject
 
         private void UpdateApartment(string status)
         {
-            //((IRepo)Application["database"]).UpdateApartment(
-            //    Apartment.Guid,
-            //    apartmentName.Value,
-            //    int.Parse(maxAdults.Value),
-            //    int.Parse(maxChildren.Value),
-            //    int.Parse(totalRooms.Value),
-            //    status,
-            //    int.Parse(distanceFromSea.Value),
-            //    decimal.Parse(price.Value));
+            ((IRepo)Application["database"]).UpdateApartment(
+                Apartment.Guid,
+                apartmentName.Value,
+                int.Parse(maxAdults.Value),
+                int.Parse(maxChildren.Value),
+                int.Parse(totalRooms.Value),
+                status,
+                int.Parse(distanceFromSea.Value),
+                decimal.Parse(price.Value));
 
             for (int i = 0; i < Apartment.Images.Count; i++)
             {
-                //TODO: add image path, isRepresentative and desc to DB
-
                 if (i == 0)
                 {
                     Apartment.Images[i].Name = FirstImageDesc.Text;
@@ -252,16 +246,17 @@ namespace RWAproject
         protected void UsersDDL_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedUser = ((DropDownList)sender).SelectedItem.ToString();
-            _user = _users.FirstOrDefault(u => u.UserName == selectedUser);
-            FillUserInfo();
+            _user = _users.FirstOrDefault(u => u.Name == selectedUser);
+            FillUserInfo(_user);
         }
 
-        private void FillUserInfo()
+        private void FillUserInfo(User user)
         {
-            Username.Value = _user.UserName;
-            Email.Value = _user.Email;
-            PhoneNumber.Value = _user.PhoneNumber;
-            Address.Value = _user.Address;
+            Username.Value = user.Name;
+            Email.Value = user.Email;
+            PhoneNumber.Value = user.PhoneNumber;
+            Address.Value = user.Address;
+            Details.Value = user.Details ?? string.Empty;
         }
 
         protected void StatusDDL_SelectedIndexChanged(object sender, EventArgs e)

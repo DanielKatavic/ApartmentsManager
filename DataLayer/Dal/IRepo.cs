@@ -11,6 +11,7 @@ namespace DataLayer.Dal
         IList<Apartment> LoadApartments();
         IList<Review> LoadReviewsByApartmentId(int apartmentId);
         Apartment LoadApartmentDetails(int apartmentId);
+        User LoadReservationByApartmentId(int apartmentId);
         User CkeckAdminUser(string email, string password);
         IList<User> LoadUsers();
         void AddImage(int imageId, int apartmentId, string path = null, string base64image = null, string imageName = "", bool isRepresentative = false);
