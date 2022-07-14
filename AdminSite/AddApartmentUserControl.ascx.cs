@@ -60,7 +60,12 @@ namespace RWAproject
                 totalRooms: int.Parse(totalRooms.Value),
                 beachDistance: int.Parse(distanceFromSea.Value));
 
-            _apartment.Images.ToList().ForEach(i => SaveImageToDB(i, insertedId));
+            for (int i = 0; i < ImagesRpt.Items.Count; i++)
+            {
+                _apartment.Images[i].Name = ((TextBox)ImagesRpt.Items[i].FindControl("ImageDesc")).Text;
+                _apartment.Images[i].IsRepresentative = ((CheckBox)ImagesRpt.Items[i].FindControl("ChbRepresentative")).Checked;
+                SaveImageToDB(_apartment.Images[i], insertedId);
+            }
             _apartment.Images.Clear();
 
             _apartment.Tags.ToList().ForEach(t => SaveTagToDB(t, insertedId));
@@ -74,7 +79,7 @@ namespace RWAproject
                 imageId: 0,
                 apartmentId: insertedId,
                 path: image.Path,
-                imageName: string.Empty,
+                imageName: image.Name,
                 isRepresentative: image.IsRepresentative);
 
         private void SaveTagToDB(Tag tag, int insertedId)
@@ -82,7 +87,7 @@ namespace RWAproject
                 apartmentId: insertedId,
                 tagId: tag.Id);
 
-        protected void BtnAddFile_Click(object sender, EventArgs e)
+        protected void BtnAddImage_Click(object sender, EventArgs e)
         {
             if (!FileUpload.HasFile)
             {

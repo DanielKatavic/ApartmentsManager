@@ -71,7 +71,7 @@
                                 <asp:CheckBox runat="server" ID="ChbRepresentative" style="position: absolute; right: 1em; top: 1em; z-index: 1000" />
                                 <img src="<%# Eval(nameof(DataLayer.Models.Image.Path)) %>" class="d-block w-100" style="height: 17em">
                                 <div class="carousel-caption d-none d-md-block">
-                                    <asp:TextBox class="image-desc" runat="server" ID="ApartmentDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
+                                    <asp:TextBox class="image-desc" runat="server" ID="ImageDesc" placeholder="IMAGE DESCRIPTION"></asp:TextBox>
                                 </div>
                             </div>
                         </ItemTemplate>
@@ -88,7 +88,7 @@
             </div>
             <div class="input-group mb-3">
                 <asp:FileUpload runat="server" class="form-control" ID="FileUpload" Style="height: 100%" />
-                <asp:Button runat="server" class="btn btn-success" ID="BtnAddFile" Text="Add file" OnClick="BtnAddFile_Click" />
+                <asp:Button runat="server" class="btn btn-success" ID="BtnAddImage" Text="Add img" OnClick="BtnAddImage_Click" />
             </div>
         </div>
     </div>
