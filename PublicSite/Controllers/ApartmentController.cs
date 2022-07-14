@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using PublicSite.Models.Auth;
 using System.Linq;
 using System.IO;
+using System.Text;
 
 namespace PublicSite.Controllers
 {
@@ -60,10 +61,12 @@ namespace PublicSite.Controllers
 
         [AllowAnonymous]
         public ActionResult ImageSrc(string path)
-        { 
+        {
+            StringBuilder fixedPath = new StringBuilder(path);
+            fixedPath.Remove(0, 1);
             string publicRoot = Server.MapPath("~");
             string adminRoot = Path.Combine(publicRoot, AdminSiteDir);
-            string picturePath = Path.Combine(adminRoot, path);
+            string picturePath = Path.Combine(adminRoot, fixedPath.ToString());
             string mimeType = MimeMapping.GetMimeMapping(picturePath);
             return new FilePathResult(picturePath, mimeType);
         }
